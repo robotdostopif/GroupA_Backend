@@ -19,7 +19,7 @@
 | Movie   | Type       | Relations |
 | ------- | ---------- | --------- |
 | MovieId | int        |           |
-| GenreId | int        |           |
+| GenreId | int        | Genre     |
 | Title   | string(50) |           |
 | Length  | int        |           |
 | Year    | Date       |           |
@@ -50,11 +50,16 @@
 
 * Tillåtna typer = actor, director
 
+**Kan vara Null:**
+
+* Character (ifall man är regissör)
+
 | PersonMovie | Type   | Relations |
 | ----------- | ------ | --------- |
 | MovieId     | int    | Movie     |
 | PersonId    | int    | Person    |
 | Role        | string |           |
+| Character   | string |           |
 
 * Person
 
@@ -87,22 +92,34 @@
 /Movies?year=<year>
 /Movies?minLength=<minLength>
 /Movies?maxLength=<maxLength>
-/Movies?subgenre=<genrename>
-/Movies/<id>?includeActors=true
-/Movies/<id>?includeDirectors=true
+/Movies?subgenre=<genreName>
+/Movies/<id>?includeActors=<bool>
+/Movies/<id>?includeDirectors=<bool>
 
 /Persons/ 
 /Persons?role=<role>
 /Persons?birthTown=<town>
 /Persons?birthCountry=<countrycode>
-/Persons?includeMovies=true
+/Persons?includeMovies=<bool>
 /Persons/<id>/
 
 /Genres/
 /Genres/<id>
-/Genres/<id>/?includeMovies=true
-/Genres/<id>/?includeActors=true
+/Genres/<id>/?includeMovies=<bool>
+/Genres/<id>/?includeActors=<bool>
 ```
+
+#### POST
+
+...
+
+#### PUT
+
+...
+
+#### DELETE
+
+...
 
 
 
