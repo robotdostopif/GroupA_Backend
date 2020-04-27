@@ -6,26 +6,55 @@
 
 ### Tables
 
-* Director
-* Title
+**Constraint Subgenre:** 
+
+* Tillåtna typer = Supernatural, Slasher, etc...
+
+| Movie    | Type       | Relations |
+| -------- | ---------- | --------- |
+| MovieId  | int        |           |
+| GenreId  | int        |           |
+| Title    | string(50) |           |
+| Length   | int        |           |
+| Year     | Date       |           |
+| Subgenre | string     |           |
+
+| Person       | Type       | Relations |
+| ------------ | ---------- | --------- |
+| PersonId     | int        |           |
+| FirstName    | string(50) |           |
+| LastName     | string(50) |           |
+| DOB          | Date       |           |
+| BirthTown    | string(50) |           |
+| BirthCountry | string(50) |           |
+
+
+
+**Constraint Role:** 
+
+* Tillåtna typer = actor, director
+
+| PersonMovie | Type   | Relations |
+| ----------- | ------ | --------- |
+| MovieId     | int    | Movie     |
+| PersonId    | int    | Person    |
+| Role        | string |           |
+
+* Person
+
+* Movie
 * Genre
-* Actor
+
+* PersonMovie
 
 
 
-#### Join Tables
-
-* ActorTitle
-* DirectorTitle
-
-
-
-### Requests
+### Tankar om Requests 
 
 * Director 
   * Visa alla regissörer
-* Title [Limit, Year, Genre]
-  * Visa alla titlar
+* Movies [Limit, Year, Genre]
+  * Visa alla filmer
 * Genre
   * Visa alla genrer
 * Actor
@@ -33,27 +62,22 @@
 
 
 
-### Routing Pseudokod
+### Requests
 
-myapi.se/Title/
+#### GET
 
-myapi.se/Title/13
-
-myapi.se/Title/Year/1970
-
-myapi.se/Title/?limit=10
-
-myapi.se/Director/
-
-myapi.se/Director/5/Titles
-
-myapi.se/Actor/
-
-myapi.se/Actor/8/Titles
-
-myapi.se/Genre/
-
-myapi.se/Genre/5/Titles
+```
+/Movies/
+/Movies/13
+/Movies/?year=<year>
+/Persons/
+/Persons/5
+/Persons/?role=<role>
+/Genres/
+/Genres/<id>
+/Genres/<id>/?includeMovies=true
+/Genres/<id>/?includeActors=true
+```
 
 
 
@@ -61,7 +85,7 @@ myapi.se/Genre/5/Titles
 
 Som användare vill jag: kunna få fram en lista av alla Regissörer
 
-Som användare vill jag: kunna få fram en lista av alla Titlar
+Som användare vill jag: kunna få fram en lista av alla Movies
 
 Som användare vill jag: kunna få fram en lista av alla Skådespelare
 
