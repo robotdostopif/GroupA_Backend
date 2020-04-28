@@ -154,15 +154,6 @@
 }
 ```
 
-| Person         | Type         | Relations |
-| -------------- | ------------ | --------- |
-| *PersonId*     | `int`        |           |
-| *FirstName*    | `string(50)` |           |
-| *LastName*     | `string(50)` |           |
-| *DOB*          | `Date`       |           |
-| *BirthTown*    | `string(50)` |           |
-| *BirthCountry* | `string(50)` |           |
-
 
 
 ### User Stories
