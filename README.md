@@ -5,14 +5,19 @@
 
 ### Process
 
-#### 2020-04-27
+**2020-04-27** 
 
 * Vi är färdiga med tabeller och GET requests
 * **Nästa steg:** 
   * Skriv PUT, POST, DELETE requests 
   * JSON psuedo!
 
-**2020-04-27**
+**2020-04-28**
+
+* Vi är färdiga med alla CRUD requests
+* Vi är färdiga med JSON exempel data
+* **Nästa steg:**
+  * Invänta nästa lektion
 
 
 
