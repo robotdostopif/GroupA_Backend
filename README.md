@@ -124,6 +124,47 @@
 
 
 
+### Json Response
+
+```
+/Movies/1
+{
+	"MovieId" : 1,
+	"GenreId" : 2,
+	"Title" : "The Amityville Horror",
+	"Length" : 90, 
+	"Year": 2005
+}
+
+/Movies/1?includeDirector=true
+{
+	"MovieId" : 1,
+	"GenreId" : 2,
+	"Title" : "The Amityville Horror",
+	"Length" : 90, 
+	"Year": 2005,
+	"Directors" : [{
+		"PersonId" : 3,
+		"FirstName" : "Andrew",
+		"LastName" : "Douglas",
+		"DOB" : null,
+		"BirthTown" : null,
+		"BirthCountry" : "UK"
+    }]
+}
+```
+
+| Person         | Type         | Relations |
+| -------------- | ------------ | --------- |
+| *PersonId*     | `int`        |           |
+| *FirstName*    | `string(50)` |           |
+| *LastName*     | `string(50)` |           |
+| *DOB*          | `Date`       |           |
+| *BirthTown*    | `string(50)` |           |
+| *BirthCountry* | `string(50)` |           |
+
+
+
 ### User Stories
 
 #### GET
