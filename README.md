@@ -12,6 +12,8 @@
   * Skriv PUT, POST, DELETE requests 
   * JSON psuedo!
 
+**2020-04-27**
+
 
 
 ### Tables
@@ -70,19 +72,6 @@
 
 
 
-### Tankar om Requests 
-
-* Director 
-  * Visa alla regissörer
-* Movies [Limit, Year, Genre]
-  * Visa alla filmer
-* Genre
-  * Visa alla genrer
-* Actor
-  * Visa alla skådespelare
-
-
-
 ### Requests
 
 #### GET
@@ -111,15 +100,27 @@
 
 #### POST
 
-...
+```
+/Movies/
+/Persons/ 
+/Genres/
+```
 
 #### PUT
 
-...
+```
+/Movies/<id>
+/Persons/<id>
+/Genres/<id>
+```
 
 #### DELETE
 
-...
+```
+/Movies/<id>
+/Persons/<id>
+/Genres/<id>
+```
 
 
 
