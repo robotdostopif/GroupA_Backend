@@ -18,23 +18,32 @@ namespace HorrorMovieAPI.Services
         {
             throw new System.NotImplementedException();
         }
-        public Task<Fake> Delete(int id)
+
+        public async Task<Fake> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var fake = await _context.Set<Fake>().FindAsync(id);
+            if (fake == null)
+            {
+                return fake;
+            }
+            _context.Set<Fake>().Remove(fake);
+            await _context.SaveChangesAsync();
+            return fake;
         }
+
         public Task<Fake> Get(int id)
         {
             throw new System.NotImplementedException();
         }
+
         public Task<List<Fake>> GetAll()
         {
             throw new System.NotImplementedException();
         }
-        
+
         public Task<Fake> Update(Fake fake)
         {
             throw new System.NotImplementedException();
         }
     }
-
 }
