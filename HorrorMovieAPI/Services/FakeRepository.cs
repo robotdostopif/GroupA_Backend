@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HorrorMovieAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
 {
@@ -37,12 +38,14 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Fake>> GetAll()
         {
-            throw new System.NotImplementedException();
+          return await _context.Set<Fake>().ToListAsync();
         }
 
         public async Task<Fake> Update(Fake fake)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(fake).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return fake;
         }
     }
 }

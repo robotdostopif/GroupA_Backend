@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HorrorMovieAPI.Controllers
 {
