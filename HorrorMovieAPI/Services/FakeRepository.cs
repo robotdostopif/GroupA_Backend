@@ -14,9 +14,11 @@ namespace HorrorMovieAPI.Services
             _context = context;
         }
 
-        public Task<Fake> Add(Fake fake)
+        public async Task<Fake> Add(Fake fake)
         {
-            throw new System.NotImplementedException();
+            _context.Set<Fake>().Add(fake);
+            await _context.SaveChangesAsync();
+            return fake;
         }
 
         public async Task<Fake> Delete(int id)
@@ -31,17 +33,14 @@ namespace HorrorMovieAPI.Services
             return fake;
         }
 
-        public Task<Fake> Get(int id)
+        public async Task<Fake> Get(int id) => await _context.Set<Fake>().FindAsync(id);
+
+        public async Task<List<Fake>> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Fake>> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Fake> Update(Fake fake)
+        public async Task<Fake> Update(Fake fake)
         {
             throw new System.NotImplementedException();
         }
