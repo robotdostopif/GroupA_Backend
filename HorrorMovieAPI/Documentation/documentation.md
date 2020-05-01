@@ -19,6 +19,14 @@
 * **Nästa steg:**
   * Invänta nästa lektion
 
+**2020-05-01**
+
+* Vi har strukturerat om tabellerna lite
+* Vi har lagt till möjlighet att seeda till Databasen
+* Vi har haft standup möte
+* **Nästa steg:**
+  * <Fyll i>
+
 
 
 ### Tables
@@ -40,7 +48,7 @@
 | *BirthTown*    | `string(50)` |           |
 | *BirthCountry* | `string(50)` |           |
 | MovieId        | `int`        |           |
-| RoleName       | string(50)   |           |
+| RoleName       | `string(50)` |           |
 
 | Director       | Type         | Relations |
 | -------------- | ------------ | --------- |
@@ -51,6 +59,13 @@
 | *BirthTown*    | `string(50)` |           |
 | *BirthCountry* | `string(50)` |           |
 | MovieId        | `int`        |           |
+
+| Casting         | Type         | Relations |
+| --------------- | ------------ | --------- |
+| *Id*            | `int`        |           |
+| *MovieId*       | `string(50)` |           |
+| *ActorId*       | `string(50)` |           |
+| *CharacterName* | `String(50)` |           |
 
 
 
