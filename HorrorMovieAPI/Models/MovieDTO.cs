@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HorrorMovieAPI.Models
 {
-    public class Movie : IEntity
+    public class MovieDTO : IEntity
     {
         public int Id { get; set; }
         [ForeignKey("GenreId")]

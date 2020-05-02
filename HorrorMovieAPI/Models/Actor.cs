@@ -13,7 +13,6 @@ namespace HorrorMovieAPI.Models
         public string BirthTown { get; set; }
         public string BirthCountry { get; set; }
         public ICollection<Casting> Castings { get; set; }
-        public string RollName { get; set; }
     }
 
 }
