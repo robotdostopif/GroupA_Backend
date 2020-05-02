@@ -37,7 +37,8 @@
 | *GenreId* | `int`        | Genre     |
 | *Title*   | `string(50)` |           |
 | *Length*  | `int`        |           |
-| *Year*    | `Date`       |           |
+| *Year*    | `int`       |           |
+| *Castings*    | `ICollection<Casting>`       |           |
 
 | Actor          | Type         | Relations |
 | -------------- | ------------ | --------- |
@@ -47,8 +48,7 @@
 | *DOB*          | `Date`       |           |
 | *BirthTown*    | `string(50)` |           |
 | *BirthCountry* | `string(50)` |           |
-| *MovieId*        | `int`        |           |
-| *RoleName*       | `string(50)` |           |
+| *Castings*     | `ICollection<Casting>`        |           |
 
 | Director       | Type         | Relations |
 | -------------- | ------------ | --------- |
@@ -58,14 +58,14 @@
 | *DOB*          | `Date`       |           |
 | *BirthTown*    | `string(50)` |           |
 | *BirthCountry* | `string(50)` |           |
-| MovieId        | `int`        |           |
+| *MovieId*        | `int`        |           |
 
 | Casting         | Type         | Relations |
 | --------------- | ------------ | --------- |
 | *Id*            | `int`        |           |
 | *MovieId*       | `int` |           |
 | *ActorId*       | `int` |           |
-| *CharacterName* | `string(50)` |           |
+| *Character* | `string(50)` |           |
 
 
 
