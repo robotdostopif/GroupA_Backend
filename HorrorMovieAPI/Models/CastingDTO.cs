@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HorrorMovieAPI.Models
 {
-    public class Casting : IEntity
+    public class CastingDTO : IEntity
     {
         public int Id { get; set; }
         public string Character { get; set; }

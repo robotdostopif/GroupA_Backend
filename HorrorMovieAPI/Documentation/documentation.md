@@ -47,8 +47,8 @@
 | *DOB*          | `Date`       |           |
 | *BirthTown*    | `string(50)` |           |
 | *BirthCountry* | `string(50)` |           |
-| MovieId        | `int`        |           |
-| RoleName       | `string(50)` |           |
+| *MovieId*        | `int`        |           |
+| *RoleName*       | `string(50)` |           |
 
 | Director       | Type         | Relations |
 | -------------- | ------------ | --------- |
@@ -63,9 +63,9 @@
 | Casting         | Type         | Relations |
 | --------------- | ------------ | --------- |
 | *Id*            | `int`        |           |
-| *MovieId*       | `string(50)` |           |
-| *ActorId*       | `string(50)` |           |
-| *CharacterName* | `String(50)` |           |
+| *MovieId*       | `int` |           |
+| *ActorId*       | `int` |           |
+| *CharacterName* | `string(50)` |           |
 
 
 
