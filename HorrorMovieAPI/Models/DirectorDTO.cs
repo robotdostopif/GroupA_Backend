@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
-    public class DirectorDTO
+    public class DirectorDTO : IEntity
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
