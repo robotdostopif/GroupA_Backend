@@ -27,6 +27,12 @@
 * **Nästa steg:**
   * <Fyll i>
 
+**2020-05-04**
+
+* Vi har uppdaterat vår backlog och lagt ärenden under Epics
+* **Nästa steg:**
+  * <Fyll i>
+
 
 
 ### Tables
