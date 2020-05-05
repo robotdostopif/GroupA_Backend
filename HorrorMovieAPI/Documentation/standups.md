@@ -5,6 +5,8 @@
 ```
 Gjort fram tills idag:
 
+King General Supreme Leader: Pierre
+
 Anders:
 Skapade Fake model till projektet
 SKapade interface IEntity
