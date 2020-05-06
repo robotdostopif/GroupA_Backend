@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
@@ -38,7 +38,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Fake>> GetAll()
         {
-          return await _context.Set<Fake>().ToListAsync();
+            return await _context.Set<Fake>().ToListAsync();
         }
 
         public async Task<Fake> Update(Fake fake)
