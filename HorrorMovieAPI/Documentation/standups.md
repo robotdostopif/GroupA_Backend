@@ -1,8 +1,7 @@
 ## Standups 
 
-#### 2020-05-06
+# 2020-05-06
 
-```
 King General Supreme Leader: André
 
 Gjort fram tills idag:
@@ -28,12 +27,11 @@ Var med och planerade förhållande regler
 Testade med branches i github
 Var med och skrev jira issues 
 
-Vad vi ska göra till nästa gång
+### Vad vi ska göra till nästa gång
 
 Anders:
 Träna på git, 
 Ta issues från våran Sprint
-
 
 Pierre:
 På börja en Sprint
@@ -46,13 +44,9 @@ Tar en eller fler issues i mån av tid
 André:
 Tar också några issues
 
+# 2020-05-01
 
-```
 
-
-#### 2020-05-01
-
-```
 King General Supreme Leader: Pierre
 
 Gjort fram tills idag:
@@ -76,5 +70,4 @@ Pierre:
 Skapade Controller för vår fake class och byggde GetAll metod
 Byggde metoder i FakeRepository
 Lade till en DbInitializer för att seeda test data
-```
 
