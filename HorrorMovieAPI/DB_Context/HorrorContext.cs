@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HorrorMovieAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace HorrorMovieAPI.Models
+namespace HorrorMovieAPI.DB_Context
 {
     public class HorrorContext : DbContext
     {
