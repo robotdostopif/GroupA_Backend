@@ -350,4 +350,5 @@ MigrationBackup/
 .ionide/
 
 HorrorMovieAPI/*.json
-
+HorrorMovieAPI/bin/
+HorrorMovieAPI/obj/
