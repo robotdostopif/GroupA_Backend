@@ -1,11 +1,61 @@
 ## Standups 
 
+#### 2020-05-06
+
+```
+King General Supreme Leader: André
+
+Gjort fram tills idag:
+
+Anders:
+Gjorde fake klasserna
+IEntity
+Övat på git
+var med och godkände förhållningsregler
+
+André:
+Jag var med och skriv våra förhållningsregler
+Jag var med och skapade nya issues på Jira
+Jag var med och testade att skapa ny branch och jobba med det på GitHub
+
+Andreas:
+Jag var med och skriv våra förhållningsregler
+Jag var med och skapade nya issues på Jira
+Jag var med och testade att skapa ny branch och jobba med det på GitHub
+
+Pierre: 
+Var med och planerade förhållande regler
+Testade med branches i github
+Var med och skrev jira issues 
+
+Vad vi ska göra till nästa gång
+
+Anders:
+Träna på git, 
+Ta issues från våran Sprint
+
+
+Pierre:
+På börja en Sprint
+tar också issues
+
+Andreas:
+Ska bli pappa
+Tar en eller fler issues i mån av tid
+
+André:
+Tar också några issues
+
+
+```
+
+
 #### 2020-05-01
 
 ```
-Gjort fram tills idag:
-
 King General Supreme Leader: Pierre
+
+Gjort fram tills idag:
 
 Anders:
 Skapade Fake model till projektet
