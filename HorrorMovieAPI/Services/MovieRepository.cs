@@ -12,57 +12,57 @@ namespace HorrorMovieAPI.Services
         {
             _context = context;
         }
-        public Task<Movie> Add(Movie entity)
+        public async Task<Movie> Add(Movie entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> Delete(int id)
+        public async Task<Movie> Delete(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> Get(int id)
+        public async Task<Movie> Get(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Movie>> GetAll()
+        public async Task<List<Movie>> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> GetMovieByIdWithActors(int id, bool includeActors)
+        public async Task<Movie> GetMovieByIdWithActors(int id, bool includeActors)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> GetMovieByIdWithDirector(int id, bool includeDirector)
+        public async Task<Movie> GetMovieByIdWithDirector(int id, bool includeDirector)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Movie>> GetMoviesByGenre(int genreId)
+        public async Task<List<Movie>> GetMoviesByGenre(int genreId)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Movie>> GetMoviesByMaxLength(int length)
+        public async Task<List<Movie>> GetMoviesByMaxLength(int length)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Movie>> GetMoviesByMinLength(int length)
+        public async Task<List<Movie>> GetMoviesByMinLength(int length)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<List<Movie>> TaskGetMoviesByYear(int year)
+        public async Task<List<Movie>> TaskGetMoviesByYear(int year)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> Update(Movie entity)
+        public async Task<Movie> Update(Movie entity)
         {
             throw new System.NotImplementedException();
         }
