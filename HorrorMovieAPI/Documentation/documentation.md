@@ -111,8 +111,7 @@
 /Actors?includeMovies=<bool>
 /Actors/<id>/
 
-/Directors/ 
-/Directors?role=<role>
+/Directors/
 /Directors?birthTown=<town>
 /Directors?birthCountry=<countrycode>
 /Directors?includeMovies=<bool>
