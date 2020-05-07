@@ -1,5 +1,51 @@
 ## Standups 
 
+# 2020-05-07
+
+King General Supreme Leader: Anders
+
+Gjort fram tills idag:
+
+Anders:
+Jag har gjort klart SKRAC-51,-79 tills idag och två issues 
+
+SKRAC-67, -55 väntar på godkännande 
+
+Jag har tränat på git och Pierre har vägledigt mig .
+
+André:
+Jag har gjort klart SKRAC-80 under lektion och gjorde SKRAC-62,-76 
+
+som väntar på godkännande .
+
+Andreas:
+Jag har tränat på att bli pappa.
+
+Pierre: 
+Jag har varit med och dragit igång en spring 
+
+samt gjort klart SKRAC-73, 74, 78 
+
+SKRAC-56 väntar på godkännande 
+
+### Vad vi ska göra till nästa gång
+
+Anders:
+ Fortsätta tränna på git  göra klart några issues till från våran sprint
+
+Pierre:
+
+Jag skall kolla på några pull request 
+
+Samt ta nya issues från våran sprint
+
+Andreas:
+Ska bli pappa
+Tar en eller fler issues i mån av tid
+
+André:
+Ta nya issues från våran sprint
+
 # 2020-05-06
 
 King General Supreme Leader: André
