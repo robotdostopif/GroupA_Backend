@@ -9,11 +9,11 @@ namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
-    public class DirectorController : ControllerBase
+    public class DirectorsController : ControllerBase
     {
         private readonly DirectorRepository _repository;
 
-        public DirectorController(DirectorRepository repository)
+        public DirectorsController(DirectorRepository repository)
         {
             _repository = repository;
         }
