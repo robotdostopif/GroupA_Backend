@@ -36,6 +36,21 @@ namespace HorrorMovieAPI.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Director>> GetDirectorsAndIncludeMovies(bool includeMovies)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Director>> GetDirectorsByBirthCountry(string birthCountry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Director>> GetDirectorsByBirthTown(string birthTown)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Director> Update(Director entity)
         {
             throw new NotImplementedException();
