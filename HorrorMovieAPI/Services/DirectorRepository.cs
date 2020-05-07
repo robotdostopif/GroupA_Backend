@@ -16,27 +16,27 @@ namespace HorrorMovieAPI.Services
             _context = context;
         }
 
-        public Task<Director> Add(Director entity)
+        public async Task<Director> Add(Director entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Director> Delete(int id)
+        public async Task<Director> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Director> Get(int id)
+        public async Task<Director> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Director>> GetAll()
+        public async Task<List<Director>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Director> Update(Director entity)
+        public async Task<Director> Update(Director entity)
         {
             throw new NotImplementedException();
         }
