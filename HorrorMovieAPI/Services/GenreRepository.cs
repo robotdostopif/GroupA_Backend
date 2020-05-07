@@ -1,5 +1,6 @@
 ﻿using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,9 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Genre>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Set<Genre>().ToListAsync();
         }
+
 
         public async Task<Genre> GetGenreByIdIncludeActors(int id, bool includeActors)
         {
