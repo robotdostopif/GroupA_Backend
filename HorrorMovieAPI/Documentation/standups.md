@@ -2,6 +2,53 @@
 
 
 
+# 2020-05-08
+
+**Generalsekreterare:** Andreas
+
+### Gjort fram tills idag:
+
+Anders:
+
+* Har gjort klart alla issues som jag tagit till mig
+* Jag har godkännt alla pullrequest jag haft på mig
+* Fortsatt träna på git
+
+André:
+
+* Har gjort klart alla issues som jag tagit till mig
+* Jag har godkännt alla pullrequest jag haft på mig
+
+Andreas:
+
+* Jag har försökt läsa på vad det andra i gruppen har gjort
+
+Pierre: 
+
+* Frånvarande
+
+
+### Göra till nästa gång
+
+Anders:
+
+* Skapa ny Sprint och ta issues därifrån
+
+Pierre:
+
+* Skapa ny Sprint och ta issues därifrån
+
+
+Andreas:
+
+* Skapa ny Sprint och ta issues därifrån
+
+André:
+
+* Skapa ny Sprint och ta issues därifrån
+
+
+
 # 2020-05-07
 
 **Generalsekreterare:** Anders
