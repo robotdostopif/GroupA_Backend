@@ -25,7 +25,7 @@ Andreas:
 
 Pierre: 
 
-* Frånvarande
+* Arbetat med sprint issues och pull requests
 
 
 ### Göra till nästa gång
