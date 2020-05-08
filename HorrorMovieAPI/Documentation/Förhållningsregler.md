@@ -8,7 +8,9 @@
 * Standup: 
   * Varje dag kl. 9 - 10 efter överenskommelse
   * Sekreterare roterar varje dag
-  * Vad är gjort/ Vad är klart/ Behöver någon hjälp?
+  * Vad har gjorts fram tills idag (varje person)
+  * Vad göra till nästa gång (varje person)
+  * Behöver någon hjälp?
 * Arbetstider ej skoldagar:  
   * 9-10 till ca15
   * Rast ca 12 (1h) + småpauser fördelat som man vill och behöver 
