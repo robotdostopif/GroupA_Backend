@@ -2,6 +2,36 @@
 
 
 
+# 2020-05-11
+
+**Generalsekreterare:** Pierre
+
+### Göra till nästa gång
+
+*Nästa standup imorgon cirka kl 11*
+
+Anders:
+
+* Börjar med https://myapi.atlassian.net/browse/SKRAC-86
+* Testar om github namn är löst
+
+Pierre:
+
+* Börjar med https://myapi.atlassian.net/browse/SKRAC-82
+
+
+Andreas:
+
+* Börjar med https://myapi.atlassian.net/browse/SKRAC-87
+* Börjar morgondagen cirkus 11
+
+André:
+
+* Börjar med https://myapi.atlassian.net/browse/SKRAC-93
+* Börjar morgondagen cirkus 11
+
+
+
 # 2020-05-08
 
 **Generalsekreterare:** Andreas
