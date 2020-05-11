@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.
+using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
 {
@@ -11,9 +11,9 @@ namespace HorrorMovieAPI.Services
     where TContext : DbContext
     {
         protected readonly HorrorContext _horrorContext;
-        protected readonly ILogger<Repository> _logger;
+        protected readonly ILogger<Repository<T,TContext>> _logger;
 
-        public Repository(HorrorContext horrorContext, ILogger<Repository> logger)
+        public Repository(HorrorContext horrorContext, ILogger<Repository<T,TContext>> logger)
         {
             _horrorContext = horrorContext;
             _logger = logger;
