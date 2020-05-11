@@ -44,6 +44,4 @@ namespace HorrorMovieAPI.Services
             throw new System.NotImplementedException();
         }
     }
-
-
 }
