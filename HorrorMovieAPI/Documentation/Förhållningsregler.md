@@ -3,9 +3,14 @@
 
 
 * Sprint:
-  * Alla ska ha lika många issues, jämt fördelade och jämnsvåra
-  * Issues fördelas i början av en sprint
+  * Issues plockas efter hand, högst prioritet först
+  * Alla ska ha ungefär lika många issues, jämt fördelade tidsmässigt och jämnsvåra
+* Sprint planering: 
+  * Använd dokumentet sprint planning.md för att planera sprint
+* Sprint reviews:
+  * Använd dokumentet sprint reviews.md 
 * Standup: 
+  * Använd dokumentet standsups.md för att dokumentera standup
   * Varje dag kl. 9 - 10 efter överenskommelse
   * Sekreterare roterar varje dag
   * Vad har gjorts fram tills idag (varje person)
