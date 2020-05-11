@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
 {
-    public abstract class Repository<T,TContext> : IRepository<T> 
+    public abstract class Repository<T, TContext> : IRepository<T>
     where T : class, IEntity
     where TContext : DbContext
     {
-        protected readonly HorrorContext _horrorContext;
-        protected readonly ILogger<Repository<T,TContext>> _logger;
+        private readonly HorrorContext _context;
+        private readonly ILogger _logger;
 
-        public Repository(HorrorContext horrorContext, ILogger<Repository<T,TContext>> logger)
+        public Repository(HorrorContext context, ILogger logger)
         {
-            _horrorContext = horrorContext;
+            _context = context;
             _logger = logger;
         }
 
@@ -45,5 +45,5 @@ namespace HorrorMovieAPI.Services
         }
     }
 
-   
+
 }

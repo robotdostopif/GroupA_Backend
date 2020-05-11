@@ -8,12 +8,6 @@ namespace HorrorMovieAPI.Services
 {
     public interface IActorRepository
     {
-        Task<List<Actor>> GetActorsByRoleName(string roleName);
-
-        Task<List<Actor>> GetActorsByBirthTown(string town);
-
-        Task<List<Actor>> GetActorsByBirthCountry(string country);
-
-        Task<List<Actor>> GetActorsAndIncludeMovies(bool includeMovies);
+        Task<List<Actor>> GetAll(string roleName, string town, string country, bool includeMovies);
     }
 }
