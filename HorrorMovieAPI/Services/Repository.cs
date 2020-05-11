@@ -24,9 +24,16 @@ namespace HorrorMovieAPI.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<T> Delete(int id)
+        public async Task<T> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _context.Set<T>().FindAsync(id);
+            if(entity==null)
+            {
+                return entity;
+            }
+            _context.Set<T>().Remove(entity);
+            await Save();
+            return entity;
         }
 
         public Task<T> Get(int id)
