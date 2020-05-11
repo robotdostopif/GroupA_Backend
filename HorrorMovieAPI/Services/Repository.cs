@@ -34,9 +34,10 @@ namespace HorrorMovieAPI.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Save()
+        public async Task<bool> Save()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Saving changes");
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public Task<T> Update(T entity)
