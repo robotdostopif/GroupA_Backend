@@ -17,9 +17,9 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Genre>>> GetAll(bool includeMovies = false, bool includeActors = false)
         {
-            return await _repository.GetAll();
+            return await _repository.GetAll(includeMovies, includeActors);
         }
     }
 }
