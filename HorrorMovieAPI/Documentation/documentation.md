@@ -97,12 +97,13 @@
 
 ```
 /Movies/
+/Movies/<id>
 /Movies?year=<year>
 /Movies?minLength=<minLength>
 /Movies?maxLength=<maxLength>
 /Movies?subgenre=<genreName>
-/Movies/<id>?includeActors=<bool>
-/Movies/<id>?includeDirectors=<bool>
+/Movies?includeActors=<bool>
+/Movies?includeDirectors=<bool>
 
 /Actors/ 
 /Actors?role=<role>
@@ -119,8 +120,8 @@
 
 /Genres/
 /Genres/<id>
-/Genres/<id>?includeMovies=<bool>
-/Genres/<id>?includeActors=<bool>
+/Genres?includeMovies=<bool>
+/Genres?includeActors=<bool>
 ```
 
 #### POST
