@@ -1,11 +1,14 @@
 using System.Threading.Tasks;
 using HorrorMovieAPI.DB_Context;
+using HorrorMovieAPI.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.
 
 namespace HorrorMovieAPI.Services
 {
-
-    public class Repository : IRepository<T>
+    public abstract class Repository<T,TContext> : IRepository<T> 
+    where T : class, IEntity
+    where TContext : DbContext
     {
         protected readonly HorrorContext _horrorContext;
         protected readonly ILogger<Repository> _logger;
