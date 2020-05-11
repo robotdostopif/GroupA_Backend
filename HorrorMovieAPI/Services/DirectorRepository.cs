@@ -1,5 +1,6 @@
 ﻿using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,51 +8,13 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Services
 {
-    public class DirectorRepository : IRepository<Director>, IDirectorRepository
+    public class DirectorRepository : Repository<Director, HorrorContext>, IDirectorRepository
     {
-        private readonly HorrorContext _context;
-
-        public DirectorRepository(HorrorContext context)
+        public DirectorRepository(HorrorContext context, ILogger logger) : base(context, logger)
         {
-            _context = context;
         }
 
-        public async Task<Director> Add(Director entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Director> Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Director> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Director>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Director>> GetDirectorsAndIncludeMovies(bool includeMovies)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Director>> GetDirectorsByBirthCountry(string birthCountry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Director>> GetDirectorsByBirthTown(string birthTown)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Director> Update(Director entity)
+        public Task<List<Director>> GetAll(string birthTown, string birthCountry, bool includeMovies)
         {
             throw new NotImplementedException();
         }
