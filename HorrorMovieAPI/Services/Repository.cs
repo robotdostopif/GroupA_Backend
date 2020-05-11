@@ -19,15 +19,17 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public Task<T> Add(T entity)
+        public async Task<T> Add(T entity)
         {
-            throw new System.NotImplementedException();
+            await _context.Set<T>().AddAsync(entity);
+            await Save();
+            return entity;
         }
 
         public async Task<T> Delete(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
-            if(entity==null)
+            if (entity == null)
             {
                 return entity;
             }
