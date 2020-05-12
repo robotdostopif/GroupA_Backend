@@ -8,6 +8,6 @@ namespace HorrorMovieAPI.Services
 {
     public interface IDirectorRepository
     {
-        Task<List<Director>> GetAll(string birthTown, string birthCountry, bool includeMovies);
+        Task<List<Director>> GetAll(string birthCountry, bool includeMovies);
     }
 }

@@ -1,4 +1,5 @@
-﻿using HorrorMovieAPI.Services;
+﻿using HorrorMovieAPI.Models;
+using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,12 @@ namespace HorrorMovieAPI.Controllers
         public DirectorsController(DirectorRepository repository)
         {
             _repository = repository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ICollection<Director>>> GetAll(string birthCountry, bool includeMovies)
+        {
+            return await _repository.GetAll(birthCountry, includeMovies);
         }
     }
 }

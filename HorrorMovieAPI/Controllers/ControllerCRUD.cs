@@ -10,6 +10,11 @@ namespace HorrorMovieAPI.Controllers
     where TRepository : class, IRepository<T>
     {
         private readonly TRepository _repository;
+        
+        public ControllerCRUD(TRepository repository)
+        {
+            _repository = repository;
+        }
 
         public Task<ActionResult<T>> Delete(int id)
         {
