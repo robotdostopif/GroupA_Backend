@@ -38,9 +38,10 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public Task<T> Get(int id)
+        public async Task<T> Get(int id)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Get by id");
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<bool> Save()
