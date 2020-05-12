@@ -11,10 +11,12 @@ namespace HorrorMovieAPI.Services
     where TContext : DbContext
     {
         private readonly HorrorContext _context;
+        private readonly ILogger _logger;
 
-        public Repository(HorrorContext context)
+        public Repository(HorrorContext context, ILogger logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<T> Add(T entity)
@@ -38,6 +40,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<T> Get(int id)
         {
+            _logger.LogInformation($"Getting object with id {id}");
             return await _context.Set<T>().FindAsync(id);
         }
 
