@@ -6,17 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
 {
-    public abstract class Repository<T, TContext> : IRepository<T>
+    public class Repository<T, TContext> : IRepository<T>
     where T : class, IEntity
     where TContext : DbContext
     {
         private readonly HorrorContext _context;
-        private readonly ILogger _logger;
 
-        public Repository(HorrorContext context, ILogger logger)
+        public Repository(HorrorContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         public async Task<T> Add(T entity)
@@ -40,19 +38,16 @@ namespace HorrorMovieAPI.Services
 
         public async Task<T> Get(int id)
         {
-            _logger.LogInformation("Get by id");
             return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<bool> Save()
         {
-            _logger.LogInformation("Saving changes");
             return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<T> Update(T entity)
         {
-            _logger.LogInformation("Update changes");
             _context.Entry(entity).State = EntityState.Modified;
             await Save();
             return entity;

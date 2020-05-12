@@ -10,7 +10,7 @@ namespace HorrorMovieAPI.Services
 {
     public class ActorRepository : Repository<Actor, HorrorContext>, IActorRepository
     {
-        public ActorRepository(HorrorContext context, ILogger logger) : base(context, logger)
+        public ActorRepository(HorrorContext context) : base(context)
         {
         }
 
