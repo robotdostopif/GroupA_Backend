@@ -12,7 +12,7 @@ namespace HorrorMovieAPI.Services
     public class DirectorRepository : Repository<Director, HorrorContext>, IDirectorRepository
     {
         private readonly HorrorContext _context;
-        public DirectorRepository(HorrorContext context, ILogger logger) : base(context, logger)
+        public DirectorRepository(HorrorContext context) : base(context)
         {
             _context = context;
         }
