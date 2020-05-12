@@ -2,6 +2,52 @@
 
 
 
+# 2020-05-12
+
+**Generalsekreterare:** André
+
+### Gjort färdigt tills idag*
+
+Anders:
+
+* Har gjort 3 issues SKRAC-86, -91 och -94
+* Github är löst. Kan det till 100%
+
+Pierre:
+
+* Gjort färdigt SKRAC-89, -82 och -92
+* Uppdaterade alla Repository så att dom ärver från IRepository
+
+
+Andreas:
+
+* Blev färdig med SKRAC-87
+
+André:
+
+* Gjorde färdigt SKRAC-93 och -88, började på på -90
+
+
+
+### Göra till nästa gång*
+
+Anders:
+
+* Ta någon ny issues
+
+Pierre:
+
+* Fortsätta med issues
+
+
+Andreas:
+
+* Tar SKRAC-59
+
+André:
+
+* Tar några issues
+
 # 2020-05-11
 
 **Generalsekreterare:** Pierre
