@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
@@ -31,7 +32,11 @@ namespace HorrorMovieAPI.Services
            
             if(includeActors)
             {
-                query = query.Include(a => a.Castings);
+                query = query.Include(a => a.Castings
+                .Join());
+
+
+
                 castingQuery = castingQuery.Include(b => b.Actor);
             }
 
