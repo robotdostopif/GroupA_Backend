@@ -9,6 +9,8 @@ namespace HorrorMovieAPI.Controllers
     where T : class, IEntity
     where TRepository : class, IRepository<T>
     {
+        private readonly TRepository _repository;
+
         public Task<ActionResult<T>> Delete(int id)
         {
             throw new System.NotImplementedException();
