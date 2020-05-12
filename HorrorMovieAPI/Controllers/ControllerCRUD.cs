@@ -9,6 +9,8 @@ namespace HorrorMovieAPI.Controllers
     where T : class, IEntity
     where TRepository : class, IRepository<T>
     {
+        private readonly TRepository _repository;
+        
         public ControllerCRUD(TRepository repository)
         {
             _repository = repository;
