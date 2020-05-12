@@ -51,6 +51,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<T> Update(T entity)
         {
+            _logger.LogInformation("Update changes");
             _context.Entry(entity).State = EntityState.Modified;
             await Save();
             return entity;
