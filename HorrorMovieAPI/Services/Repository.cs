@@ -50,9 +50,12 @@ namespace HorrorMovieAPI.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<T> Update(T entity)
+        public async Task<T> Update(T entity)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Update changes");
+            _context.Entry(entity).State = EntityState.Modified;
+            await Save();
+            return entity;
         }
     }
 }
