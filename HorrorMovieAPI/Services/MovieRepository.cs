@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
 {
-    public class MovieRepository : Repository<Movie, HorrorContext>//, IMovieRepository
+    public class MovieRepository : Repository<Movie, HorrorContext>, IMovieRepository
     {
         private readonly HorrorContext _context;
         public MovieRepository(HorrorContext context) : base(context)
@@ -14,16 +14,16 @@ namespace HorrorMovieAPI.Services
             _context = context;
         }
 
-        // public async Task<List<Movie>> GetAll(
-        //     int year,
-        //     int maxLength,
-        //     int minLength,
-        //     bool includeActors,
-        //     bool includeDirector,
-        //     int genreId
-        //     )
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public Task<List<Movie>> GetAll(
+            int year,
+            int maxLength,
+            int minLength,
+            bool includeActors,
+            bool includeDirector,
+            int genreId
+            )
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

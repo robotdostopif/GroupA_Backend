@@ -11,12 +11,10 @@ namespace HorrorMovieAPI.Services
     where TContext : DbContext
     {
         private readonly HorrorContext _context;
-        //private readonly ILogger _logger;
 
         public Repository(HorrorContext context)
         {
             _context = context;
-            //_logger = logger;
         }
 
         public async Task<T> Add(T entity)
@@ -48,9 +46,11 @@ namespace HorrorMovieAPI.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<T> Update(T entity)
+        public async Task<T> Update(T entity)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            await Save();
+            return entity;
         }
     }
 }
