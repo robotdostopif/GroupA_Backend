@@ -41,13 +41,7 @@ namespace HorrorMovieAPI.Services
         public async Task<T> Get(int id)
         {
             _logger.LogInformation("Get by id");
-            var entity = await _context.Set<T>().FindAsync(id);
-            if (entity == null)
-            {
-                return entity;
-            }
-
-            return entity;
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<bool> Save()
