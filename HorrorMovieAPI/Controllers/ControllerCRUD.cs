@@ -41,9 +41,15 @@ namespace HorrorMovieAPI.Controllers
             throw new System.NotImplementedException();
         }
 
-        public Task<ActionResult> Put(int id, T entity)
+        public async Task<ActionResult> Put(int id, T entity)
         {
-            throw new System.NotImplementedException();
+            var E = await _repository.Get(id);
+            if(E == null)
+            {
+                return NotFound;
+            }
+            E = await _repository.Update(entity);
+            return E;
         }
     }
 }
