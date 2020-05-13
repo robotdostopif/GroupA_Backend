@@ -7,12 +7,8 @@ namespace HorrorMovieAPI.Services
     public interface IMovieRepository
     {
         Task<List<Movie>> GetAll(
-            int year,
-            int maxLength,
-            int minLength,
             bool includeActors,
-            bool includeDirector,
-            int genreId
+            bool includeDirector
             );
     }
 }
