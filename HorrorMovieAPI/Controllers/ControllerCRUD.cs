@@ -14,9 +14,15 @@ namespace HorrorMovieAPI.Controllers
             throw new System.NotImplementedException();
         }
 
-        public Task<ActionResult<T>> Get(int id)
+        // api.com/v1.0/[controller]/<id>
+        public async Task<ActionResult<T>> Get(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _repository.Get(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return entity;
         }
 
         public Task<ActionResult> Post(T entity)
