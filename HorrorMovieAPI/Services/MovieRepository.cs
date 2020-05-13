@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
@@ -16,7 +19,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public Task<List<Movie>> GetAll(
+        public async Task<List<Movie>> GetAll(
             int year,
             int maxLength,
             int minLength,
@@ -25,7 +28,27 @@ namespace HorrorMovieAPI.Services
             int genreId
             )
         {
-            throw new System.NotImplementedException();
+            //_logger.LogInformation($"Getting all Movies");
+            IQueryable<Movie> query = _context.Movies;
+            IQueryable<Casting> castingQuery = _context.Castings;
+           
+            if(includeActors)
+            {
+                query = query.Include(a => a.Castings
+                .Join());
+
+
+
+                castingQuery = castingQuery.Include(b => b.Actor);
+            }
+
+            if(includeDirector)
+            {
+                query = query.Include(a => a.Castings);
+                castingQuery = castingQuery.Include(b => b.Actor);
+            }
+            query = query.OrderBy(y => y.Title);
+            return await query.ToListAsync();
         }
     }
 }
