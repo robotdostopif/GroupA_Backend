@@ -20,35 +20,25 @@ namespace HorrorMovieAPI.Services
         }
 
         public async Task<List<Movie>> GetAll(
-            int year,
-            int maxLength,
-            int minLength,
             bool includeActors,
-            bool includeDirector,
-            int genreId
+            bool includeDirector
             )
-       {
-            // _logger.LogInformation($"Getting all Movies");
-            // IQueryable<Movie> query = _context.Movies;
-            // IQueryable<Casting> castingQuery = _context.Castings;
+        {
+            //_logger.LogInformation($"Getting all Movies");
+            IQueryable<Movie> query = _context.Movies;
            
-            // if(includeActors)
-            // {
-            //     query = query.Include(a => a.Castings
-            //     .Join());
+            if(includeActors)
+            {
+                query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);
+            }
 
+            if(includeDirector)
+            {
+                query = query.Include(a => a.Castings).ThenInclude(b => b.Movie).ThenInclude(c => c.Director);
+            }
 
-
-            //     castingQuery = castingQuery.Include(b => b.Actor);
-            // }
-
-            // if(includeDirector)
-            // {
-            //     query = query.Include(a => a.Castings);
-            //     castingQuery = castingQuery.Include(b => b.Actor);
-            // }
-            // query = query.OrderBy(y => y.Title);
-            return new Movie
+            query = query.OrderBy(y => y.Title);
+            return await query.ToListAsync();
         }
     }
-}
+} 
