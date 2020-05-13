@@ -31,7 +31,7 @@ namespace HorrorMovieAPI.Services
 
             if (includeMovies)
             {
-                query = query.Include(p => p.Movies);
+                query = query.Include(p => p.Castings).ThenInclude(m => m.Movie);
             }
 
             query = query.OrderBy(y => y.LastName);

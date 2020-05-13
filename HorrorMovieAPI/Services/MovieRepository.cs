@@ -27,28 +27,28 @@ namespace HorrorMovieAPI.Services
             bool includeDirector,
             int genreId
             )
-        {
-            //_logger.LogInformation($"Getting all Movies");
-            IQueryable<Movie> query = _context.Movies;
-            IQueryable<Casting> castingQuery = _context.Castings;
+       {
+            // _logger.LogInformation($"Getting all Movies");
+            // IQueryable<Movie> query = _context.Movies;
+            // IQueryable<Casting> castingQuery = _context.Castings;
            
-            if(includeActors)
-            {
-                query = query.Include(a => a.Castings
-                .Join());
+            // if(includeActors)
+            // {
+            //     query = query.Include(a => a.Castings
+            //     .Join());
 
 
 
-                castingQuery = castingQuery.Include(b => b.Actor);
-            }
+            //     castingQuery = castingQuery.Include(b => b.Actor);
+            // }
 
-            if(includeDirector)
-            {
-                query = query.Include(a => a.Castings);
-                castingQuery = castingQuery.Include(b => b.Actor);
-            }
-            query = query.OrderBy(y => y.Title);
-            return await query.ToListAsync();
+            // if(includeDirector)
+            // {
+            //     query = query.Include(a => a.Castings);
+            //     castingQuery = castingQuery.Include(b => b.Actor);
+            // }
+            // query = query.OrderBy(y => y.Title);
+            return new Movie
         }
     }
 }
