@@ -15,9 +15,14 @@ namespace HorrorMovieAPI.Controllers
             _repository = repository;
         }
 
-        public Task<ActionResult<T>> Delete(int id)
+        public async Task<ActionResult<T>> Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _repository.Delete(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return entity;
         }
 
         // api.com/v1.0/[controller]/<id>
