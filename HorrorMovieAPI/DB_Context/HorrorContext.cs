@@ -108,10 +108,10 @@ namespace HorrorMovieAPI.DB_Context
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Actor> Actors { get; set; }
-        public DbSet<Director> Directors { get; set; }
-        public DbSet<Casting> Castings { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<Actor> Actors { get; set; }
+        public virtual DbSet<Director> Directors { get; set; }
+        public virtual DbSet<Casting> Castings { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
     }
 }
