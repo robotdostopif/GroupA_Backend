@@ -1,6 +1,58 @@
 ## Standups 
 
+# 2020-05-13
 
+**Generalsekreterare:** Anders
+
+### Gjort färdigt tills idag*
+
+Anders:
+
+* Jag har påbörjat SKRAC-49
+
+Pierre:
+
+* Gjort färdigt SKRAC-66, -65 och -101
+* Undersökt hur vi skall gå vidare med Unit Tester
+
+
+Andreas:
+
+* Blev färdig med SKRAC-46
+* Jag har påbörjat  SKRAC-59
+* Glömde göra ny branch på SKRAC-46 som gick upp som SKRAC-59 , 
+* Får ligga kvar och får åtgärdas i pushen på SKRAC-59
+
+André:
+
+* Gjorde färdigt SKRAC-90, 99, 100
+* Jag hade problem med jira och hittade inga nya issues
+* Problemet löst nu
+
+
+
+### Göra till nästa gång*
+
+Anders:
+
+* fortsätta med SKRAC-49
+* försöka ta någon ny issues
+
+Pierre:
+
+* Fortsätta med issues
+* Börja med SKRAC-81 Tillsammans med Gruppmedlemmar 
+
+
+Andreas:
+
+* Fortsätta med SKRAC-59
+* Börja med SKRAC-98
+
+André:
+
+* Fortsätta med SKRAC-55 
+* Ta någon ny issues
 
 # 2020-05-12
 
