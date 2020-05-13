@@ -352,3 +352,6 @@ MigrationBackup/
 HorrorMovieAPI/*.json
 HorrorMovieAPI/bin/
 HorrorMovieAPI/obj/
+HorrorMovieAPI.Tests/obj/
+HorrorMovieAPI.Tests/bin/
+HorrorMovieAPI.Tests/.vscode/
