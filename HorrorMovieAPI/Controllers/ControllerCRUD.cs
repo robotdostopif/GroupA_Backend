@@ -46,10 +46,10 @@ namespace HorrorMovieAPI.Controllers
             var ent = await _repository.Get(id);
             if(ent == null)
             {
-                return NotFound;
+                return NotFound();
             }
             ent = await _repository.Update(entity);
-            return ent;
+            return ent(id, entity);
         }
     }
 }
