@@ -6,6 +6,11 @@ namespace HorrorMovieAPI.DB_Context
 {
     public class HorrorContext : DbContext
     {
+        public HorrorContext()
+        {
+
+        }
+
         public HorrorContext(DbContextOptions<HorrorContext> options) : base(options)
         {
         }

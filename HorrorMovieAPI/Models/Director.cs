@@ -11,7 +11,7 @@ namespace HorrorMovieAPI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DOB { get; set; }
-        public string BirthThown { get; set; }
+        public string BirthTown { get; set; }
         public string BirthCountry { get; set; }
         public ICollection<Movie> Movies { get; set; }
     }
