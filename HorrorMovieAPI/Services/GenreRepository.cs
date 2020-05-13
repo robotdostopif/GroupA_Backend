@@ -12,10 +12,12 @@ namespace HorrorMovieAPI.Services
     public class GenreRepository : Repository<Genre, HorrorContext>, IGenreRepository
     {
         private readonly HorrorContext _context;
+        private readonly ILogger<GenreRepository> _logger;
 
-        public GenreRepository(HorrorContext context, ILogger logger) : base(context, logger)
+        public GenreRepository(HorrorContext context, ILogger<GenreRepository> logger) : base(context, logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<List<Genre>> GetAll(bool includeMovies, bool includeActors)

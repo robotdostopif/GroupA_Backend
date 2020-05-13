@@ -9,9 +9,11 @@ namespace HorrorMovieAPI.Services
     public class MovieRepository : Repository<Movie, HorrorContext>, IMovieRepository
     {
         private readonly HorrorContext _context;
-        public MovieRepository(HorrorContext context, ILogger logger) : base(context, logger)
+        private readonly ILogger<MovieRepository> _logger;
+        public MovieRepository(HorrorContext context, ILogger<MovieRepository> logger) : base(context, logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public Task<List<Movie>> GetAll(

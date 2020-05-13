@@ -12,9 +12,11 @@ namespace HorrorMovieAPI.Services
     public class DirectorRepository : Repository<Director, HorrorContext>, IDirectorRepository
     {
         private readonly HorrorContext _context;
-        public DirectorRepository(HorrorContext context, ILogger logger) : base(context, logger)
+        private readonly ILogger<DirectorRepository> _logger;
+        public DirectorRepository(HorrorContext context, ILogger<DirectorRepository> logger) : base(context, logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<List<Director>> GetAll(string birthCountry, bool includeMovies)
@@ -23,7 +25,12 @@ namespace HorrorMovieAPI.Services
 
             if (string.IsNullOrEmpty(birthCountry) == false)
             {
-                query.Where(d => d.BirthCountry == birthCountry);
+                _logger.LogInformation("Fetching with BirthCountry specified");
+                query = query.Where(d => d.BirthCountry == birthCountry);
+            }
+            else
+            {
+                _logger.LogInformation("Fetching with BirthCountry NOT specified");
             }
 
             if (includeMovies)
