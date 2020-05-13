@@ -43,13 +43,13 @@ namespace HorrorMovieAPI.Controllers
 
         public async Task<ActionResult> Put(int id, T entity)
         {
-            var E = await _repository.Get(id);
-            if(E == null)
+            var ent = await _repository.Get(id);
+            if(ent == null)
             {
                 return NotFound;
             }
-            E = await _repository.Update(entity);
-            return E;
+            ent = await _repository.Update(entity);
+            return ent;
         }
     }
 }
