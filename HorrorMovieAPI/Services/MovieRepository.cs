@@ -26,19 +26,22 @@ namespace HorrorMovieAPI.Services
         {
             //_logger.LogInformation($"Getting all Movies");
             IQueryable<Movie> query = _context.Movies;
-           
-            if(includeActors)
+
+            if (includeActors && includeDirector)
+            {
+                query = query.Include(x => x.Director).Include(a => a.Castings).ThenInclude(b => b.Actor);
+            }
+            else if (includeDirector)
+            {
+                query = query.Include(c => c.Director);
+            }
+            else if (includeActors)
             {
                 query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);
-            }
-
-            if(includeDirector)
-            {
-                query = query.Include(a => a.Castings).ThenInclude(b => b.Movie).ThenInclude(c => c.Director);
             }
 
             query = query.OrderBy(y => y.Title);
             return await query.ToListAsync();
         }
     }
-} 
+}
