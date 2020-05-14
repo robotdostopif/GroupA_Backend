@@ -35,10 +35,18 @@ namespace HorrorMovieAPI.Controllers
             }
             return entity;
         }
-
-        public Task<ActionResult> Post(T entity)
+        [HttpPost]
+        public Task<ActionResult<T>> Post(T entity)
         {
-            throw new System.NotImplementedException();
+            _repository.Add(entity);
+            if(await _repository.Save())
+            {
+                return Created("", entity);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         public Task<ActionResult> Put(int id, T entity)
