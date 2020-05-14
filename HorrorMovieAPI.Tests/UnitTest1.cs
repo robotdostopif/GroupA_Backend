@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using HorrorMovieAPI.Controllers;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.EntityFrameworkCore;
@@ -26,7 +28,25 @@ namespace HorrorMovieAPI.Tests
             // Act
             var actual = await directorRepository.GetAll("", false);
             // Assert
-            Assert.Equal(2, (int)actual.Count);
+            Assert.Equal(1, (int)actual.Count);
+        }
+
+        [Fact]
+        public void Get_WhenCalled_ReturnsOkResult()
+        {
+            var horrorContextMock = new Mock<HorrorContext>();
+            horrorContextMock.Setup(d => d.Directors).ReturnsDbSet(new List<Director>());
+
+            var logger = Mock.Of<ILogger<DirectorRepository>>();
+            var directorRepository = new DirectorRepository(horrorContextMock.Object, logger);
+
+            var directorsController = new DirectorsController(directorRepository);
+
+            // Act
+            var okResult = directorsController.GetAll();
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult.Result);
         }
 
         private static IList<Director> GetDirectors()
