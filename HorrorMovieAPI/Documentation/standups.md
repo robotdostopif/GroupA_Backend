@@ -1,5 +1,55 @@
 ## Standups 
 
+# 2020-05-14
+
+**Generalsekreterare:** Anders
+
+### Gjort färdigt tills idag*
+
+Anders:
+
+* Jag har gjort färdigt SKRAC-49
+* Jag har påbörjat SKRAC-96
+
+Pierre:
+
+* Frånvarande
+
+
+Andreas:
+
+* Blev färdig med SKRAC-59, -98
+* Jag har påbörjat  SKRAC-97
+
+André:
+
+* Gjorde färdigt SKRAC-57, -95
+
+
+
+### Göra till nästa gång*
+
+Anders:
+
+* fortsätta med SKRAC-96
+* Skall försöka hinna med att läsa om Hateoas
+
+Pierre:
+
+* Frånvarande
+
+
+Andreas:
+
+* Fortsätta med SKRAC-97
+* Skall försöka hinna med att läsa om Hateoas
+
+André:
+
+* Vara med skapa en sprint en ny sprint med tester
+* Ta SKRAC-85 samt Ta några nya issues om jag hinner
+* Skall försöka hinna med att läsa om Hateoas och se vad vi skall implementera i den
+
 # 2020-05-13
 
 **Generalsekreterare:** Anders
