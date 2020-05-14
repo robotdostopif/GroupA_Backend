@@ -38,6 +38,7 @@ namespace HorrorMovieAPI.Controllers
             return entity;
         }
 
+        [HttpPost]
         public Task<ActionResult> Post(TEntity entity)
         {
             throw new System.NotImplementedException();
@@ -46,13 +47,12 @@ namespace HorrorMovieAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, TEntity entity)
         {
-            
-            if(id != entity.Id)
+            if (id != entity.Id)
             {
                 return NotFound();
             }
-            e = await _repository.Update(entity);
-            return NoContent();
+            await _repository.Update(entity);
+            return Ok();
         }
     }
 }
