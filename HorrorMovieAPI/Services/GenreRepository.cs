@@ -22,7 +22,19 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Genre>> GetAll(bool includeMovies, bool includeActors)
         {
-            return await _context.Set<Genre>().ToListAsync();
+            IQueryable<Genre> query = _context.Genres;
+
+            if (includeActors)
+            {
+                query = query.Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
+            }
+            else if (includeMovies)
+            {
+                query = query.Include(x => x.Movies);
+            }
+
+            query = query.OrderBy(y => y.Name);
+            return await query.ToListAsync();
         }
     }
 }

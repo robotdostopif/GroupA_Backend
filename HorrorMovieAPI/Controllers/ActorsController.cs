@@ -9,16 +9,16 @@ namespace HorrorMovieAPI.Controllers
 {
     [Route("api/v1.0/[controller]")]
     [ApiController]
-    public class ActorsController : ControllerBase
+    public class ActorsController : ControllerCRUD<Actor, ActorRepository>
     {
         private readonly ActorRepository _repository;
-        public ActorsController(ActorRepository repository)
+        public ActorsController(ActorRepository repository) : base(repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<Actor>>> GetAll(string firstName,bool includeMovies)
+        public async Task<ActionResult<ICollection<Actor>>> GetAll(string firstName = "", bool includeMovies = false)
         {
             return await _repository.GetAll(firstName, includeMovies);
         }

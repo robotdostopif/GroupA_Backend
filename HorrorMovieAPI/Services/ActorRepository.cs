@@ -24,9 +24,9 @@ namespace HorrorMovieAPI.Services
         public async Task<List<Actor>> GetAll(string firstName, bool includeMovies)
         {
             IQueryable<Actor> query = _context.Actors;
-            if(string.IsNullOrEmpty(firstName) == false)
+            if (string.IsNullOrEmpty(firstName) == false)
             {
-                query.Where(w => w.FirstName == firstName);
+                query = query.Where(w => w.FirstName == firstName);
             }
 
             if (includeMovies)
