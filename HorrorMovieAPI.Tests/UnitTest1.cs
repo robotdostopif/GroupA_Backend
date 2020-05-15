@@ -32,7 +32,7 @@ namespace HorrorMovieAPI.Tests
         }
 
         [Fact]
-        public void Get_WhenCalled_ReturnsOkResult()
+        public void DirectorsGetAllReturnsOkResult()
         {
             var horrorContextMock = new Mock<HorrorContext>();
             horrorContextMock.Setup(d => d.Directors).ReturnsDbSet(new List<Director>());
