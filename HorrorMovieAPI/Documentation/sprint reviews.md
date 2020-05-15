@@ -1,6 +1,38 @@
 # Sprint Reviews
 
+## 2020-05-15
 
+### SKRAC-an Sprint 7
+
+Sekreterare: André
+
+* Vad var målet för sprinten?
+  * Alla crud metoder klara i både controllers och repository * DbContext ska seeda data med hjälp av ModelBuilder och HasData() * Påbörja tester med Xunit för GetAll() * ... fler tester i mån av tid, men viktigt är att få igång testprojekt och lära sig
+    - 
+* Uppfylldes målet för sprinten?
+  *  :white_check_mark: Ja
+
+- Blev alla issues klara?
+  - :white_check_mark: Ja
+  - La även flera issues
+- Höll tidsplanering för era issues.
+  
+  - :white_check_mark: Ja
+- Bedöm vad ni kan göra bättre i nästa sprint
+  
+  - Schemalägg frivilligt gemensamt arbete med startpunkter.
+- Har det kommit upp nya saker som skall läggas till på er backlog?
+  - Säkerställ Implementering av Iloggers i alla repos.
+  
+  - Logga relevant information i alla repo metoder
+  
+  - Imapper ska implementeras i alla controllers
+  
+  - Göra likadana tester i test projektet för alla IEntitys.
+  
+  - Ha en test fil för varje typ, ex DirectorTest.cs
+  
+    
 
 ## 2020-05-08
 
