@@ -1,5 +1,57 @@
 ## Standups 
 
+# 2020-05-15
+
+**Generalsekreterare:** Andreas
+
+### Gjort färdigt tills idag*
+
+Anders:
+
+* Gjort klart SKRAC-96 men fått en merge conflikt
+* hjälpte till med fix för GetAll() i samtliga repos
+
+Pierre:
+
+* Gjort klart SKRAC-97 
+* fix för GetAll() i samtliga repos 
+* suttit med André och byggt vidare på ett test
+
+
+Andreas:
+
+* SKRAC-97 blev färdig med god hjälp av mina kompisar
+* Hann inte läsa om HATEOS
+
+André:
+
+* Gjort klart SKRAC-85 tillsammans med Pierre
+
+
+
+### Göra till nästa gång*
+
+Anders:
+
+* Lösa merge konflikten på SKRAC-96
+* Gemensamt grupparbete
+
+Pierre:
+
+* Hjälpa Anders med konflikten på SKRAC-96
+* Gemensamt grupparbete
+
+
+Andreas:
+
+* Hjälpa Anders med konflikten på SKRAC-96
+* Gemensamt grupparbete
+
+André:
+
+* Hjälpa Anders med konflikten på SKRAC-96
+* Gemensamt grupparbete
+
 # 2020-05-14
 
 **Generalsekreterare:** Anders
