@@ -39,9 +39,17 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult> Post(TEntity entity)
+        public async Task<ActionResult> Post(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            _repository.Add(entity);
+            if(await _repository.Save())
+            {
+                return Created("", entity);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("{id}")]
