@@ -20,9 +20,11 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<Director>>> GetAll(string birthCountry = "", bool includeMovies = false)
+        public async Task<ActionResult> GetAll(string birthCountry = "", bool includeMovies = false)
         {
-            return await _repository.GetAll(birthCountry, includeMovies);
+            var result = await _repository.GetAll(birthCountry, includeMovies);
+
+            return Ok(result);
         }
     }
 }
