@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +12,20 @@ namespace HorrorMovieAPI.Controllers
     public class GenresController : ControllerBase
     {
         private readonly GenreRepository _repository;
-        public GenresController(GenreRepository repository)
+        private readonly IMapper _mapper;
+
+        public GenresController(GenreRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Genre>>> GetAll(bool includeMovies = false, bool includeActors = false)
         {
-            return await _repository.GetAll(includeMovies, includeActors);
+            var results = await _repository.GetAll(includeMovies, includeActors);
+            var mappedResults = _mapper.Map<GenreDTO>(results);
+            return Ok(mappedResults);
         }
     }
 }
