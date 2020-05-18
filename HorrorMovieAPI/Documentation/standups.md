@@ -1,5 +1,49 @@
 ## Standups 
 
+# 2020-05-18
+
+**Generalsekreterare:** André
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* Blivit introducerad till projektet.
+
+Sebastian:
+
+* Blivit introducerad till projektet.
+
+
+Anders:
+
+* Introducerade Fredrika och Sebastian
+
+André:
+
+* Introducerade Fredrika och Sebastian
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* Ska göra SKRAC-105 och börjar på SKRAC-111, SKRAC-116
+
+Sebastian:
+
+* Ska göra SKRAC-103 och börja på SKRAC-117
+
+
+Anders:
+
+* Ska göra SKRAC-104 och börja på SKRAC-110
+
+André:
+
+* Ska börja på SKRAC-108 när Fredrika är färdig med profile mappen
+
 # 2020-05-15
 
 **Generalsekreterare:** Andreas
