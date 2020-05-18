@@ -19,11 +19,12 @@ namespace HorrorMovieAPI.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         public async Task<ActionResult<ICollection<Actor>>> GetAll(string firstName = "", bool includeMovies = false)
         {
-            return await _repository.GetAll(firstName, includeMovies);
+            var results = await _repository.GetAll(firstName, includeMovies);
+            var mappedResults = _mapper.Map<ActorDTO[]>(results);
+            return Ok(mappedResults);
         }
     }
 }
