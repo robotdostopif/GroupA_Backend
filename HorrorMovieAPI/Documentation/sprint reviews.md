@@ -6,9 +6,9 @@
 
 Sekreterare: André
 
-* Vad var målet för sprinten?
-  * Alla crud metoder klara i både controllers och repository * DbContext ska seeda data med hjälp av ModelBuilder och HasData() * Påbörja tester med Xunit för GetAll() * ... fler tester i mån av tid, men viktigt är att få igång testprojekt och lära sig
-    - 
+- Vad var målet för sprinten?
+  - Alla crud metoder klara i både controllers och repository * DbContext ska seeda data med hjälp av ModelBuilder och HasData() Påbörja tester med Xunit för GetAll()  ... fler tester i mån av tid, men viktigt är att få igång testprojekt och lära sig
+     
 * Uppfylldes målet för sprinten?
   *  :white_check_mark: Ja
 

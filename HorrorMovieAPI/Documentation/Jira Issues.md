@@ -35,13 +35,15 @@
 #### To do
 
 * Create folder Dto
-  * Move all DTO models into folder Dto/
-
+  
+* Move all DTO models into folder Dto/
+  
 * Create Services/RepositoryCrud.cs
   * Create the file in Services folder
   * Fill it with a private readonly field HorrorContext
   * Fill it with a constructor that takes context injection and sets the private field
-* 
+  
+  
 
 
 
