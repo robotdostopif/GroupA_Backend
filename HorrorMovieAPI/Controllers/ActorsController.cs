@@ -3,7 +3,7 @@ using HorrorMovieAPI.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
+using AutoMapper;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -12,9 +12,11 @@ namespace HorrorMovieAPI.Controllers
     public class ActorsController : ControllerCRUD<Actor, ActorRepository>
     {
         private readonly ActorRepository _repository;
-        public ActorsController(ActorRepository repository) : base(repository)
+        private readonly IMapper _mapper;
+        public ActorsController(ActorRepository repository, IMapper mapper) : base(repository)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
 
