@@ -26,5 +26,12 @@ namespace HorrorMovieAPI.Controllers
 
             return Ok(result);
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetDirectorById(int id, bool includeMovies = false)
+        {
+            var result = await _repository.GetDirectorById(id, includeMovies);
+
+            return Ok(result);
+        }
     }
 }
