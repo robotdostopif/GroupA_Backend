@@ -1,3 +1,4 @@
+using AutoMapper;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +34,7 @@ namespace HorrorMovieAPI
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<MovieRepository>();
             services.AddScoped<ActorRepository>();
