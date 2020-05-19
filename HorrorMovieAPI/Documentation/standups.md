@@ -1,5 +1,50 @@
 ## Standups 
 
+# 2020-05-19
+
+**Generalsekreterare:** Anders
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* Jag gjorde klar SKRAC-105, -106
+
+Sebastian:
+
+* Frånvarande
+
+
+Anders:
+
+* Jag gjorde klart SKRAC-104, -110, -109
+
+André:
+
+* Jag har gjort SKRAC-108 
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* Ska göra vi gör a Nya issues så vi kan ärva in dom generiska klasserna som vi har i controllerCRUD  istället. Titta på HATEOS 
+
+Sebastian:
+
+* Vet ej, men högst troligt fortsätta med issues
+
+
+Anders:
+
+* Avvaktar till eftermiddag då vi skall sitta och se hur vi skall gå vidare med min nästa issues likt Fredrica. Titta på HATEOS
+* Kommer att behöva gå till lunch på Onsdag
+
+André:
+
+* Skall fortsätta med Samma sak som som Fredrika och Anders i eftermiddag
+
 # 2020-05-18
 
 **Generalsekreterare:** André
