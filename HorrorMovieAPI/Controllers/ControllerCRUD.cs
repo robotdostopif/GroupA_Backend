@@ -10,6 +10,7 @@ namespace HorrorMovieAPI.Controllers
     where TRepository : class, IRepository<TEntity>
     {
         private readonly TRepository _repository;
+
         public ControllerCRUD(TRepository repository)
         {
             _repository = repository;
@@ -41,8 +42,8 @@ namespace HorrorMovieAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(TEntity entity)
         {
-            _repository.Add(entity);
-            if(await _repository.Save())
+            await _repository.Add(entity);
+            if (await _repository.Save())
             {
                 return Created("", entity);
             }

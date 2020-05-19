@@ -28,7 +28,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetDirectorById(int id, bool includeMovies = false)
+        public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
         {
             var result = await _repository.GetDirectorById(id, includeMovies);
 
