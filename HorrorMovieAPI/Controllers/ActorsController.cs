@@ -20,7 +20,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Actor[]>> GetAll(string firstName = "", bool includeMovies = false)
+        public async Task<ActionResult<ActorDTO[]>> GetAll(string firstName = "", bool includeMovies = false)
         {
             var results = await _repository.GetAll(firstName, includeMovies);
             var mappedResults = _mapper.Map<ActorDTO[]>(results);
