@@ -20,21 +20,30 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Genre>> GetAll(bool includeMovies, bool includeActors)
+        public async Task<List<Genre>> GetAll(bool includeMovies)
         {
             IQueryable<Genre> query = _context.Genres;
 
-            if (includeActors)
+            if (includeMovies)
             {
                 query = query.Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
-            }
-            else if (includeMovies)
-            {
-                query = query.Include(x => x.Movies);
             }
 
             query = query.OrderBy(y => y.Name);
             return await query.ToListAsync();
+        }
+
+        public async Task<Genre> GetById(int id, bool includeMovies)
+        {
+            IQueryable<Genre> query = _context.Genres.Where(i => i.Id == id);
+
+            if (includeMovies)
+            {
+                query = query.Where(i => i.Id == id).Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
+            }
+
+            query = query.OrderBy(y => y.Id);
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
