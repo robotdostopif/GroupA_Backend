@@ -13,6 +13,7 @@ namespace HorrorMovieAPI.Services
     {
         private readonly HorrorContext _context;
         private readonly ILogger<MovieRepository> _logger;
+
         public MovieRepository(HorrorContext context, ILogger<MovieRepository> logger) : base(context, logger)
         {
             _context = context;
@@ -42,6 +43,22 @@ namespace HorrorMovieAPI.Services
 
             query = query.OrderBy(y => y.Title);
             return await query.ToListAsync();
+        }
+
+        public async Task<Movie> GetById(int id, bool includeActors, bool includeDirector)
+        {
+            IQueryable<Movie> query = _context.Movies.Where(i => i.Id == id);
+
+            if (includeActors)
+            {
+                query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);
+            }
+            if (includeDirector)
+            {
+                query = query.Include(x => x.Director);
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
