@@ -1,4 +1,5 @@
-﻿using HorrorMovieAPI.Models;
+﻿using AutoMapper;
+using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,10 +14,11 @@ namespace HorrorMovieAPI.Controllers
     public class DirectorsController : ControllerBase
     {
         private readonly DirectorRepository _repository;
-
-        public DirectorsController(DirectorRepository repository)
+        private readonly IMapper _mapper;
+        public DirectorsController(DirectorRepository repository,IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
