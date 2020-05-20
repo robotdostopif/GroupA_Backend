@@ -37,5 +37,18 @@ namespace HorrorMovieAPI.Services
             query = query.OrderBy(y => y.LastName);
             return await query.ToListAsync();
         }
+
+        public async Task<Actor> GetById(int id, bool includeMovies)
+        {
+            IQueryable<Actor> query = _context.Actors;
+            query = query.Where(d => d.Id == id);
+
+            if (includeMovies)
+            {
+                query = query.Where(a => a.Id == id).Include(m => m.Castings).ThenInclude(m => m.Movie);
+            }
+         
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

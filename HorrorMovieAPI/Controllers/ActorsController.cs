@@ -9,11 +9,11 @@ namespace HorrorMovieAPI.Controllers
 {
     [Route("api/v1.0/[controller]")]
     [ApiController]
-    public class ActorsController : ControllerCRUD<Actor, ActorRepository>
+    public class ActorsController : ControllerBase
     {
         private readonly ActorRepository _repository;
         private readonly IMapper _mapper;
-        public ActorsController(ActorRepository repository, IMapper mapper) : base(repository)
+        public ActorsController(ActorRepository repository, IMapper mapper) 
         {
             _repository = repository;
             _mapper = mapper;
@@ -26,6 +26,14 @@ namespace HorrorMovieAPI.Controllers
             var mappedResults = _mapper.Map<ActorDTO[]>(results);
             return Ok(mappedResults);
 
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ActorDTO>> GetById(int id, bool includeMovies = false)
+        {
+            var result = await _repository.GetById(id, includeMovies);
+            var mappedResult = _mapper.Map<ActorDTO>(result);
+            return Ok(mappedResult);
         }
     }
 }
