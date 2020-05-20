@@ -53,12 +53,11 @@ namespace HorrorMovieAPI.Services
             {
                 query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);
             }
-            else if (includeDirector)
+            if (includeDirector)
             {
                 query = query.Include(x => x.Director);
             }
 
-            query = query.OrderBy(y => y.Id);
             return await query.FirstOrDefaultAsync();
         }
     }
