@@ -27,5 +27,13 @@ namespace HorrorMovieAPI.Controllers
             var mappedResults = _mapper.Map<GenreDTO[]>(results);
             return Ok(mappedResults);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GenreDTO>> GetById(int id, bool includeMovies = false, bool includeActors = false)
+        {
+            var results = await _repository.GetById(id, includeMovies, includeActors);
+            var mappedResults = _mapper.Map<GenreDTO>(results);
+            return Ok(mappedResults);
+        }
     }
 }
