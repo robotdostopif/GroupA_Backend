@@ -1,5 +1,50 @@
 ## Standups 
 
+# 2020-05-20
+
+**Generalsekreterare:** Sebastian		
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* Kollat hur man kan utvidga generisk controllermetod och researchs men inte fått det att fungera än.
+
+Sebastian:
+
+* Jag har gjort mapping skarc-107.
+
+
+Anders:
+
+* Jag har varit med när gruppen försökte fixa generisk controllermetod .
+
+André:
+
+* Jag har varit med när gruppen försökte fixa generisk controllermetod och fixade genre  skarc-120 .
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* Skrac-111 göra en controller metod för id och sen även göra skrac-116 göra en repometod för att hitta på id.
+
+Sebastian:
+
+* Börja kolla på HATEOAS skrac 115.
+
+
+Anders:
+
+* Skrac-114 göra en controller metod för id. 
+* Kommer att behöva gå vid lunch idag.
+
+André:
+
+* Skrac-118 ,119 och 113 göra reop metoder för att get by id på movie och genre och skapa metod för det i genre controller.
+
 # 2020-05-19
 
 **Generalsekreterare:** Anders
@@ -12,7 +57,7 @@ Fredrika:
 
 Sebastian:
 
-* Frånvarande
+* Jag har gjort SKRAC-103,117 och 112
 
 
 Anders:
@@ -33,7 +78,7 @@ Fredrika:
 
 Sebastian:
 
-* Vet ej, men högst troligt fortsätta med issues
+* Jag ska göra SKRAC-107.
 
 
 Anders:

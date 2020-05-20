@@ -1,4 +1,5 @@
-﻿using HorrorMovieAPI.Models;
+﻿using AutoMapper;
+using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,26 +14,27 @@ namespace HorrorMovieAPI.Controllers
     public class DirectorsController : ControllerBase
     {
         private readonly DirectorRepository _repository;
-
-        public DirectorsController(DirectorRepository repository)
+        private readonly IMapper _mapper;
+        public DirectorsController(DirectorRepository repository,IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<DirectorDTO[]>> GetAll(string birthCountry = "", bool includeMovies = false)
         {
-            var result = await _repository.GetAll(birthCountry, includeMovies);
-
-            return Ok(result);
+            var results = await _repository.GetAll(birthCountry, includeMovies);
+            var mappedResults = _mapper.Map<DirectorDTO[]>(results);
+            return Ok(mappedResults);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
         {
             var result = await _repository.GetDirectorById(id, includeMovies);
-
-            return Ok(result);
+            var mappedResult = _mapper.Map<DirectorDTO>(result);
+            return Ok(mappedResult);
         }
     }
 }
