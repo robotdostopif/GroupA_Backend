@@ -9,6 +9,6 @@ namespace HorrorMovieAPI.Services
     public interface IActorRepository
     {
         Task<List<Actor>> GetAll(string firstname, bool includeMovies);
-        Task<Actor> GetById(int id);
+        Task<Actor> GetById(int id, bool includeMovies);
     }
 }
