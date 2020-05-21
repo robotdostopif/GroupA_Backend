@@ -1,5 +1,45 @@
 # Sprint Reviews
 
+## 2020-05-21
+
+### SKRAC-an Sprint 8
+
+* Sekreterare: **Fredrika**
+
+* **Vad var målet för sprinten?** 
+  Implementera getbyid metoder för controllerklasserna. 
+  Fixa automapper (model -> DTO) för controllermetoderna. 
+
+* **Uppfylldes målet för sprinten?** 
+
+  :white_check_mark: Ja
+
+- **Blev alla issues klara?**
+
+  Nej, vi har ett issue kvar SKRAK-115 som rör hateoas. 
+  Denna går över till nästa sprint istället.
+
+- **Om inte, varför**
+  Det blev strul i veckoschemat pga kristihimmelfärd, aka tidsbrist. 
+
+- *Icke klara issues återförs till backlog, efter att de har uppdaterats. Har vissa
+  delar klarats av? Skall vi ha en ny tidsuppskattning? Vad behövs för att vi
+  skall klara detta issue nästa gång?*
+
+- **Höll tidsplaneringen för alla issues?**
+
+  ​	:white_check_mark: Ja
+
+  Tidsplaneringen höll, vissa issues gick snabbare än vad vi förutspått.
+
+- **Bedöm vad ni kan göra bättre i nästa sprint**
+  Vi märkte att vi ville ha lite större issues, vi hade de nu på metodnivå. 
+  Det blev strul med vissa issues då man behövde den andra klar för att det skulle gå att testa/fungera. 
+  Det fanns för lite i backlogen. Vi skapade issues i backlogen för att kunna skapa en ny sprint. Vi kan/bör bli bättre på att fylla upp backlogen. Vi skulle kunna lägga in fler xunit-tester i backlogen till nästa gång.
+
+- **Har det kommit upp nya saker som skall läggas till på er backlog?**
+  Vi har inte lagt till något i backlogen. 
+
 ## 2020-05-15
 
 ### SKRAC-an Sprint 7
@@ -8,7 +48,7 @@ Sekreterare: André
 
 - Vad var målet för sprinten?
   - Alla crud metoder klara i både controllers och repository * DbContext ska seeda data med hjälp av ModelBuilder och HasData() Påbörja tester med Xunit för GetAll()  ... fler tester i mån av tid, men viktigt är att få igång testprojekt och lära sig
-     
+    
 * Uppfylldes målet för sprinten?
   *  :white_check_mark: Ja
 
