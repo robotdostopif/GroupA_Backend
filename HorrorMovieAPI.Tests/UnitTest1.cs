@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
 using HorrorMovieAPI.Controllers;
 using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
@@ -39,8 +40,9 @@ namespace HorrorMovieAPI.Tests
 
             var logger = Mock.Of<ILogger<DirectorRepository>>();
             var directorRepository = new DirectorRepository(horrorContextMock.Object, logger);
+            var _mockMapper = new Mock<IMapper>();
 
-            var directorsController = new DirectorsController(directorRepository);
+            var directorsController = new DirectorsController(directorRepository, _mockMapper.Object);
 
             // Act
             var okResult = directorsController.GetAll();
