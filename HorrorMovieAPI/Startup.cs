@@ -3,6 +3,9 @@ using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,8 +19,7 @@ namespace HorrorMovieAPI
 
         public Startup(IConfiguration configuration)
         {
-             Configuration = configuration;
-
+            Configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -35,6 +37,14 @@ namespace HorrorMovieAPI
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper>(x =>
+            {
+                var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+                var factory = x.GetRequiredService<IUrlHelperFactory>();
+                return factory.GetUrlHelper(actionContext);
+            });
 
             services.AddScoped<MovieRepository>();
             services.AddScoped<ActorRepository>();
