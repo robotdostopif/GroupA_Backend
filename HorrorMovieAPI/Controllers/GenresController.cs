@@ -35,5 +35,41 @@ namespace HorrorMovieAPI.Controllers
             var mappedResults = _mapper.Map<GenreDTO>(results);
             return Ok(mappedResults);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var entity = await _repository.Delete(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, Genre genre)
+        {
+            if (id != genre.Id)
+            {
+                return NotFound();
+            }
+            await _repository.Update(genre);
+            return Ok();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Post(Genre genre)
+        {
+            await _repository.Add(genre);
+            //här är nått knas 
+            if (!await _repository.Save())
+            {
+                return Created("", genre);
+            }
+            else
+            {
+                return BadRequest();
+            }
+            
+        }
     }
 }
