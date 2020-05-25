@@ -1,5 +1,51 @@
 ## Standups 
 
+# 2020-05-25
+
+**Generalsekreterare:** Fredrika		
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* xxx
+
+Sebastian:
+
+* xxx
+
+
+Aron:
+
+* xxx
+
+Nor:
+
+* xxx
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* SKRAC-126 och SKRAC-173.
+
+Sebastian:
+
+* SKRAC-139, SKRAC-140 och SKRAC-141.
+
+
+Aron:
+
+* SKRAC-145, SKRAC-169 (tester).
+
+  
+
+Nor:
+
+* SKRAC-122 (apiRequest actor) SKRAC-155 (actor repotester).
+
 # 2020-05-20
 
 **Generalsekreterare:** Sebastian		
