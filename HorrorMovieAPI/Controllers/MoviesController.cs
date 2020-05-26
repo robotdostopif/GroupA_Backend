@@ -60,7 +60,7 @@ namespace HorrorMovieAPI.Controllers
                 {
                     Title = movieToCreateDTO.Title,
                     Length = movieToCreateDTO.Length,
-                    Year = movieToCreateDTO.Length,
+                    Year = movieToCreateDTO.Year,
                     Director = director,
                     Genre = genre
                 };
