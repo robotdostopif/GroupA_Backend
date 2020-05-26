@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HorrorMovieAPI.Services
 {
-    public class Repository<T, TContext> : IRepository<T>
+    public class Repository<T> : IRepository<T>
     where T : class, IEntity
-    where TContext : DbContext
+    
     {
         private readonly HorrorContext _context;
         private readonly ILogger _logger;
@@ -23,7 +23,6 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Adding object of type {entity.GetType()}");
             await _context.Set<T>().AddAsync(entity);
-            await Save();
             return entity;
         }
 
@@ -65,6 +64,15 @@ namespace HorrorMovieAPI.Services
             _context.Entry(entity).State = EntityState.Modified;
             await Save();
             return entity;
+        }
+
+        public async Task<Director> GetDirectorById(int id) 
+        {
+            return await _context.Set<Director>().FindAsync(id);
+        }
+        public async Task<Genre> GetGenreById(int id)
+        {
+            return await _context.Set<Genre>().FindAsync(id);
         }
     }
 }

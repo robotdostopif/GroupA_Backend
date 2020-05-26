@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
 {
-    public class MovieRepository : Repository<Movie, HorrorContext>, IMovieRepository
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<MovieRepository> _logger;
@@ -45,7 +45,7 @@ namespace HorrorMovieAPI.Services
             return await query.ToListAsync();
         }
 
-        public async Task<Movie> GetById(int id, bool includeActors, bool includeDirector)
+        public async Task<Movie> GetMovieById(int id, bool includeActors, bool includeDirector)
         {
             IQueryable<Movie> query = _context.Movies.Where(i => i.Id == id);
 
