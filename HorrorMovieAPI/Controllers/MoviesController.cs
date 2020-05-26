@@ -29,16 +29,34 @@ namespace HorrorMovieAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<MovieDTO[]>> GetAll(bool includeActors = false, bool includeDirector = false)
         {
-            var results = await _repository.GetAll(includeActors,includeDirector);
-            var toReturn = results.Select(x => ExpandSingleItem(x));
-            return Ok (toReturn);
+            try
+            {
+              var results = await _repository.GetAll(includeActors,includeDirector);
+              var toReturn = results.Select(x => ExpandSingleItem(x));
+              return Ok (toReturn);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve movies. Exception thrown: {e.Message}");
+            }
+           
         }
 
         [HttpGet("{id}", Name = "GetMovieById")]
-        public async Task<ActionResult<MovieDTO>> GetMovieById(int id, bool includeActors = false, bool includeDirector = false)
-        {         
-            var result = await _repository.GetMovieById(id, includeActors, includeDirector);  
-            return Ok(ExpandSingleItem(result));
+        public async Task<ActionResult<MovieDTO>> GetById(int id, bool includeActors = false, bool includeDirector = false)
+        {
+            try
+            {
+                var result = await _repository.GetMovieById(id, includeActors, includeDirector);  
+                return Ok(ExpandSingleItem(result));
+            }
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
+            }
+            
         }
 
         [HttpPost(Name = "AddMovie")]
