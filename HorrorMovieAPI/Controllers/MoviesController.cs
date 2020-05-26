@@ -26,17 +26,35 @@ namespace HorrorMovieAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<MovieDTO[]>> GetAll(bool includeActors = false, bool includeDirector = false)
         {
-            var result = await _repository.GetAll(includeActors,includeDirector);
-            var mappedResults = _mapper.Map<MovieDTO[]>(result);
-            return Ok (mappedResults);
+            try
+            {
+                var result = await _repository.GetAll(includeActors, includeDirector);
+                var mappedResults = _mapper.Map<MovieDTO[]>(result);
+                return Ok(mappedResults);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve movies. Exception thrown: {e.Message}");
+            }
+           
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<MovieDTO>> GetById(int id, bool includeActors = false, bool includeDirector = false)
         {
-            var result = await _repository.GetMovieById(id, includeActors, includeDirector);
-            var mappedResult = _mapper.Map<MovieDTO>(result);
-            return Ok(mappedResult);
+            try
+            {
+                var result = await _repository.GetMovieById(id, includeActors, includeDirector);
+                var mappedResult = _mapper.Map<MovieDTO>(result);
+                return Ok(mappedResult);
+            }
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
+            }
+            
         }
 
         [HttpPost(Name = "AddMovie")]
