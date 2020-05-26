@@ -7,6 +7,7 @@ using AutoMapper;
 using System;
 using Microsoft.AspNetCore.Http;
 using HorrorMovieAPI.Dto;
+using System.Linq;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -16,27 +17,28 @@ namespace HorrorMovieAPI.Controllers
     {
         private readonly MovieRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IUrlHelper _urlHelper;
 
-        public MoviesController(MovieRepository repository, IMapper mapper)
+        public MoviesController(MovieRepository repository, IMapper mapper, IUrlHelper urlHelper)
         {
             _mapper = mapper;
             _repository = repository;
+            _urlHelper = urlHelper;
         }
 
         [HttpGet]
         public async Task<ActionResult<MovieDTO[]>> GetAll(bool includeActors = false, bool includeDirector = false)
         {
-            var result = await _repository.GetAll(includeActors,includeDirector);
-            var mappedResults = _mapper.Map<MovieDTO[]>(result);
-            return Ok (mappedResults);
+            var results = await _repository.GetAll(includeActors,includeDirector);
+            var toReturn = results.Select(x => ExpandSingleItem(x));
+            return Ok (toReturn);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<MovieDTO>> GetById(int id, bool includeActors = false, bool includeDirector = false)
-        {
-            var result = await _repository.GetMovieById(id, includeActors, includeDirector);
-            var mappedResult = _mapper.Map<MovieDTO>(result);
-            return Ok(mappedResult);
+        [HttpGet("{id}", Name = "GetMovieById")]
+        public async Task<ActionResult<MovieDTO>> GetMovieById(int id, bool includeActors = false, bool includeDirector = false)
+        {         
+            var result = await _repository.GetMovieById(id, includeActors, includeDirector);  
+            return Ok(ExpandSingleItem(result));
         }
 
         [HttpPost(Name = "AddMovie")]
@@ -79,7 +81,7 @@ namespace HorrorMovieAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut("{movieId}", Name = "UpdateMovie")]
+        [HttpPut("{id}", Name = "UpdateMovie")]
         public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
         {
             try
@@ -108,8 +110,8 @@ namespace HorrorMovieAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{movieID}", Name = "DeleteMovie")]
-        public async Task<ActionResult> Deletemovie(int movieId)
+        [HttpDelete("{id}", Name = "DeleteMovie")]
+        public async Task<ActionResult> DeleteMovie(int movieId)
         {
             try
             {
@@ -135,6 +137,44 @@ namespace HorrorMovieAPI.Controllers
             }
             return BadRequest();
         }
-       
+
+        private dynamic ExpandSingleItem(Movie movie)
+        {
+            var links = GetLinks(movie);
+            MovieDTO movieDto = _mapper.Map<MovieDTO>(movie);
+
+            var resourceToReturn = movieDto.ToDynamic() as IDictionary<string, object>;
+            resourceToReturn.Add("links", links);
+
+            return resourceToReturn;
+        }
+
+        private IEnumerable<LinkDto> GetLinks(Movie movie)
+        {
+            var links = new List<LinkDto>();
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(GetMovieById), new { id = movie.Id }),
+              "self",
+              "GET"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(DeleteMovie), new { id = movie.Id }),
+              "delete",
+              "DELETE"));
+
+            links.Add(
+               new LinkDto(_urlHelper.Link(nameof(UpdateMovie), new { id = movie.Id }),
+               "update",
+               "PUT"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(AddMovie), null),
+              "create",
+              "POST"));
+
+            return links;
+        }
+
     }
 }
