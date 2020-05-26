@@ -43,7 +43,6 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Deleting object of type {entity.GetType()}");
             _context.Set<T>().Remove(entity);
-            await Save();
         }
 
         public async Task<T> Get(int id)

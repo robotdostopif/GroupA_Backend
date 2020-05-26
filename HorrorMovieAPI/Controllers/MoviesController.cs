@@ -107,5 +107,34 @@ namespace HorrorMovieAPI.Controllers
 
             return BadRequest();
         }
+
+        [HttpDelete("{movieID}", Name = "DeleteMovie")]
+        public async Task<ActionResult> Deletemovie(int movieId)
+        {
+            try
+            {
+                var movieToDelete = await _repository.Get(movieId);
+                if(movieToDelete == null)
+                {
+                    return NotFound($"Could not found the movie with the id: {movieId}");
+                }
+
+                await _repository.Delete(movieToDelete);
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
+
+
+            }
+            return BadRequest();
+        }
+       
     }
 }
