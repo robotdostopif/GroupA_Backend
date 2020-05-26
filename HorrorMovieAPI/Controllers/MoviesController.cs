@@ -79,7 +79,7 @@ namespace HorrorMovieAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut("{movieId}")]
+        [HttpPut("{movieId}", Name = "UpdateMovie")]
         public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
         {
             try
