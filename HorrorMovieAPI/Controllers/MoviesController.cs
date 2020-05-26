@@ -72,7 +72,7 @@ namespace HorrorMovieAPI.Controllers
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to create the movie. Exception trhrown when attempting to add data to the database: {e.Message}");
+                    $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
             }
             return BadRequest();
         }
