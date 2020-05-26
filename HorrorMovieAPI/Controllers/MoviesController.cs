@@ -81,7 +81,7 @@ namespace HorrorMovieAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut("{movieId}", Name = "UpdateMovie")]
+        [HttpPut("{id}", Name = "UpdateMovie")]
         public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
         {
             try
@@ -110,7 +110,7 @@ namespace HorrorMovieAPI.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{movieID}", Name = "DeleteMovie")]
+        [HttpDelete("{id}", Name = "DeleteMovie")]
         public async Task<ActionResult> DeleteMovie(int movieId)
         {
             try
