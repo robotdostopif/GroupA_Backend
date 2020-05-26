@@ -39,10 +39,12 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public async Task Delete(T entity)
+        public async Task<T>Delete(T entity)
         {
             _logger.LogInformation($"Deleting object of type {entity.GetType()}");
             _context.Set<T>().Remove(entity);
+            await Save();
+            return entity;
         }
 
         public async Task<T> Get(int id)
@@ -61,6 +63,7 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Updating object of type {entity.GetType()}");
             _context.Entry(entity).State = EntityState.Modified;
+            await Save();
             return entity;
         }
 
