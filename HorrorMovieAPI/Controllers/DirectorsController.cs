@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,17 +25,35 @@ namespace HorrorMovieAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<DirectorDTO[]>> GetAll(string birthCountry = "", bool includeMovies = false)
         {
-            var results = await _repository.GetAll(birthCountry, includeMovies);
-            var mappedResults = _mapper.Map<DirectorDTO[]>(results);
-            return Ok(mappedResults);
+            try
+            {
+                var results = await _repository.GetAll(birthCountry, includeMovies);
+                var mappedResults = _mapper.Map<DirectorDTO[]>(results);
+                return Ok(mappedResults);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to retrieve directors. Exception thrown: {e.Message} ");
+            }
+            
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
         {
-            var result = await _repository.GetDirectorById(id, includeMovies);
-            var mappedResult = _mapper.Map<DirectorDTO>(result);
-            return Ok(mappedResult);
+            try
+            {
+                var result = await _repository.GetDirectorById(id, includeMovies);
+                var mappedResult = _mapper.Map<DirectorDTO>(result);
+                return Ok(mappedResult);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to retrieve director with id {id}. Exception thrown: {e.Message} ");
+            }
+            
         }
     }
 }
