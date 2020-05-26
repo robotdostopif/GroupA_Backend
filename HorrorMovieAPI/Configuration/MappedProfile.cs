@@ -28,6 +28,8 @@ namespace HorrorMovieAPI.Configuration
                 .ReverseMap();
 
             CreateMap<ActorForUpdateDTO, Actor>();
+
+            CreateMap<DirectorForUpdateDTO, Director>();
         }
     }
 }
