@@ -60,8 +60,7 @@ namespace HorrorMovieAPI.Controllers
         public async Task<ActionResult> Post(Genre genre)
         {
             await _repository.Add(genre);
-            //här är nått knas 
-            if (!await _repository.Save())
+            if (await _repository.Save())
             {
                 return Created("", genre);
             }
@@ -69,7 +68,7 @@ namespace HorrorMovieAPI.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
     }
 }

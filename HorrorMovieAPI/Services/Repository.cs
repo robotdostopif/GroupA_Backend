@@ -22,7 +22,6 @@ namespace HorrorMovieAPI.Services
         public async Task<T> Add(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
-            await Save();
             return entity;
         }
 
@@ -46,8 +45,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<bool> Save()
         {
-            var result= await _context.SaveChangesAsync() > 0;
-            return result;
+            return await _context.SaveChangesAsync() > 0; ;
         }
 
         public async Task<T> Update(T entity)
