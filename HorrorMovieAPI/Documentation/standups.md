@@ -1,5 +1,51 @@
 ## Standups 
 
+# 2020-05-26
+
+**Generalsekreterare:** Aron		
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* Har gjort klart Skrac-127 som är en del av API Requestsen i MovieController.
+
+Sebastian:
+
+* Har gjort klart Skrac-138 som var PUT, POST och DELETE Requests för GenreControllern.
+
+
+Aron:
+
+* Har lagt till tester för GetRequests för GenreRepository(Skrac-163), ActorRepository(Skrac-163) och MovieRepository(Skrac-169) , har också lagt till logger för GenericRepository(Skrac-145). 
+
+Nor:
+
+* Har lagt till Crud Requests i ActorAPI(Skrac-122) och även HATOEAS för Actor(Skrac-174).
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* PutRequest och DeleteRequest för MovieController, SKRAC-128 och SKRAC-129. Därefter börja med HATEOAS för MovieController(Skrac-173).
+
+Sebastian:
+
+* Lägga till logger till GenreRepository(SKRAC-165, SKRAC-167) och ExceptionHandling för GenreController(Skrac-136). Därefter börja med HATEOAS för GenreController(Skrac-175).
+
+
+Aron:
+
+* Lägga till API-Requests för DirectorController(Skrac-131) och lägga till ExceptionHandling och HATEOAS för DirectorController(Skrac-176, Skrac-135). Därefter kika på fler tester på DirectorRepository.
+
+  
+
+Nor:
+
+* Lägga till fler tester för ActorRepository(Skrac-155).
+
 # 2020-05-25
 
 **Generalsekreterare:** Fredrika		
