@@ -10,6 +10,7 @@ namespace HorrorMovieAPI.Dto
         public string Title { get; set; }
         public int DirectorID { get; set; }
         public int GenreID { get; set; }
-
+        public int Length { get; set; }
+        public int Year { get; set; }
     }
 }

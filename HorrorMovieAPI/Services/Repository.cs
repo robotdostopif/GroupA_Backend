@@ -55,7 +55,6 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Updating object of type {entity.GetType()}");
             _context.Entry(entity).State = EntityState.Modified;
-            await Save();
             return entity;
         }
 

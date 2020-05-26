@@ -59,6 +59,8 @@ namespace HorrorMovieAPI.Controllers
                 Movie movie = new Movie
                 {
                     Title = movieToCreateDTO.Title,
+                    Length = movieToCreateDTO.Length,
+                    Year = movieToCreateDTO.Length,
                     Director = director,
                     Genre = genre
                 };
@@ -74,6 +76,35 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
             }
+            return BadRequest();
+        }
+
+        [HttpPut("{movieId}")]
+        public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
+        {
+            try
+            {
+                var movieToUpdate = await _repository.Get(movieId);
+                if(movieToUpdate == null)
+                {
+                    return NotFound($"Could not find the movie with the id {movieId}");
+                }
+
+                var updatedMovie = _mapper.Map(movieDTO, movieToUpdate);
+                await _repository.Update(updatedMovie);
+                
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+            }
+
             return BadRequest();
         }
     }
