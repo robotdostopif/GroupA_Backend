@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Services
 {
-    public class DirectorRepository : Repository<Director, HorrorContext>, IDirectorRepository
+    public class DirectorRepository : Repository<Director>, IDirectorRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<DirectorRepository> _logger;

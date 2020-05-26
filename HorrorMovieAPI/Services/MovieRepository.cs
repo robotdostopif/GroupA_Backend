@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
 {
-    public class MovieRepository : Repository<Movie, HorrorContext>, IMovieRepository
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<MovieRepository> _logger;
@@ -20,12 +20,9 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Movie>> GetAll(
-            bool includeActors,
-            bool includeDirector
-            )
+        public async Task<List<Movie>> GetAll(bool includeActors, bool includeDirector)
         {
-            //_logger.LogInformation($"Getting all Movies");
+            _logger.LogInformation($"Getting all Movies");
             IQueryable<Movie> query = _context.Movies;
 
             if (includeActors && includeDirector)
@@ -45,10 +42,11 @@ namespace HorrorMovieAPI.Services
             return await query.ToListAsync();
         }
 
-        public async Task<Movie> GetById(int id, bool includeActors, bool includeDirector)
+        public async Task<Movie> GetMovieById(int id, bool includeActors, bool includeDirector)
         {
+            _logger.LogInformation($"Getting movie with the id {id}");
             IQueryable<Movie> query = _context.Movies.Where(i => i.Id == id);
-
+            
             if (includeActors)
             {
                 query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);

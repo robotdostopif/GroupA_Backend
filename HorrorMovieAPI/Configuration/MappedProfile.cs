@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HorrorMovieAPI.Dto;
 using HorrorMovieAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,12 @@ namespace HorrorMovieAPI.Configuration
             CreateMap<Genre, GenreDTO>()
                 .ReverseMap();
 
+            CreateMap<Movie, MovieToCreateDTO>()
+                .ReverseMap();
+
+            CreateMap<ActorForUpdateDTO, Actor>();
+
+            CreateMap<DirectorForUpdateDTO, Director>();
         }
     }
 }

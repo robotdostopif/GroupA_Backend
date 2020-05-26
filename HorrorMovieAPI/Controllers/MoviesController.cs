@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using System;
+using Microsoft.AspNetCore.Http;
+using HorrorMovieAPI.Dto;
+using System.Linq;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -13,27 +17,182 @@ namespace HorrorMovieAPI.Controllers
     {
         private readonly MovieRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IUrlHelper _urlHelper;
 
-        public MoviesController(MovieRepository repository, IMapper mapper)
+        public MoviesController(MovieRepository repository, IMapper mapper, IUrlHelper urlHelper)
         {
             _mapper = mapper;
             _repository = repository;
+            _urlHelper = urlHelper;
         }
 
         [HttpGet]
         public async Task<ActionResult<MovieDTO[]>> GetAll(bool includeActors = false, bool includeDirector = false)
         {
-            var result = await _repository.GetAll(includeActors,includeDirector);
-            var mappedResults = _mapper.Map<MovieDTO[]>(result);
-            return Ok (mappedResults);
+            try
+            {
+              var results = await _repository.GetAll(includeActors,includeDirector);
+              var toReturn = results.Select(x => ExpandSingleItem(x));
+              return Ok (toReturn);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve movies. Exception thrown: {e.Message}");
+            }
+           
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetMovieById")]
         public async Task<ActionResult<MovieDTO>> GetById(int id, bool includeActors = false, bool includeDirector = false)
         {
-            var result = await _repository.GetById(id, includeActors, includeDirector);
-            var mappedResult = _mapper.Map<MovieDTO>(result);
-            return Ok(mappedResult);
+            try
+            {
+                var result = await _repository.GetMovieById(id, includeActors, includeDirector);  
+                return Ok(ExpandSingleItem(result));
+            }
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
+            }
+            
         }
+
+        [HttpPost(Name = "AddMovie")]
+        public async Task<ActionResult<MovieDTO>> AddMovie(MovieToCreateDTO movieToCreateDTO)
+        {
+            try
+            {
+                Director director = await _repository.GetDirectorById(movieToCreateDTO.DirectorID);
+
+                Genre genre = await _repository.GetGenreById(movieToCreateDTO.GenreID);
+                if(director == null )
+                {
+                    return BadRequest($"The director with the id: {director.Id} could not be found.");
+                }
+                if(genre == null)
+                {
+                    return BadRequest($"The genre with the id: {genre.Id} could not be found.");
+                }
+
+                Movie movie = new Movie
+                {
+                    Title = movieToCreateDTO.Title,
+                    Length = movieToCreateDTO.Length,
+                    Year = movieToCreateDTO.Year,
+                    Director = director,
+                    Genre = genre
+                };
+                await _repository.Add(movie);
+                
+                if (await _repository.Save())
+                {
+                    return Created($"/api/v1.0/movies/{movie.Id}", _mapper.Map<MovieDTO>(movie));
+                }
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("{id}", Name = "UpdateMovie")]
+        public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
+        {
+            try
+            {
+                var movieToUpdate = await _repository.Get(movieId);
+                if(movieToUpdate == null)
+                {
+                    return NotFound($"Could not find the movie with the id {movieId}");
+                }
+
+                var updatedMovie = _mapper.Map(movieDTO, movieToUpdate);
+                await _repository.Update(updatedMovie);
+                
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete("{id}", Name = "DeleteMovie")]
+        public async Task<ActionResult> DeleteMovie(int movieId)
+        {
+            try
+            {
+                var movieToDelete = await _repository.Get(movieId);
+                if(movieToDelete == null)
+                {
+                    return NotFound($"Could not found the movie with the id: {movieId}");
+                }
+
+                await _repository.Delete(movieToDelete);
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
+
+
+            }
+            return BadRequest();
+        }
+
+        private dynamic ExpandSingleItem(Movie movie)
+        {
+            var links = GetLinks(movie);
+            MovieDTO movieDto = _mapper.Map<MovieDTO>(movie);
+
+            var resourceToReturn = movieDto.ToDynamic() as IDictionary<string, object>;
+            resourceToReturn.Add("links", links);
+
+            return resourceToReturn;
+        }
+
+        private IEnumerable<LinkDto> GetLinks(Movie movie)
+        {
+            var links = new List<LinkDto>();
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(GetMovieById), new { id = movie.Id }),
+              "self",
+              "GET"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(DeleteMovie), new { id = movie.Id }),
+              "delete",
+              "DELETE"));
+
+            links.Add(
+               new LinkDto(_urlHelper.Link(nameof(UpdateMovie), new { id = movie.Id }),
+               "update",
+               "PUT"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(AddMovie), null),
+              "create",
+              "POST"));
+
+            return links;
+        }
+
     }
 }
