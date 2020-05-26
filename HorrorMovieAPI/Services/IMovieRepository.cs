@@ -4,7 +4,7 @@ using HorrorMovieAPI.Models;
 
 namespace HorrorMovieAPI.Services
 {
-    public interface IMovieRepository : IRepository<Movie>
+    public interface IMovieRepository
     {
         Task<List<Movie>> GetAll(bool includeActors, bool includeDirector);
 

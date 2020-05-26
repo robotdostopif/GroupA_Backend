@@ -53,7 +53,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             _mockContext.Setup(x => x.Movies).ReturnsDbSet(movies);
 
             // Act
-            var movie = await _mockRepo.GetById(expectedId, false,false);
+            var movie = await _mockRepo.GetMovieById(expectedId, false,false);
 
             // Assert
             Assert.Equal(expectedId, movie.Id);

@@ -31,32 +31,32 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-              var results = await _repository.GetAll(includeActors,includeDirector);
-              var toReturn = results.Select(x => ExpandSingleItem(x));
-              return Ok (toReturn);
+                var results = await _repository.GetAll(includeActors, includeDirector);
+                var toReturn = results.Select(x => ExpandSingleItem(x));
+                return Ok(toReturn);
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to retrieve movies. Exception thrown: {e.Message}");
             }
-           
+
         }
 
         [HttpGet("{id}", Name = "GetMovieById")]
-        public async Task<ActionResult<MovieDTO>> GetById(int id, bool includeActors = false, bool includeDirector = false)
+        public async Task<ActionResult<MovieDTO>> GetMovieById(int id, bool includeActors = false, bool includeDirector = false)
         {
             try
             {
-                var result = await _repository.GetMovieById(id, includeActors, includeDirector);  
+                var result = await _repository.GetMovieById(id, includeActors, includeDirector);
                 return Ok(ExpandSingleItem(result));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
             }
-            
+
         }
 
         [HttpPost(Name = "AddMovie")]
@@ -67,11 +67,11 @@ namespace HorrorMovieAPI.Controllers
                 Director director = await _repository.GetDirectorById(movieToCreateDTO.DirectorID);
 
                 Genre genre = await _repository.GetGenreById(movieToCreateDTO.GenreID);
-                if(director == null )
+                if (director == null)
                 {
                     return BadRequest($"The director with the id: {director.Id} could not be found.");
                 }
-                if(genre == null)
+                if (genre == null)
                 {
                     return BadRequest($"The genre with the id: {genre.Id} could not be found.");
                 }
@@ -84,9 +84,9 @@ namespace HorrorMovieAPI.Controllers
                     Director = director,
                     Genre = genre
                 };
-                await _repository.Add(movie);
-                
-                if (await _repository.Save())
+                var movieFromRepo = await _repository.Add(movie);
+
+                if (movieFromRepo != null)
                 {
                     return Created($"/api/v1.0/movies/{movie.Id}", _mapper.Map<MovieDTO>(movie));
                 }
@@ -100,31 +100,28 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpPut("{id}", Name = "UpdateMovie")]
-        public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
+        public async Task<ActionResult> UpdateMovie(int id, MovieToCreateDTO movieDTO)
         {
             try
             {
-                var movieToUpdate = await _repository.Get(movieId);
-                if(movieToUpdate == null)
+                var movieToUpdate = await _repository.Get(id);
+                if (movieToUpdate == null)
                 {
-                    return NotFound($"Could not find the movie with the id {movieId}");
+                    return NotFound($"Could not find the movie with the id {id}");
                 }
 
                 var updatedMovie = _mapper.Map(movieDTO, movieToUpdate);
-                await _repository.Update(updatedMovie);
-                
-                if(await _repository.Save())
+                var movieFromRepo = await _repository.Update(updatedMovie);
+                if (movieFromRepo != null)
                 {
                     return NoContent();
                 }
-
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
             }
-
             return BadRequest();
         }
 
@@ -134,21 +131,21 @@ namespace HorrorMovieAPI.Controllers
             try
             {
                 var movieToDelete = await _repository.Get(movieId);
-                if(movieToDelete == null)
+                if (movieToDelete == null)
                 {
                     return NotFound($"Could not found the movie with the id: {movieId}");
                 }
 
-                await _repository.Delete(movieToDelete);
-                if(await _repository.Save())
+                var movieFromRepo = await _repository.Delete(movieToDelete);
+                if (movieFromRepo != null)
                 {
                     return NoContent();
                 }
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
 
 
