@@ -59,6 +59,8 @@ namespace HorrorMovieAPI.Controllers
                 Movie movie = new Movie
                 {
                     Title = movieToCreateDTO.Title,
+                    Length = movieToCreateDTO.Length,
+                    Year = movieToCreateDTO.Year,
                     Director = director,
                     Genre = genre
                 };
@@ -76,5 +78,63 @@ namespace HorrorMovieAPI.Controllers
             }
             return BadRequest();
         }
+
+        [HttpPut("{movieId}", Name = "UpdateMovie")]
+        public async Task<ActionResult> UpdateMovie(int movieId, MovieDTO movieDTO)
+        {
+            try
+            {
+                var movieToUpdate = await _repository.Get(movieId);
+                if(movieToUpdate == null)
+                {
+                    return NotFound($"Could not find the movie with the id {movieId}");
+                }
+
+                var updatedMovie = _mapper.Map(movieDTO, movieToUpdate);
+                await _repository.Update(updatedMovie);
+                
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete("{movieID}", Name = "DeleteMovie")]
+        public async Task<ActionResult> Deletemovie(int movieId)
+        {
+            try
+            {
+                var movieToDelete = await _repository.Get(movieId);
+                if(movieToDelete == null)
+                {
+                    return NotFound($"Could not found the movie with the id: {movieId}");
+                }
+
+                await _repository.Delete(movieToDelete);
+                if(await _repository.Save())
+                {
+                    return NoContent();
+                }
+            }
+
+            catch(Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
+
+
+            }
+            return BadRequest();
+        }
+       
     }
 }
