@@ -17,10 +17,12 @@ namespace HorrorMovieAPI.Controllers
     {
         private readonly DirectorRepository _repository;
         private readonly IMapper _mapper;
-        public DirectorsController(DirectorRepository repository, IMapper mapper)
+        private readonly IUrlHelper _urlHelper;
+        public DirectorsController(DirectorRepository repository, IMapper mapper, IUrlHelper urlHelper)
         {
             _repository = repository;
             _mapper = mapper;
+            _urlHelper = urlHelper;
         }
 
         [HttpGet]
@@ -29,8 +31,8 @@ namespace HorrorMovieAPI.Controllers
             try
             {
                 var results = await _repository.GetAll(birthCountry, includeMovies);
-                var mappedResults = _mapper.Map<DirectorDTO[]>(results);
-                return Ok(mappedResults);
+                var toReturn = results.Select(x => ExpandSingleItem(x));
+                return Ok(toReturn);
             }
             catch (Exception e)
             {
@@ -40,14 +42,13 @@ namespace HorrorMovieAPI.Controllers
             
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetDirectorById")]
         public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
         {
             try
             {
                 var result = await _repository.GetDirectorById(id, includeMovies);
-                var mappedResult = _mapper.Map<DirectorDTO>(result);
-                return Ok(mappedResult);
+                return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
             {
@@ -57,8 +58,8 @@ namespace HorrorMovieAPI.Controllers
             
         }
 
-        [HttpDelete("{id}", Name ="DeleteDirector")]
-        public async Task<IActionResult> DeleteDirector(int id)
+        [HttpDelete("{id}", Name ="DeleteDirectorById")]
+        public async Task<IActionResult> DeleteDirectorById(int id)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace HorrorMovieAPI.Controllers
 
         }
 
-        [HttpPut("{id}", Name = "UpdateDirector")]
+        [HttpPut("{id}", Name = "UpdateDirectorDetails")]
         public async Task<IActionResult> UpdateDirectorDetails(int id, [FromBody] DirectorForUpdateDTO directorForUpdateDto)
         {
             try
@@ -123,6 +124,44 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
             }
+        }
+
+        private dynamic ExpandSingleItem(Director director)
+        {
+            var links = GetLinks(director);
+            DirectorDTO directorDto = _mapper.Map<DirectorDTO>(director);
+
+            var resourceToReturn = directorDto.ToDynamic() as IDictionary<string, object>;
+            resourceToReturn.Add("links", links);
+
+            return resourceToReturn;
+        }
+
+        private IEnumerable<LinkDto> GetLinks(Director director)
+        {
+            var links = new List<LinkDto>();
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(GetDirectorById), new { id = director.Id }),
+              "self",
+              "GET"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(DeleteDirectorById), new { id = director.Id }),
+              "delete",
+              "DELETE"));
+
+            links.Add(
+               new LinkDto(_urlHelper.Link(nameof(UpdateDirectorDetails), new { id = director.Id }),
+               "update",
+               "PUT"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(CreateDirector), null),
+              "create",
+              "POST"));
+              
+            return links;
         }
     }
 }

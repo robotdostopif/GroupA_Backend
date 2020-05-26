@@ -41,8 +41,8 @@ namespace HorrorMovieAPI.Tests
             var logger = Mock.Of<ILogger<DirectorRepository>>();
             var directorRepository = new DirectorRepository(horrorContextMock.Object, logger);
             var _mockMapper = new Mock<IMapper>();
-
-            var directorsController = new DirectorsController(directorRepository, _mockMapper.Object);
+            var _mockUrlHelper = new Mock<IUrlHelper>();
+            var directorsController = new DirectorsController(directorRepository, _mockMapper.Object, _mockUrlHelper.Object);
 
             // Act
             var okResult = directorsController.GetAll();
