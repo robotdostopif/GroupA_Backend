@@ -12,5 +12,7 @@ namespace HorrorMovieAPI.Services
         Task<T> Update(T entity);
         Task<T> Delete(int id);
         Task<T> Delete(T entity);
+        Task<Director> GetDirectorById(int id);
+        Task<Genre> GetGenreById(int id);
     }
 }
