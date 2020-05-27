@@ -15,12 +15,11 @@ namespace HorrorMovieAPI.Controllers
     [Route("api/v1.0/[controller]")]
     public class GenresController : ControllerBase
     {
-        private readonly GenreRepository _repository;
+        private readonly IGenreRepository _repository;
         private readonly IMapper _mapper;
         private readonly IUrlHelper _urlHelper;
 
-
-        public GenresController(IUrlHelper urlHelper, GenreRepository repository, IMapper mapper)
+        public GenresController(IUrlHelper urlHelper, IGenreRepository repository, IMapper mapper)
         {
             _urlHelper = urlHelper;
             _repository = repository;
