@@ -35,7 +35,6 @@ namespace HorrorMovieAPI.Controllers
                 var results = await _repository.GetAll(includeMovies);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
 
-                //var mappedResults = _mapper.Map<GenreDTO[]>(results);
                 if (results.Count == 0)
                 {
                     return NotFound(results);
@@ -64,9 +63,7 @@ namespace HorrorMovieAPI.Controllers
                 }
                 else
                 {
-
-                    var mappedResults = _mapper.Map<GenreDTO>(result);
-                    return Ok(mappedResults);
+                    return Ok(ExpandSingleItem(result));
                 }
 
             }
