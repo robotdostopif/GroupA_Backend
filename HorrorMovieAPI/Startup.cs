@@ -47,7 +47,7 @@ namespace HorrorMovieAPI
             });
 
             services.AddScoped<MovieRepository>();
-            services.AddScoped<ActorRepository>();
+            services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<DirectorRepository>();
             services.AddScoped<GenreRepository>();
         }
