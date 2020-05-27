@@ -15,10 +15,10 @@ namespace HorrorMovieAPI.Controllers
     [Route("api/v1.0/[controller]")]
     public class DirectorsController : ControllerBase
     {
-        private readonly DirectorRepository _repository;
+        private readonly IDirectorRepository _repository;
         private readonly IMapper _mapper;
         private readonly IUrlHelper _urlHelper;
-        public DirectorsController(DirectorRepository repository, IMapper mapper, IUrlHelper urlHelper)
+        public DirectorsController(IDirectorRepository repository, IMapper mapper, IUrlHelper urlHelper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -63,12 +63,12 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var director = await _repository.GetDirectorById(id);
+                var director = await _repository.GetDirectorById(id, false);
                 if (director == null)
                 {
                     return BadRequest($"Could not delete director. Director with Id {id} was not found.");
                 }
-                await _repository.Delete(director);
+                await _repository.Delete(id);
                 return NoContent();
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var directorFromRepo = await _repository.GetDirectorById(id);
+                var directorFromRepo = await _repository.GetDirectorById(id,false);
 
                 if (directorFromRepo == null)
                 {
@@ -110,9 +110,9 @@ namespace HorrorMovieAPI.Controllers
             {
                 var director = _mapper.Map<Director>(directorDto);
 
-                await _repository.Add(director);
+                var directorFromRepo = await _repository.Add(director);
 
-                if (await _repository.Save())
+                if (directorFromRepo != null)
                 {
                     return CreatedAtAction(nameof(GetDirectorById), new { id = director.Id }, director);
                 }
