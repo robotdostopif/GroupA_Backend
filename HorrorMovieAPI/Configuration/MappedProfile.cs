@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Configuration
 {
-    public class MappedProfile  : Profile 
+    public class MappedProfile : Profile
     {
         public MappedProfile()
         {
@@ -28,11 +28,12 @@ namespace HorrorMovieAPI.Configuration
                 .ReverseMap();
 
             CreateMap<Movie, MovieToCreateDTO>()
-                .ReverseMap();
+            .ReverseMap();
 
-            CreateMap<ActorForUpdateDTO, Actor>();
-
-            CreateMap<DirectorForUpdateDTO, Director>();
+            CreateMap<ActorForUpdateDTO, Actor>()
+               .ReverseMap();
+            CreateMap<DirectorForUpdateDTO, Director>()
+            .ReverseMap();
         }
     }
 }
