@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using HorrorMovieAPI.Dto;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Http;
@@ -15,9 +17,12 @@ namespace HorrorMovieAPI.Controllers
     {
         private readonly GenreRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IUrlHelper _urlHelper;
 
-        public GenresController(GenreRepository repository, IMapper mapper)
+
+        public GenresController(IUrlHelper urlHelper, GenreRepository repository, IMapper mapper)
         {
+            _urlHelper = urlHelper;
             _repository = repository;
             _mapper = mapper;
         }
@@ -28,7 +33,9 @@ namespace HorrorMovieAPI.Controllers
             try
             {
                 var results = await _repository.GetAll(includeMovies);
-                var mappedResults = _mapper.Map<GenreDTO[]>(results);
+                var toReturn = results.Select(x => ExpandSingleItem(x));
+
+                //var mappedResults = _mapper.Map<GenreDTO[]>(results);
                 if (results.Count == 0)
                 {
                     return NotFound(results);
@@ -36,7 +43,7 @@ namespace HorrorMovieAPI.Controllers
                 else
                 {
 
-                    return Ok(mappedResults);
+                    return Ok(toReturn);
                 }
             }
             catch (Exception e)
@@ -45,8 +52,8 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GenreDTO>> GetById(int id, bool includeMovies = false)
+        [HttpGet("{id}", Name = "GetGenreById")]
+        public async Task<ActionResult<GenreDTO>> GetGenreById(int id, bool includeMovies = false)
         {
             try
             {
@@ -69,8 +76,8 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{id}", Name = "DeleteGenreById")]
+        public async Task<ActionResult> DeleteGenreById(int id)
         {
             try
             {
@@ -87,8 +94,8 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, Genre genre)
+        [HttpPut("{id}", Name = "UpdateGenreDetails")]
+        public async Task<ActionResult> UpdateGenreDetails(int id, Genre genre)
         {
             try
             {
@@ -105,8 +112,8 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
         }
-        [HttpPost]
-        public async Task<ActionResult> Post(Genre genre)
+        [HttpPost(Name = "CreateGenre")]
+        public async Task<ActionResult> CreateGenre(Genre genre)
         {
             try
             {
@@ -126,6 +133,43 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
             }
 
+        }
+        private dynamic ExpandSingleItem(Genre genre)
+        {
+            var links = GetLinks(genre);
+            GenreDTO genreDTO = _mapper.Map<GenreDTO>(genre);
+
+            var resourceToReturn = genreDTO.ToDynamic() as IDictionary<string, object>;
+            resourceToReturn.Add("links", links);
+
+            return resourceToReturn;
+        }
+
+        private IEnumerable<LinkDto> GetLinks(Genre genre)
+        {
+            var links = new List<LinkDto>();
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(GetGenreById), new { id = genre.Id }),
+              "self",
+              "GET"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(DeleteGenreById), new { id = genre.Id }),
+              "delete",
+              "DELETE"));
+
+            links.Add(
+               new LinkDto(_urlHelper.Link(nameof(UpdateGenreDetails), new { id = genre.Id }),
+               "update",
+               "PUT"));
+
+            links.Add(
+              new LinkDto(_urlHelper.Link(nameof(CreateGenre), null),
+              "create",
+              "POST"));
+
+            return links;
         }
     }
 }
