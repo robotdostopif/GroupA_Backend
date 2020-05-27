@@ -1,4 +1,5 @@
 ﻿using HorrorMovieAPI.Models;
+using HorrorMovieAPI.Controllers;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -19,8 +20,8 @@ namespace CoolestMovieAPI.Tests
           
             
             var directorRepositoryMock = new Mock<IMovieRepository>();
-            directorRepositoryMock.Setup(repo => repo.GetAll(bool includeActors, bool includeDirector)).ReturnsAsync((IList<Movie>)null);
-            var controller = new DirectorsController(directorRepositoryMock.Object);
+            //directorRepositoryMock.Setup(repo => repo.GetAll(false, false)).ReturnsAsync((IList<Movie>)null);
+            var controller = new MovieController(directorRepositoryMock.Object);
 
             // Act
             var result = await controller.GetAll();
