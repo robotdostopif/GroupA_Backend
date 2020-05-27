@@ -21,6 +21,7 @@ namespace HorrorMovieAPI.Services
         public async Task<List<Director>> GetAll(string birthCountry, bool includeMovies)
         {
             IQueryable<Director> query = _context.Directors;
+            _logger.LogInformation("Fetching all directors.");
 
             if (string.IsNullOrEmpty(birthCountry) == false)
             {
@@ -41,9 +42,11 @@ namespace HorrorMovieAPI.Services
             return await query.ToListAsync();
         }
 
-        public async Task<Director> GetDirectorById( int id,bool includeMovies)
+        public async Task<Director> GetDirectorById(int id, bool includeMovies)
         {
+            _logger.LogInformation($"Fetching director with the id: {id}.");
             var query= await _context.Directors.Where(d => d.Id == id).FirstOrDefaultAsync();
+
             if (includeMovies)
             {
                 query = await _context.Directors.Where(d => d.Id == id).Include(m=>m.Movies).FirstOrDefaultAsync();
