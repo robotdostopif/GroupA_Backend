@@ -12,6 +12,6 @@ namespace HorrorMovieAPI.Models
         public DateTime DOB { get; set; }
         public string BirthTown { get; set; }
         public string BirthCountry { get; set; }
-        public ICollection<Casting> Castings { get; set; }
+        public ICollection<CastingDTO> Castings { get; set; }
     }
 }
