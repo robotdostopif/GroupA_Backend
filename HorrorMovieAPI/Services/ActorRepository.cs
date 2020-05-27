@@ -25,6 +25,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Actor>> GetAll(string firstName, bool includeMovies)
         {
+            _logger.LogInformation($"Fetching actors " + (includeMovies ? "including" : "excluding") + "movies.");
             IQueryable<Actor> query = _context.Actors;
             if (string.IsNullOrEmpty(firstName) == false)
             {
@@ -42,6 +43,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<Actor> GetById(int id, bool includeMovies)
         {
+            _logger.LogInformation($"Fetching actor with id {id}, " + (includeMovies ? "including" : "excluding") + "movies.");
             IQueryable<Actor> query = _context.Actors;
             query = query.Where(d => d.Id == id);
 
@@ -49,7 +51,7 @@ namespace HorrorMovieAPI.Services
             {
                 query = query.Where(a => a.Id == id).Include(m => m.Castings).ThenInclude(m => m.Movie);
             }
-         
+
             return await query.FirstOrDefaultAsync();
         }
     }

@@ -69,11 +69,11 @@ namespace HorrorMovieAPI.Controllers
                 Genre genre = await _repository.GetGenreById(movieToCreateDTO.GenreID);
                 if (director == null)
                 {
-                    return BadRequest($"The director with the id: {director.Id} could not be found.");
+                    return BadRequest($"The director with the id: {movieToCreateDTO.DirectorID} could not be found.");
                 }
                 if (genre == null)
                 {
-                    return BadRequest($"The genre with the id: {genre.Id} could not be found.");
+                    return BadRequest($"The genre with the id: {movieToCreateDTO.GenreID} could not be found.");
                 }
 
                 Movie movie = new Movie

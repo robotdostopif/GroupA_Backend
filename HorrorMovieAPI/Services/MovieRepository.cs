@@ -22,6 +22,7 @@ namespace HorrorMovieAPI.Services
 
         public async Task<List<Movie>> GetAll(bool includeActors, bool includeDirector)
         {
+          
             _logger.LogInformation($"Getting all Movies");
             IQueryable<Movie> query = _context.Movies;
 

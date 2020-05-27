@@ -26,8 +26,11 @@ namespace HorrorMovieAPI.Services
 
             if (includeMovies)
             {
+                _logger.LogInformation("Fetching all genres and movies associated whit them");
+
                 query = query.Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
             }
+            _logger.LogInformation("Fetching all genres");
 
             query = query.OrderBy(y => y.Name);
             return await query.ToListAsync();
@@ -39,6 +42,8 @@ namespace HorrorMovieAPI.Services
 
             if (includeMovies)
             {
+                _logger.LogInformation($"Fetching genre with id number {id} and movies associated whit them");
+
                 query = query.Where(i => i.Id == id).Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
             }
 
