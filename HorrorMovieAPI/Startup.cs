@@ -46,8 +46,8 @@ namespace HorrorMovieAPI
                 return factory.GetUrlHelper(actionContext);
             });
 
-            services.AddScoped<MovieRepository>();
-            services.AddScoped<ActorRepository>();
+            services.AddScoped<MovieRepository, IMovieRepository>();
+            services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
         }

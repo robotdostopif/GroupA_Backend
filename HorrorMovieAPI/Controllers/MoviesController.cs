@@ -147,8 +147,6 @@ namespace HorrorMovieAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
-
-
             }
             return BadRequest();
         }
