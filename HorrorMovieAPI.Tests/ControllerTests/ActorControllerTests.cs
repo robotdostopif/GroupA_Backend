@@ -33,15 +33,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
             _mapper = new Mock<IMapper>();
             _mockRepo = new Mock<IActorRepository>();            
             _controller = new ActorsController(_urlHelper.Object, _mockRepo.Object, _mapper.Object);
-        }
-
-        [Fact]
-        public async Task Actor_GetAll_ReturnsObject()
-        {
-            var result = await _controller.GetAll();
-
-           Assert.NotNull(result);
-        }
+        }   
 
         [Fact]
         public async Task Director_ReturnsExactNumberOfActors()
