@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.Swagger;
+using System.Reflection;
 
 namespace HorrorMovieAPI
 {
@@ -46,10 +50,12 @@ namespace HorrorMovieAPI
                 return factory.GetUrlHelper(actionContext);
             });
 
-            services.AddScoped<MovieRepository, IMovieRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0"} ));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,6 +65,13 @@ namespace HorrorMovieAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0");
+                c.RoutePrefix = string.Empty;
+            });
+
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
