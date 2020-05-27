@@ -1,5 +1,76 @@
 ## Standups 
 
+
+
+# 2020-05-27
+
+**Generalsekreterare:** Nor		
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-128
+* SKRAC-129
+* SKRAC-173
+* SKRAC-137
+* SKRAC-135
+* SKRAC-160
+* SKRAC-161
+* Kommentar: Har gjort klart SKRAC-126 (grupp), CRUD-funktioner för Movie-controller.
+
+Sebastian:
+
+* SKRAC-165 (150)
+* SKRAC-167 (150)
+* SKRAC-136
+* Kommentar: Lade till Logger och exception-handling till Genre-controller och repository.
+
+
+Aron:
+
+* SKRAC-131
+* SKRAC-176
+* SKRAC-142
+* Kommentar: Har lagt till API-Requests för DirectorController(SKRAC-131) och la till ExceptionHandling och HATEOAS för DirectorController(SKRAC-176, SKRAC-135). Därefter kikade på fler tester på DirectorRepository. 
+
+Nor:
+
+* SKRAC-157 
+* SKRAC-159
+* Kommentar: Har endast lagt till logging till Actor-repository.
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* SKRAC-149
+* SKRAC-177
+* Kommentar: Lägga till logging för Director-repository (SKRAC-149). Lära sig swagger. Göra unit tester för Actor-controller (SKRAC-177).
+
+Sebastian:
+
+* SKRAC-175
+* SKRAC-180
+* Kommentar: Skapa HATEOAS för Genre-controller (SKRAC-175). Göra unit tester för Movie-controller (SKRAC-180).
+
+
+Aron:
+
+* SKRAC-186
+
+* Kommentar: Kolla på filtrering/sök-funktioner i API. Läsa om swagger. Göra unit tester för Director-controller (SKRAC-186).
+
+  
+
+Nor:
+
+* SKRAC-183
+* SKRAC-149
+* Kommentar: Kolla på filtrering/sök-funktioner i API. Läsa om swagger. Göra unit tester för Genre-controller (SKRAC-183). Lägga till tester för Director-repository (SKRAC-149).
+
 # 2020-05-26
 
 **Generalsekreterare:** Aron		
@@ -655,4 +726,3 @@ Pierre:
 * Skapade Controller för vår fake class och byggde GetAll metod
 * Byggde metoder i FakeRepository
 * Lade till en DbInitializer för att seeda test data
-
