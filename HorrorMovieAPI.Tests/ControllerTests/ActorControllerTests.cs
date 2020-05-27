@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace HorrorMovieAPI.Tests.ControllerTests
@@ -35,15 +36,15 @@ namespace HorrorMovieAPI.Tests.ControllerTests
         }
 
         [Fact]
-        public void Actor_GetAll_ReturnsObject()
+        public async Task Actor_GetAll_ReturnsObject()
         {
-            var result = _controller.GetAll();
+            var result = await _controller.GetAll();
 
            Assert.NotNull(result);
         }
 
         [Fact]
-        public void Director_ReturnsExactNumberOfActors()
+        public async Task Director_ReturnsExactNumberOfActors()
         {
             List<Actor> actors = new List<Actor>()
             {
@@ -63,11 +64,28 @@ namespace HorrorMovieAPI.Tests.ControllerTests
             _mockRepo.Setup(repo => repo.GetAll("", true))
                 .ReturnsAsync(actors);
 
-            var result = _controller.GetAll();
+            var result = await _controller.GetAll();
 
             Assert.Equal(2, actors.Count);
-
         }
 
+        [Fact]
+        public async Task Actor_GetById_ReturnsOk()
+        {
+            Actor actor = new Actor()
+            {
+                Id = 1,
+                FirstName = "Ryan",
+                LastName = "Gosling",
+                DOB = new DateTime(1980 - 11 - 12)
+            };
+               
+            _mockRepo.Setup(repo => repo.GetById(1, true))
+               .ReturnsAsync(actor);
+
+            var returnedActor = await _controller.GetActorById(1, true);
+
+            Assert.IsAssignableFrom<ObjectResult>(returnedActor.Result);
+        }
     }
 }
