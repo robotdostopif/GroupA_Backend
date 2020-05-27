@@ -49,7 +49,7 @@ namespace HorrorMovieAPI
             services.AddScoped<MovieRepository>();
             services.AddScoped<ActorRepository>();
             services.AddScoped<DirectorRepository>();
-            services.AddScoped<GenreRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
