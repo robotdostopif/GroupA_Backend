@@ -13,12 +13,11 @@ namespace HorrorMovieAPI.Services
     {
         private readonly HorrorContext _context;
         private readonly ILogger<DirectorRepository> _logger;
-        public DirectorRepository(HorrorContext context, ILogger<DirectorRepository> logger) : base(context, logger)
+        public DirectorRepository(HorrorContext context, ILogger<DirectorRepository> logger):base(context,logger)
         {
             _context = context;
             _logger = logger;
         }
-
         public async Task<List<Director>> GetAll(string birthCountry, bool includeMovies)
         {
             IQueryable<Director> query = _context.Directors;
