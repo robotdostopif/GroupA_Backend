@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Dto
 {
-    public class MovieToCreateDTO
+    public class MovieForUpdateDTO
     {
         public string Title { get; set; }
         public int DirectorID { get; set; }

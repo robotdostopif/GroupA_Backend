@@ -27,7 +27,7 @@ namespace HorrorMovieAPI.Configuration
             CreateMap<Genre, GenreDTO>()
                 .ReverseMap();
 
-            CreateMap<Movie, MovieToCreateDTO>()
+            CreateMap<Movie, MovieForUpdateDTO>()
             .ReverseMap();
 
             CreateMap<ActorForUpdateDTO, Actor>()

@@ -60,10 +60,10 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                     Name = "Spooky"
                 }
             };
-            _mockRepo.Setup(repo => repo.GetAll(true)).ReturnsAsync(genres);
+            _mockRepo.Setup(repo => repo.GetAll("",new string[2])).ReturnsAsync(genres);
 
             // Act
-            var response = await _genresController.GetAll(true);
+            var response = await _genresController.GetAll();
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(response.Result);

@@ -42,7 +42,7 @@ namespace HorrorMovieAPI.Services
             return await query.ToListAsync();
         }
 
-        public async Task<Director> GetDirectorById(int id, bool includeMovies)
+        public async Task<Director> GetById(int id, bool includeMovies)
         {
             _logger.LogInformation($"Fetching director with the id: {id}.");
             var query= await _context.Directors.Where(d => d.Id == id).FirstOrDefaultAsync();

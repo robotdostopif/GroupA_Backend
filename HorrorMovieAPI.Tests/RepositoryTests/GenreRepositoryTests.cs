@@ -69,7 +69,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             _mockContext.Setup(x => x.Genres).ReturnsDbSet(genres);
 
             // Act
-            var genresFromRepo = await _mockRepo.GetAll(false);
+            var genresFromRepo = await _mockRepo.GetAll();
 
             // Assert
             Assert.Equal(expectedAmountOfGenres, genresFromRepo.Count());

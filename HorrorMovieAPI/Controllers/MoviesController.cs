@@ -36,7 +36,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var results = await _repository.GetAllMovies(movieTitle, afterYear, including);
+                var results = await _repository.GetAll(movieTitle, afterYear, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
@@ -52,7 +52,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var result = await _repository.GetMovieById(id, includeActors, includeDirector);
+                var result = await _repository.GetById(id, includeActors, includeDirector);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
@@ -62,8 +62,55 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
-        [HttpPost(Name = "AddMovie")]
-        public async Task<ActionResult<MovieDTO>> AddMovie(MovieToCreateDTO movieToCreateDTO)
+        [HttpDelete("{id}", Name = "DeleteMovieById")]
+        public async Task<ActionResult> DeleteMovieById(int id)
+        {
+            try
+            {
+                var movie = await _repository.GetById(id,false,false);
+
+                if (movie == null)
+                {
+                    return NotFound($"Could not delete movie. Movie with Id {id} was not found.");
+                }
+                await _repository.Delete(movie);
+
+                return NoContent();
+            }
+
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to delete the movie with the id: {id}. Exception thrown: {e.Message}");
+            }
+        }
+
+        [HttpPut("{id}", Name = "UpdateMovieDetails")]
+        public async Task<ActionResult> UpdateMovieDetails(int id, MovieForUpdateDTO movieDTO)
+        {
+            try
+            {
+                var movieFromRepo = await _repository.GetById(id,false,false);
+                if (movieFromRepo == null)
+                {
+                    return NotFound($"Could not find the movie with the id {id}");
+                }
+
+                var movieForUpdate = _mapper.Map(movieDTO, movieFromRepo);
+
+                await _repository.Update(movieForUpdate);
+        
+                return NoContent();
+            }
+
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+            }
+        }
+
+        [HttpPost(Name = "CreateMovie")]
+        public async Task<ActionResult<MovieDTO>> CreateMovie(MovieForUpdateDTO movieToCreateDTO)
         {
             try
             {
@@ -93,65 +140,13 @@ namespace HorrorMovieAPI.Controllers
                 {
                     return Created($"/api/v1.0/movies/{movie.Id}", _mapper.Map<MovieDTO>(movie));
                 }
+                return BadRequest("Failed to create movie.");
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
             }
-            return BadRequest();
-        }
-
-        [HttpPut("{id}", Name = "UpdateMovie")]
-        public async Task<ActionResult> UpdateMovie(int id, MovieToCreateDTO movieDTO)
-        {
-            try
-            {
-                var movieToUpdate = await _repository.Get(id);
-                if (movieToUpdate == null)
-                {
-                    return NotFound($"Could not find the movie with the id {id}");
-                }
-
-                var updatedMovie = _mapper.Map(movieDTO, movieToUpdate);
-                var movieFromRepo = await _repository.Update(updatedMovie);
-                if (movieFromRepo != null)
-                {
-                    return NoContent();
-                }
-            }
-
-            catch (Exception e)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
-            }
-            return BadRequest();
-        }
-
-        [HttpDelete("{id}", Name = "DeleteMovie")]
-        public async Task<ActionResult> DeleteMovie(int movieId)
-        {
-            try
-            {
-                var movieToDelete = await _repository.Get(movieId);
-                if (movieToDelete == null)
-                {
-                    return NotFound($"Could not found the movie with the id: {movieId}");
-                }
-
-                var movieFromRepo = await _repository.Delete(movieToDelete);
-                if (movieFromRepo != null)
-                {
-                    return NoContent();
-                }
-            }
-
-            catch (Exception e)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the movie with the id: {movieId}. Exception thrown: {e.Message}");
-            }
-            return BadRequest();
         }
 
         private dynamic ExpandSingleItem(Movie movie)
@@ -175,17 +170,17 @@ namespace HorrorMovieAPI.Controllers
               "GET"));
 
             links.Add(
-              new LinkDto(_urlHelper.Link(nameof(DeleteMovie), new { id = movie.Id }),
+              new LinkDto(_urlHelper.Link(nameof(DeleteMovieById), new { id = movie.Id }),
               "delete",
               "DELETE"));
 
             links.Add(
-               new LinkDto(_urlHelper.Link(nameof(UpdateMovie), new { id = movie.Id }),
+               new LinkDto(_urlHelper.Link(nameof(UpdateMovieDetails), new { id = movie.Id }),
                "update",
                "PUT"));
 
             links.Add(
-              new LinkDto(_urlHelper.Link(nameof(AddMovie), null),
+              new LinkDto(_urlHelper.Link(nameof(CreateMovie), null),
               "create",
               "POST"));
 
