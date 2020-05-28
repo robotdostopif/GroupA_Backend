@@ -1,6 +1,70 @@
 ## Standups 
 
+# 2020-05-28
 
+**Generalsekreterare:** Sebastian	
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-177
+* SKRAC-149
+* SKRAC-201
+* Kommentar: Tester på actor controller och logger för director samt fixade med swagger .
+
+Sebastian:
+
+* SKRAC-195
+* Kommentar: Lade HATEOAS i genre controller och börjademed tester .
+
+
+Aron:
+
+* SKRAC-186
+* SKRAC-121
+* SKRAC-202
+* Kommentar: Gjorde tester för director controller ändrade props i dto-klasserna. 
+
+Nor:
+
+* SKRAC-183
+* Kommentar: Gjorde tester för genrecontroller.
+
+## gjort tillsammans 
+
+vi satt alla gemensamt med dependency injection och så satt Nor fredrika och Aron med Swagger 
+
+
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* SKRAC-195
+* Kommentar: Lägga till filtrering för genre.
+
+Sebastian:
+
+* SKRAC-180
+* SKRAC-194
+* Kommentar:  Göra färdigt unit tester för Movie-controller (SKRAC-180) och lägga till filtrering för år på filmer.
+
+
+Aron:
+
+
+
+* SKRAC-203
+
+* Kommentar: städa upp koden, läsa på mer om swagger och börja kolla med paging och kanske implementera csv data seed .
+
+  
+
+Nor:
+
+* SKRAC-192
+* Kommentar: Lägga till filtrering för movie title och göra om det generiska repot lite.
 
 # 2020-05-27
 
