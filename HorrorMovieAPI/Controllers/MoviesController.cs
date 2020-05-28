@@ -26,12 +26,17 @@ namespace HorrorMovieAPI.Controllers
             _urlHelper = urlHelper;
         }
 
+        // Example requests (Case sensitive includes):
+        // https://localhost:5001/api/v1.0/movies?movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre&movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre
         [HttpGet]
-        public async Task<ActionResult<MovieDTO[]>> GetAll(bool includeActors = false, bool includeDirector = false)
+        public async Task<ActionResult<MovieDTO[]>> GetAllMovies([FromQuery] string movieTitle = "", [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(includeActors, includeDirector);
+                var results = await _repository.GetAllMovies(movieTitle, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
@@ -40,7 +45,6 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to retrieve movies. Exception thrown: {e.Message}");
             }
-
         }
 
         [HttpGet("{id}", Name = "GetMovieById")]
@@ -56,7 +60,6 @@ namespace HorrorMovieAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
             }
-
         }
 
         [HttpPost(Name = "AddMovie")]
