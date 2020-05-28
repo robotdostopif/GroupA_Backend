@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HorrorMovieAPI.Models;
 
@@ -12,7 +14,8 @@ namespace HorrorMovieAPI.Services
         Task<T> Update(T entity);
         Task<T> Delete(int id);
         Task<T> Delete(T entity);
-        Task<Director> GetDirectorById(int id);
         Task<Genre> GetGenreById(int id);
+        Task<Director> GetDirectorById(int id);
+        Task<IList<T>> GetAll(params string[] including);
     }
 }

@@ -15,10 +15,11 @@ namespace HorrorMovieAPI.Controllers
     [ApiController]
     public class ActorsController : ControllerBase
     {
-        private readonly ActorRepository _repository;
+        private readonly IActorRepository _repository;
         private readonly IUrlHelper _urlHelper;
         private readonly IMapper _mapper;
-        public ActorsController(IUrlHelper urlHelper, ActorRepository repository, IMapper mapper) 
+
+        public ActorsController(IUrlHelper urlHelper, IActorRepository repository, IMapper mapper) 
         {
             _urlHelper = urlHelper;
             _repository = repository;

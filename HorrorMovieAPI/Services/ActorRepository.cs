@@ -15,6 +15,8 @@ namespace HorrorMovieAPI.Services
         private readonly HorrorContext _context;
         private readonly ILogger<ActorRepository> _logger;
 
+
+
         public ActorRepository(HorrorContext context, ILogger<ActorRepository> logger) : base(context, logger)
         {
             _context = context;

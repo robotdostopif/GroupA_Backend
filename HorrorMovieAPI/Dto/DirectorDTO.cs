@@ -13,6 +13,6 @@ namespace HorrorMovieAPI.Models
         public DateTime DOB { get; set; }
         public string BirthTown { get; set; }
         public string BirthCountry { get; set; }
-        public ICollection<Movie> Movies { get; set; }
+        public ICollection<MovieDTO> Movies { get; set; }
     }
 }

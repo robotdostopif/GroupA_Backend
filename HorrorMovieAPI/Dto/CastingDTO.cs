@@ -7,7 +7,7 @@ namespace HorrorMovieAPI.Models
     {
         public int Id { get; set; }
         public string Character { get; set; }
-        public Movie Movie { get; set; }
-        public Actor Actor { get; set; }
+        public MovieDTO Movie { get; set; }
+        public ActorDTO Actor { get; set; }
     }
 }
