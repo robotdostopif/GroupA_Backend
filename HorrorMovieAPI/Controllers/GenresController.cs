@@ -27,11 +27,11 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenreDTO[]>> GetAll(bool includeMovies = false)
+        public async Task<ActionResult<GenreDTO[]>> GetAll(string genre = "", bool includeMovies = false)
         {
             try
             {
-                var results = await _repository.GetAll(includeMovies);
+                var results = await _repository.GetAll(genre, includeMovies);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
 
                 if (results.Count == 0)

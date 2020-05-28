@@ -20,9 +20,14 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Genre>> GetAll(bool includeMovies)
+        public async Task<List<Genre>> GetAll(string genre, bool includeMovies)
         {
             IQueryable<Genre> query = _context.Genres;
+
+            if(string.IsNullOrEmpty(genre) == false)
+            {
+                query = query.Where(g => g.Name == genre);
+            }
 
             if (includeMovies)
             {
