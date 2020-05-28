@@ -27,22 +27,13 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenreDTO[]>> GetAll(string genre = "", bool includeMovies = false)
+        public async Task<ActionResult<GenreDTO[]>> GetAll([FromQuery]string genre = "", [FromQuery] string [] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(genre, includeMovies);
+                var results = await _repository.GetAll(genre, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
-
-                if (results.Count == 0)
-                {
-                    return NotFound(results);
-                }
-                else
-                {
-
-                    return Ok(toReturn);
-                }
+                return Ok(toReturn);
             }
             catch (Exception e)
             {
