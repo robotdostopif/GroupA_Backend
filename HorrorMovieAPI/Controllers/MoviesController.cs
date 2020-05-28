@@ -32,11 +32,11 @@ namespace HorrorMovieAPI.Controllers
         // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre&movieTitle=hall
         // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre
         [HttpGet]
-        public async Task<ActionResult<MovieDTO[]>> GetAllMovies([FromQuery] string movieTitle = "", [FromQuery] int afterYear = default, [FromQuery] string[] including = null)
+        public async Task<ActionResult<MovieDTO[]>> GetAllMovies([FromQuery] string movieTitle = "", [FromQuery] int exactYear = default, [FromQuery] int afterYear = default, [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAllMovies(movieTitle, afterYear, including);
+                var results = await _repository.GetAllMovies(movieTitle, exactYear, afterYear, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
