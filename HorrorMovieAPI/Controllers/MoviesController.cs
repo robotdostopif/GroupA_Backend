@@ -26,12 +26,17 @@ namespace HorrorMovieAPI.Controllers
             _urlHelper = urlHelper;
         }
 
+        // Example requests (Case sensitive includes):
+        // https://localhost:5001/api/v1.0/movies?movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre&movieTitle=hall
+        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre
         [HttpGet]
-        public async Task<ActionResult<MovieDTO[]>> GetAll(string movieTitle = "", bool includeActors = false, bool includeDirector = false)
+        public async Task<ActionResult<MovieDTO[]>> GetAllMovies([FromQuery] string movieTitle = "", [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(movieTitle, includeActors, includeDirector);
+                var results = await _repository.GetAllMovies(movieTitle, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
