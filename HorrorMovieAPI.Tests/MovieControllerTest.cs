@@ -31,56 +31,56 @@ namespace HorrorMovieAPI.Tests.ControllerTests
         }
 
         [Fact]
-        public async void CreateDirector_DirectorExists_ReturnsCorrectDirectorId()
+        public async void GetById_MovieExists_ReturnsObjectResult()
         {
             // Arrange
-            DirectorForUpdateDTO director = new DirectorForUpdateDTO()
+            var genre = new Genre { Id = 1, Name = "horror" };
+            List<Movie> movies = new List<Movie>()
             {
-                DOB = DateTime.Parse("1944-01-20")
-            };
-            var result = await _directorController.CreateDirector(director);
 
-            Assert.IsType<CreatedResult>(result);
-        }
 
-        [Fact]
-        public async Task GetDirectorById_DirectorExists_ReturnsObjectResult()
-        {
-            Director director = new Director()
-            {
-                Id = 1,
-                FirstName = "Hasse",
-                DOB = DateTime.Parse("1944-01-20")
-            };
-            _mockRepo.Setup(repo => repo.GetDirectorById(1, true)).ReturnsAsync(director);
-
-            // Act
-            var response = await _directorController.GetDirectorById(1, true);
-
-            // Assert
-            Assert.IsAssignableFrom<ObjectResult>(response.Result);
-        }
-
-        [Fact]
-        public async Task GetDirectors_DirectorExists_ReturnsObjectResult()
-        {
-            // Arrange
-            List<Director> directors = new List<Director>() {
-                new Director() {
+                new Movie() {
                     Id = 1,
-                    FirstName = "Hasse",
-                    DOB = DateTime.Parse("1944-01-20")
-                },
-                new Director() {
+                    Genre=genre,
+                    Title="horrormovie 1"
+                 },
+                new Movie() {
                     Id = 2,
-                    FirstName = "Tage",
-                    DOB = DateTime.Parse("1944-01-20")
-                }
+                    Genre=genre,
+                    Title="horrormovie 2"
+                 },
             };
-            _mockRepo.Setup(repo => repo.GetAll("", true)).ReturnsAsync(directors);
+            _mockRepo.Setup(repo => repo.GetMovieById(2,false,false));
+            var result = await _movieController.GetAllMovies();
+            //Assert.Equal(result, movies[1]);
+            Assert.IsAssignableFrom<ObjectResult>(result.Result);
+
+        }
+
+        [Fact]
+        public async Task GetMovies_MoviesExist_ReturnsObjectResult()
+        {
+            // Arrange
+            var genre = new Genre { Id = 1, Name = "horror" };
+            List<Movie> movies = new List<Movie>()
+            {
+
+
+                new Movie() {
+                    Id = 1,
+                    Genre=genre,
+                    Title="horrormovie 1"
+                 },
+                new Movie() {
+                    Id = 2,
+                    Genre=genre,
+                    Title="horrormovie 2"
+                 },
+            };
+            _mockRepo.Setup(repo => repo.GetAllMovies("")).ReturnsAsync(movies);
 
             // Act
-            var response = await _directorController.GetAll("", true);
+            var response = await _movieController.GetAllMovies("");
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(response.Result);
