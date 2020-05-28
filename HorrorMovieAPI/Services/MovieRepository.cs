@@ -20,7 +20,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Movie>> GetAll(bool includeActors, bool includeDirector)
+        public async Task<List<Movie>> GetAll(string movieTitle, bool includeActors, bool includeDirector)
         {
           
             _logger.LogInformation($"Getting all Movies");
@@ -39,7 +39,7 @@ namespace HorrorMovieAPI.Services
                 query = query.Include(a => a.Castings).ThenInclude(b => b.Actor);
             }
 
-            query = query.Include(a => a.Genre).OrderBy(y => y.Title);
+            query = query.Include(a => a.Genre).OrderBy(y => y.Title).Where(x => x.Title.Contains(movieTitle));
             return await query.ToListAsync();
         }
 
