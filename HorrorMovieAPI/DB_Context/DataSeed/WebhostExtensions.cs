@@ -1,5 +1,8 @@
+using System.Linq;
+using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,11 +16,12 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetService<HorrorContext>();
-
-                // now we have the DbContext. Run migrations
-
-                // now that the database is up to date. Let's seed
-                new TestDataSeeder(context).SeedData();
+                context.Movies.RemoveRange(context.Movies);
+                context.SaveChanges();
+                if (!context.Movies.Any())
+                {
+                    new TestDataSeeder(context).SeedData();
+                }
             }
 
             return host;

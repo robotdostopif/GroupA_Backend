@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using CsvHelper;
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
