@@ -2,6 +2,7 @@
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PoweredSoft.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,20 +21,19 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Genre>> GetAll(bool includeMovies)
+        public async Task<List<Genre>> GetAll(string genre, params string[] including)
         {
-            IQueryable<Genre> query = _context.Genres;
+            _logger.LogInformation($"Fetching all genres from the database.");
 
-            if (includeMovies)
+            var movies = await GetAll(including);
+           
+            if(string.IsNullOrEmpty(genre) == false)
             {
-                _logger.LogInformation("Fetching all genres and movies associated whit them");
-
-                query = query.Include(x => x.Movies).ThenInclude(x => x.Castings).ThenInclude(x => x.Actor);
+                return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList();
             }
-            _logger.LogInformation("Fetching all genres");
 
-            query = query.OrderBy(y => y.Name);
-            return await query.ToListAsync();
+            return movies.ToList();
+            
         }
 
         public async Task<Genre> GetById(int id, bool includeMovies)
