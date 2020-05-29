@@ -6,7 +6,7 @@ namespace HorrorMovieAPI.Services
 {
     public interface IMovieRepository : IRepository<Movie>
     {
-        Task<List<Movie>> GetAll(bool includeActors, bool includeDirector);
+        Task<List<Movie>> GetAllMovies(string movieTitle, int afterYear, params string[] including);
 
         Task<Movie> GetMovieById(int id, bool includeActors, bool includeDirector);
     }

@@ -3,6 +3,11 @@ using HorrorMovieAPI.DB_Context;
 using HorrorMovieAPI.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using PoweredSoft.DynamicLinq;
 
 namespace HorrorMovieAPI.Services
 {
@@ -65,6 +70,20 @@ namespace HorrorMovieAPI.Services
             _context.Entry(entity).State = EntityState.Modified;
             await Save();
             return entity;
+        }
+
+        public async Task<IList<T>> GetAll(params string[] including)
+        {
+            _logger.LogInformation($"Fetching entity list of type {typeof(T)} from the database.");
+            var query = _context.Set<T>().AsQueryable();
+            if (including != null)
+                including.ToList().ForEach(include =>
+                {
+                    if (include != null)
+                        query = query.Include(include);
+                });
+
+            return await query.ToListAsync();
         }
 
         public async Task<Director> GetDirectorById(int id) 
