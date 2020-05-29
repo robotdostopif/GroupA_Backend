@@ -1,5 +1,8 @@
+using System.Diagnostics;
+using System;
 using System.IO;
 using HorrorMovieAPI.Models;
+using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.DB_Context.DataSeed
 {
@@ -22,9 +25,10 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
                     var line = reader.ReadLine();
                     var values = line.Split(',');
                     var isNumeric = int.TryParse(values[2].Trim(',').Substring(values[2].Length-2), out int y);
-                    int year = isNumeric ? int.Parse(values[2].Trim(',').Substring(values[2].Length-2)) : 0;
+                    int year = isNumeric ? int.Parse("20" + values[2].Trim(',').Substring(values[2].Length-2)) : 0;
                     isNumeric = int.TryParse(values[6].Substring(0,2), out int l);
                     int length = isNumeric ? int.Parse(values[6].Substring(0,2)) : 0;
+
                     Movie movie = new Movie()
                     {
                         Title = values[0],
@@ -33,9 +37,9 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
                     };
                     _context.Movies.AddAsync(movie);
                     }
-                    catch
+                    catch (Exception e)
                     {
-
+                        Debug.WriteLine($"Something went wrong when loading data from csv. {e.Message}");
                     }
                 }
                     _context.SaveChanges();
