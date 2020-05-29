@@ -1,5 +1,51 @@
 ## Standups 
 
+# 2020-05-29
+
+**Generalsekreterare:** Fredrika	
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-195
+* SKRAC-193
+* SKRAC-207
+* Kommentar: Filtrering på movie och genre. Dynamic include för genre. 
+
+Sebastian:
+
+* SKRAC-180
+* SKRAC-194
+* Kommentar: Filtrering på specifikt år, tester för moviecontroller ( tester för getAll() och GetById()).
+
+
+Aron:
+
+* SKRAC-203
+* Kommentar: Satt och ändrade så att allt såg likadant ut, alla returns ser nu lika dana ut (om jag inte missat nåt). Satt med att försöka lösa paging för projektet. Fixat data seeding för movies. 
+
+Nor:
+
+* SKRAC-192
+* Kommentar: Filtrera efter titel på filmer (SKRAC-192). Dynamic include för movies getAll() (SKRAC-206), gjorde detta under samma issue/branch som 192.
+
+## Gjort tillsammans 
+
+Vi gjorde inget större ihop igår, hjälpte varandra när vi behövde hjälp typ. Eftersom att vi lagt till dynamic include bör vi kika över testerna.  
+
+
+
+### Göra till nästa gång*
+
+## Sista standupen för denna sprint (Sprint 9).
+
+
+
+
+
+
+
 # 2020-05-28
 
 **Generalsekreterare:** Sebastian	
