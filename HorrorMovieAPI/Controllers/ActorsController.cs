@@ -19,7 +19,7 @@ namespace HorrorMovieAPI.Controllers
         private readonly IUrlHelper _urlHelper;
         private readonly IMapper _mapper;
 
-        public ActorsController(IUrlHelper urlHelper, IActorRepository repository, IMapper mapper) 
+        public ActorsController(IUrlHelper urlHelper, IActorRepository repository, IMapper mapper)
         {
             _urlHelper = urlHelper;
             _repository = repository;
@@ -29,7 +29,7 @@ namespace HorrorMovieAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ActorDTO[]>> GetAll(string firstName = "", bool includeMovies = false)
         {
-            try 
+            try
             {
                 var results = await _repository.GetAll(firstName, includeMovies);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
@@ -45,7 +45,7 @@ namespace HorrorMovieAPI.Controllers
         [HttpGet("{id}", Name = "GetActorById")]
         public async Task<ActionResult<ActorDTO>> GetActorById(int id, bool includeMovies = false)
         {
-            try 
+            try
             {
                 var result = await _repository.GetById(id, includeMovies);
                 return Ok(ExpandSingleItem(result));
@@ -53,7 +53,7 @@ namespace HorrorMovieAPI.Controllers
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve the actor. Exception thrown when attempting to retrieve data from the database: {e.Message}");
+                    $"Failed to retrieve the actor with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
             }
         }
 
@@ -66,7 +66,7 @@ namespace HorrorMovieAPI.Controllers
 
                 if (actor == null)
                 {
-                    return BadRequest($"Could not delete actor. Actor with Id {id} was not found.");
+                    return NotFound($"Could not delete actor. Actor with Id {id} was not found.");
                 }
                 await _repository.Delete(actor);
 
@@ -82,17 +82,17 @@ namespace HorrorMovieAPI.Controllers
         [HttpPut("{id}", Name = "UpdateActorDetails")]
         public async Task<IActionResult> UpdateActorDetails(int id, [FromBody] ActorForUpdateDTO actorForUpdateDto)
         {
-            try 
+            try
             {
                 var actorFromRepo = await _repository.GetById(id, false);
 
                 if (actorFromRepo == null)
                 {
-                    return BadRequest($"Could not update actor. Actor with Id {id} was not found.");
+                    return NotFound($"Could not update actor. Actor with Id {id} was not found.");
                 }
-                _mapper.Map(actorForUpdateDto, actorFromRepo);
+                var actorForUpdate = _mapper.Map(actorForUpdateDto, actorFromRepo);
 
-                await _repository.Update(actorFromRepo);
+                await _repository.Update(actorForUpdate);
 
                 return NoContent();
             }
@@ -108,14 +108,14 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var actorFromRepo = await _repository.GetById(actorDTO.Id, false);
-                if (actorFromRepo != null)
-                    return BadRequest($"Actor with the id {actorDTO.Id} already exist.");
-                
                 var actor = _mapper.Map<Actor>(actorDTO);
 
-                await _repository.Add(actor);
-                return CreatedAtAction(nameof(GetActorById), new { id = actor.Id }, actor);
+                var actorFromRepo = await _repository.Add(actor);
+                if (actorFromRepo != null)
+                {
+                    return CreatedAtAction(nameof(GetActorById), new { id = actor.Id }, actor);
+                }
+                return BadRequest("Failed to create actor.");
             }
             catch (Exception e)
             {
@@ -158,7 +158,7 @@ namespace HorrorMovieAPI.Controllers
               new LinkDto(_urlHelper.Link(nameof(CreateActor), null),
               "create",
               "POST"));
-              
+
             return links;
         }
     }

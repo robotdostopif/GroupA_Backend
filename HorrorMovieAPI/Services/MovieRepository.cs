@@ -20,7 +20,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Movie>> GetAllMovies(string movieTitle, int exactYear,int afterYear, params string[] including)
+        public async Task<List<Movie>> GetAll(string movieTitle, int exactYear, int afterYear, params string[] including)
         {
             _logger.LogInformation($"Fetching all movies from the database.");
             var movies = await GetAll(including);
@@ -37,7 +37,7 @@ namespace HorrorMovieAPI.Services
             return movies.Where(m => m.Title.Contains(movieTitle)).ToList();
         }
 
-        public async Task<Movie> GetMovieById(int id, bool includeActors, bool includeDirector)
+        public async Task<Movie> GetById(int id, bool includeActors, bool includeDirector)
         {
             _logger.LogInformation($"Getting movie with the id {id}");
             IQueryable<Movie> query = _context.Movies.Where(i => i.Id == id);

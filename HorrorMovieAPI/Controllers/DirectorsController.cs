@@ -47,7 +47,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var result = await _repository.GetDirectorById(id, includeMovies);
+                var result = await _repository.GetById(id, includeMovies);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
@@ -63,12 +63,14 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var director = await _repository.GetDirectorById(id, false);
+                var director = await _repository.GetById(id, false);
+
                 if (director == null)
                 {
                     return BadRequest($"Could not delete director. Director with Id {id} was not found.");
                 }
                 await _repository.Delete(id);
+
                 return NoContent();
             }
             catch (Exception e)
@@ -84,15 +86,15 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var directorFromRepo = await _repository.GetDirectorById(id,false);
+                var directorFromRepo = await _repository.GetById(id, false);
 
                 if (directorFromRepo == null)
                 {
                     return BadRequest($"Could not update director. Director with Id {id} was not found.");
                 }
-                _mapper.Map(directorForUpdateDto, directorFromRepo);
+                var directorForUpdate = _mapper.Map(directorForUpdateDto, directorFromRepo);
 
-                await _repository.Update(directorFromRepo);
+                await _repository.Update(directorForUpdate);
 
                 return NoContent();
             }

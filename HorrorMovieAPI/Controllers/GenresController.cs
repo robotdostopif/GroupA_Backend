@@ -47,19 +47,12 @@ namespace HorrorMovieAPI.Controllers
             try
             {
                 var result = await _repository.GetById(id, includeMovies);
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    return Ok(ExpandSingleItem(result));
-                }
-
+                return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database Failure: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
             }
         }
 
@@ -68,56 +61,63 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var entity = await _repository.Delete(id);
-                if (entity == null)
+                var genre = await _repository.Delete(id);
+                if (genre == null)
                 {
-                    return NotFound();
+                    return BadRequest($"Could not delete genre. Genre with Id {id} was not found.");
                 }
-                return Ok();
+                await _repository.Delete(genre);
 
+                return NoContent();
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
         }
         [HttpPut("{id}", Name = "UpdateGenreDetails")]
-        public async Task<ActionResult> UpdateGenreDetails(int id, Genre genre)
+        public async Task<ActionResult> UpdateGenreDetails(int id, [FromBody] GenreForUpdateDTO genreForUpdateDto)
         {
             try
             {
-                if (id != genre.Id)
-                {
-                    return NotFound();
-                }
-                await _repository.Update(genre);
-                return Ok();
+                var genreFromRepo = await _repository.GetById(id, false);
 
+                if (genreFromRepo == null)
+                {
+                    return NotFound($"Could not update genre. Genre with Id {id} was not found.");
+                }
+
+                var genreForUpdate = _mapper.Map(genreForUpdateDto, genreFromRepo);
+
+                await _repository.Update(genreForUpdate);
+
+                return NoContent();
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
         [HttpPost(Name = "CreateGenre")]
-        public async Task<ActionResult> CreateGenre(Genre genre)
+        public async Task<ActionResult> CreateGenre([FromBody] GenreForUpdateDTO genreForUpdateDTO)
         {
             try
             {
-                await _repository.Add(genre);
-                if (await _repository.Save())
-                {
-                    return Created("", genre);
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                var genre = _mapper.Map<Genre>(genreForUpdateDTO);
+                var genreFromRepo = await _repository.Add(genre);
 
+                if (genreFromRepo != null)
+                {
+                    return CreatedAtAction(nameof(GetGenreById), new { id = genre.Id }, genre);
+                }
+                return BadRequest("Failed to create genre.");
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}");
             }
 
         }

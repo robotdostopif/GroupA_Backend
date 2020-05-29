@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
-    public class GenreAddDto
+    public class GenreForUpdateDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }
