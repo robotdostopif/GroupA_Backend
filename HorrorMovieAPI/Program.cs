@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HorrorMovieAPI.DB_Context.DataSeed;
 using HorrorMovieAPI.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,7 @@ namespace HorrorMovieAPI
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().SeedData().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
