@@ -64,7 +64,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
         [InlineData(2)]
         [InlineData(3)]
         public async void GetAllMovies_MovieAmount_ReturnsCorrectAmountOfMovies(int expectedAmountOfMovies)
-        {  
+        {
             //Arrange
             IList<Movie> movies = new List<Movie>();
 
@@ -89,11 +89,11 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                     }
                 });
             }
-
-            _mockContext.Setup(x => x.Movies).ReturnsDbSet(movies);
-
+            
+            _mockContext.Setup(x => x.Set<Movie>()).ReturnsDbSet(movies);
+            
             // Act
-            var movie = await _mockRepo.GetAll("");
+            var movie = await _mockRepo.GetAllMovies("The Silence of the Lambs", 1991, 1991);
 
             // Assert
             Assert.Equal(expectedAmountOfMovies, movie.Count());
