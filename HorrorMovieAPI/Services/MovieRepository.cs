@@ -31,10 +31,10 @@ namespace HorrorMovieAPI.Services
             }
             if (afterYear > 1888)
             {
-                movies = movies.Where(m => m.Year > afterYear).ToList();
+                movies = movies.Where(m => m.Year >= afterYear).ToList();
             }
                               
-            return movies.Where(m => m.Title.Contains(movieTitle)).ToList();
+            return await Task.FromResult(movies.Where(m => m.Title.Contains(movieTitle)).ToList());
         }
 
         public async Task<Movie> GetById(int id, bool includeActors, bool includeDirector)

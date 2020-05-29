@@ -31,18 +31,6 @@ namespace HorrorMovieAPI.Tests.ControllerTests
         }
 
         [Fact]
-        public async void CreateDirector_DirectorExists_ReturnsCorrectDirectorId()
-        {
-            // Arrange
-            DirectorForUpdateDTO director = new DirectorForUpdateDTO() {
-                DOB = DateTime.Parse("1944-01-20")
-            };
-            var result = await _directorController.CreateDirector(director);
-
-            Assert.IsType<CreatedResult>(result);
-        }
-
-        [Fact]
         public async Task GetDirectorById_DirectorExists_ReturnsObjectResult()
         {
             Director director = new Director() {
