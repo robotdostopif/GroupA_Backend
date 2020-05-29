@@ -6,7 +6,7 @@ namespace HorrorMovieAPI.Services
 {
     public interface IGenreRepository : IRepository<Genre>
     {
-        Task<List<Genre>> GetAll(bool includeMovies);
+        Task<List<Genre>> GetAll(string genre, params string[] including);
 
         Task<Genre> GetById(int id, bool includeMovies);
     }
