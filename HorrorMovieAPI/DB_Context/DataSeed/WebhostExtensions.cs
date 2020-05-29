@@ -16,8 +16,6 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetService<HorrorContext>();
-                context.Movies.RemoveRange(context.Movies);
-                context.SaveChanges();
                 if (!context.Movies.Any())
                 {
                     new TestDataSeeder(context).SeedData();
