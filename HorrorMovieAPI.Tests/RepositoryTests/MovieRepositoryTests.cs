@@ -93,7 +93,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             _mockContext.Setup(x => x.Set<Movie>()).ReturnsDbSet(movies);
             
             // Act
-            var movie = await _mockRepo.GetAllMovies("The Silence of the Lambs", 1991, 1991);
+            var movie = await _mockRepo.GetAll("The Silence of the Lambs", 1991, 1991);
 
             // Assert
             Assert.Equal(expectedAmountOfMovies, movie.Count());

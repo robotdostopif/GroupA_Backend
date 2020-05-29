@@ -20,7 +20,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<IList<Movie>> GetAllMovies(string movieTitle, int exactYear, int afterYear, params string[] including)
+        public async Task<List<Movie>> GetAll(string movieTitle, int exactYear, int afterYear, params string[] including)
         {
             _logger.LogInformation($"Fetching all movies from the database.");
             var movies = await GetAll(including);

@@ -36,7 +36,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var results = await _repository.GetAllMovies(movieTitle, exactYear, afterYear, including);
+                var results = await _repository.GetAll(movieTitle, exactYear, afterYear, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
