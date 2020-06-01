@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using HorrorMovieAPI.Dto;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
@@ -8,11 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
+    [Authorize]
     public class DirectorsController : ControllerBase
     {
         private readonly IDirectorRepository _repository;
