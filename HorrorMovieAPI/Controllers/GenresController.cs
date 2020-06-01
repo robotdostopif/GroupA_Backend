@@ -14,6 +14,7 @@ namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
+    [Authorize]
     public class GenresController : ControllerBase
     {
         private readonly IGenreRepository _repository;
@@ -58,7 +59,6 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteGenreById")]
-        [Authorize]
         public async Task<ActionResult> DeleteGenreById(int id)
         {
             try
@@ -79,7 +79,6 @@ namespace HorrorMovieAPI.Controllers
             }
         }
         [HttpPut("{id}", Name = "UpdateGenreDetails")]
-        [Authorize]
         public async Task<ActionResult> UpdateGenreDetails(int id, [FromBody] GenreForUpdateDTO genreForUpdateDto)
         {
             try
@@ -104,12 +103,12 @@ namespace HorrorMovieAPI.Controllers
             }
         }
         [HttpPost(Name = "CreateGenre")]
-        [Authorize]
-        public async Task<ActionResult> CreateGenre([FromBody] GenreForUpdateDTO genreForUpdateDTO)
+        
+        public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
         {
             try
             {
-                var genre = _mapper.Map<Genre>(genreForUpdateDTO);
+                var genre = _mapper.Map<Genre>(genreDTO);
                 var genreFromRepo = await _repository.Add(genre);
 
                 if (genreFromRepo != null)
