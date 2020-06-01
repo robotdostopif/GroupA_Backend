@@ -8,6 +8,9 @@ using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.Swagger.Annotations;
+using System.Net;
 
 namespace HorrorMovieAPI.Controllers
 {
