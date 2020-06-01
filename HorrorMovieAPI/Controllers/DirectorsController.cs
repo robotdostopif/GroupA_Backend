@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.Swagger.Annotations;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -27,7 +28,12 @@ namespace HorrorMovieAPI.Controllers
             _mapper = mapper;
             _urlHelper = urlHelper;
         }
-
+        /// <summary>
+        /// Gets all the directors with possible filtering by birthcountry and include of directed movies
+        /// </summary>
+        /// <param name="birthCountry"></param>
+        /// <param name="includeMovies"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<DirectorDTO[]>> GetAll(string birthCountry = "", bool includeMovies = false)
         {
@@ -44,7 +50,12 @@ namespace HorrorMovieAPI.Controllers
             }
             
         }
-
+        /// <summary>
+        /// Get a director by a specific id and possible include of directed movies
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="includeMovies"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name ="GetDirectorById")]
         public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
         {
@@ -60,7 +71,11 @@ namespace HorrorMovieAPI.Controllers
             }
             
         }
-
+        /// <summary>
+        /// Delete a director by unique id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}", Name ="DeleteDirectorById")]
         public async Task<IActionResult> DeleteDirectorById(int id)
         {
@@ -83,7 +98,12 @@ namespace HorrorMovieAPI.Controllers
             }
 
         }
-
+        /// <summary>
+        /// Update directordetails by unique id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="directorForUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}", Name = "UpdateDirectorDetails")]
         public async Task<IActionResult> UpdateDirectorDetails(int id, [FromBody] DirectorForUpdateDTO directorForUpdateDto)
         {
@@ -107,7 +127,11 @@ namespace HorrorMovieAPI.Controllers
                     $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
-
+        /// <summary>
+        /// Post a new director
+        /// </summary>
+        /// <param name="directorDto"></param>
+        /// <returns></returns>
         [HttpPost(Name = "CreateDirector")]
         public async Task<IActionResult> CreateDirector([FromBody] DirectorForUpdateDTO directorDto)
         {

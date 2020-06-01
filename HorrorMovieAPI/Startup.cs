@@ -56,7 +56,10 @@ namespace HorrorMovieAPI
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" }));
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" });
+                c.IncludeXmlComments("HorrorMovieAPI.XML");
+                });
+                                    
 
             services.AddAuthentication(options =>
             {
@@ -77,10 +80,12 @@ namespace HorrorMovieAPI
             }
 
             app.UseSwagger();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0");
                 c.RoutePrefix = string.Empty;
+                
             });
 
             //app.UseHttpsRedirection();
