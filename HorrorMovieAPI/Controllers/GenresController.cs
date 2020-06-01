@@ -6,6 +6,7 @@ using AutoMapper;
 using HorrorMovieAPI.Dto;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
+    [Authorize]
     public class GenresController : ControllerBase
     {
         private readonly IGenreRepository _repository;
@@ -101,11 +103,12 @@ namespace HorrorMovieAPI.Controllers
             }
         }
         [HttpPost(Name = "CreateGenre")]
-        public async Task<ActionResult> CreateGenre([FromBody] GenreForUpdateDTO genreForUpdateDTO)
+        
+        public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
         {
             try
             {
-                var genre = _mapper.Map<Genre>(genreForUpdateDTO);
+                var genre = _mapper.Map<Genre>(genreDTO);
                 var genreFromRepo = await _repository.Add(genre);
 
                 if (genreFromRepo != null)
