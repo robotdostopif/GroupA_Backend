@@ -3,7 +3,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\C#\GroupA_Backend-master\GroupA_Backend-master\HorrorMovieAPI\HorrorMovieAPI.xml</DocumentationFile>
+    <DocumentationFile>D:\skola\backend\GroupA_Backend\HorrorMovieAPI\HorrorMovieAPI.xml</DocumentationFile>
+    <OutputPath>C:\</OutputPath>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
