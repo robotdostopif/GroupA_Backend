@@ -1,5 +1,54 @@
 # Sprint Reviews
 
+## 2020-05-29
+
+### SKRAC-an Sprint 9
+
+* Sekreterare: **Fredrika**
+
+* **Vad var målet för sprinten?** 
+  Målet för sprinten var att implementera HATEOAS samt lägga till API Requests för alla controllers (PUT, POST, DELETE). Ett annat delmål var att lägga till fler tester. 
+
+* **Uppfylldes målet för sprinten?** 
+
+  :white_check_mark: Ja
+
+- **Blev alla issues klara?**
+
+  Nej, vi har ett issue kvar med två stycken subtasks [SKRAC-204]. 
+  Detta var ett issue som vi la till ganska sent under sprintens gång. 
+
+- **Om inte, varför**
+  På slutet fokuserade vi mer på tester och att snygga upp koden och göra så att våra CRUD-metoder följer samma struktur för returer .
+
+- *Icke klara issues återförs till backlog, efter att de har uppdaterats. Har vissa
+  delar klarats av? Skall vi ha en ny tidsuppskattning? Vad behövs för att vi
+  skall klara detta issue nästa gång?*
+
+- **Höll tidsplaneringen för alla issues?**
+
+  Nej, ibland stötte vi på problem som vi inte hade räknat med. Ibland kunde man spinna iväg på annat också. Ibland när man satt och sökte på problem/lösningar så kunde de ta längre tid än vi förutspått.
+
+  
+
+- Bedöm vad ni kan göra bättre i nästa sprint**
+
+  Göra pullrequesten snabbare. Det låg en del pullrequests och väntade. 
+  Det uppstod mergeconflicts som *kanske* hade kunnat undvikas om man var snabbare på att mergea/reviewa pullrequests. 
+
+
+  **Vad vi gjorde bra i denna sprinten:** Vi upplever att vi hade bra issues, de var välplanerade. I förra sprinten hade vi väldigt små issues som inte kunde utföras utan ett annat issue så man kunde inte testa sin kod, alltså fick vi sammanföra flera issues till ett. Alla visste vad de skulle göra hela tiden, fördelningen av issues fungerade bra.
+
+  
+
+- **Har det kommit upp nya saker som skall läggas till på er backlog?**
+  Ja vi har lagt till issues i backlogen ett flertal gånger. Vi la exempelvis till att vi skulle ha dynamic includes. 
+  Vi har funderat och kikat lite på paging men inte gjort slag i saken och lagt till ett issue för det (och alltså heller inte implementerat det ännu). 
+
+  **Vad vi vill lägga till i backlogen men inte hunnit:** Vi vill ändra om det generiska repot och ändra de olika metoderna. Detta för att slippa referera till det generiska interfacet i de andra repositorie-interfaces.
+
+  
+
 ## 2020-05-21
 
 ### SKRAC-an Sprint 8
