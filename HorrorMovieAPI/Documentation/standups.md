@@ -1,5 +1,68 @@
 ## Standups 
 
+# 2020-06-01
+
+**Generalsekreterare:** Aron	
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* xxx
+
+Sebastian:
+
+* xxx
+
+
+Aron:
+
+* xxx
+
+Nor:
+
+* xxx
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* SKRAC-229
+* SKRAC-219
+* SKRAC-224
+* Kommentar: Lägga till authentification till ActorController och lägga till Comments for ActorController och Descriptions for ActorDTO Properties.
+
+Sebastian:
+
+* SKRAC-230
+* SKRAC-225
+* SKRAC-221
+* Kommentar:  Lägga till authentification till GenreController och lägga till Comments for GenreController och Descriptions for GenreDTO Properties.
+
+
+Nor:
+
+* SKRAC-227
+
+* SKRAC-223
+
+* SKRAC-218
+
+* Kommentar: Lägga till authentification till MovieController och lägga till Comments for MovieController och Descriptions for MovieDTO Properties.
+
+  
+
+Aron:
+
+* SKRAC-220
+* SKRAC-222
+* SKRAC-228
+* Kommentar: Lägga till authentification till DirectorController och lägga till Comments for DirectorController och Descriptions for DirectorDTO Properties.
+
+
+
+### Göra till nästa gång*
+
 # 2020-05-29
 
 **Generalsekreterare:** Fredrika	
