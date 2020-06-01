@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.Swagger;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HorrorMovieAPI
 {
@@ -49,13 +50,23 @@ namespace HorrorMovieAPI
                 var factory = x.GetRequiredService<IUrlHelperFactory>();
                 return factory.GetUrlHelper(actionContext);
             });
-          
-            services.AddScoped<IMovieRepository,MovieRepository>();
+
+            services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0"} ));
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" }));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration.GetSection("Auth0").GetSection("Domain").Value;
+                options.Audience = Configuration.GetSection("Auth0").GetSection("Audience").Value;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,12 +77,21 @@ namespace HorrorMovieAPI
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0");
                 c.RoutePrefix = string.Empty;
             });
 
             //app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             app.UseMvc();
         }
     }

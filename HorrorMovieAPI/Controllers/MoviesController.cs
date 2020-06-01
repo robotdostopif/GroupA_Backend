@@ -8,6 +8,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using HorrorMovieAPI.Dto;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -63,6 +64,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteMovieById")]
+        [Authorize]
         public async Task<ActionResult> DeleteMovieById(int id)
         {
             try
@@ -86,6 +88,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpPut("{id}", Name = "UpdateMovieDetails")]
+        [Authorize]
         public async Task<ActionResult> UpdateMovieDetails(int id, MovieForUpdateDTO movieDTO)
         {
             try
@@ -110,6 +113,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpPost(Name = "CreateMovie")]
+        [Authorize]
         public async Task<ActionResult<MovieDTO>> CreateMovie(MovieForUpdateDTO movieToCreateDTO)
         {
             try
