@@ -6,6 +6,7 @@ using AutoMapper;
 using HorrorMovieAPI.Dto;
 using HorrorMovieAPI.Models;
 using HorrorMovieAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,6 +58,7 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteGenreById")]
+        [Authorize]
         public async Task<ActionResult> DeleteGenreById(int id)
         {
             try
@@ -77,6 +79,7 @@ namespace HorrorMovieAPI.Controllers
             }
         }
         [HttpPut("{id}", Name = "UpdateGenreDetails")]
+        [Authorize]
         public async Task<ActionResult> UpdateGenreDetails(int id, [FromBody] GenreForUpdateDTO genreForUpdateDto)
         {
             try
@@ -101,6 +104,7 @@ namespace HorrorMovieAPI.Controllers
             }
         }
         [HttpPost(Name = "CreateGenre")]
+        [Authorize]
         public async Task<ActionResult> CreateGenre([FromBody] GenreForUpdateDTO genreForUpdateDTO)
         {
             try
