@@ -42,6 +42,31 @@
             <param name="directorDto"></param>
             <returns></returns>
         </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetAll(System.String,System.String[])">
+            <summary>
+            Gets all the genres with possibility to include movies
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetGenreById(System.Int32,System.Boolean)">
+            <summary>
+            Gets the genre with a specific ID and possibility to include movies
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.DeleteGenreById(System.Int32)">
+            <summary>
+            Detete the genre with a specific ID 
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.UpdateGenreDetails(System.Int32,HorrorMovieAPI.Models.GenreForUpdateDTO)">
+            <summary>
+            Change the genre with a specific ID 
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.CreateGenre(HorrorMovieAPI.Models.GenreDTO)">
+            <summary>
+            Create a new genre
+            </summary>
+        </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.Id">
             <summary>
             Specific ID

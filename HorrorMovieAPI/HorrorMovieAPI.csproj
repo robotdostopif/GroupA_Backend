@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>HorrorMovieAPI.xml</DocumentationFile>
+  <DocumentationFile>HorrorMovieAPI.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
