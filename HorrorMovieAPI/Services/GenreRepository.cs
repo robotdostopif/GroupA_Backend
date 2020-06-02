@@ -30,12 +30,14 @@ namespace HorrorMovieAPI.Services
            
             if(string.IsNullOrEmpty(genre) == false)
             {
-                    
+
+
                 return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList().ToPagedList(page ?? 1, 3);
             }
 
-            return movies.ToList().ToPagedList(page ?? 1, 50);
-            
+
+            return movies.ToList().ToPagedList(page ?? 1, 3);
+
         }
 
         public async Task<Genre> GetById(int id, bool includeMovies)
