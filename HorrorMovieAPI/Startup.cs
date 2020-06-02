@@ -29,6 +29,7 @@ namespace HorrorMovieAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<HorrorContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

@@ -15,6 +15,8 @@ using PoweredSoft.Types;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Newtonsoft.Json;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -37,14 +39,13 @@ namespace HorrorMovieAPI.Controllers
         /// <summary>
         /// Gets all the genres with possibility to include movies
         /// </summary>
-        
+
         [HttpGet]
-        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "",[FromQuery] string [] including = null )
+        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "", [FromQuery] string[] including = null)
         {
             try
             {
-                
-                var results = await _repository.GetAll(genre ,page , including);
+                var results = await _repository.GetAll(genre, page, including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }
@@ -68,7 +69,7 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
             }
         }
@@ -91,7 +92,7 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
         }
@@ -119,7 +120,7 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
@@ -127,7 +128,7 @@ namespace HorrorMovieAPI.Controllers
         /// Create a new genre
         /// </summary>
         [HttpPost(Name = "CreateGenre")]
-        
+
         public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
         {
             try
@@ -143,7 +144,7 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}");
             }
 
