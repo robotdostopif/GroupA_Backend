@@ -26,6 +26,12 @@ namespace HorrorMovieAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all actors, possible to filter on first name and include movies
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="includeMovies"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<ActorDTO[]>> GetAll(string firstName = "", bool includeMovies = false)
         {
@@ -42,6 +48,12 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Get actor by Id, possible to filter on movies
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="includeMovies"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetActorById")]
         public async Task<ActionResult<ActorDTO>> GetActorById(int id, bool includeMovies = false)
         {
@@ -57,6 +69,11 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete actor by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}", Name = "DeleteActorById")]
         public async Task<IActionResult> DeleteActorById(int id)
         {
@@ -79,6 +96,12 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Update actor by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="actorForUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}", Name = "UpdateActorDetails")]
         public async Task<IActionResult> UpdateActorDetails(int id, [FromBody] ActorForUpdateDTO actorForUpdateDto)
         {
@@ -103,6 +126,11 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Create actor
+        /// </summary>
+        /// <param name="actorDTO"></param>
+        /// <returns></returns>
         [HttpPost(Name = "CreateActor")]
         public async Task<IActionResult> CreateActor([FromBody] ActorDTO actorDTO)
         {
