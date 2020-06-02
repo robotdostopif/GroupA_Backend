@@ -62,14 +62,14 @@ namespace HorrorMovieAPI.Controllers
         /// Get a director by a specific id and possible include of directed movies
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="includeMovies"></param>
+        /// <param name="including"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name ="GetDirectorById")]
-        public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, bool includeMovies = false)
+        public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, [FromQuery]string[] including = null)
         {
             try
             {
-                var result = await _repository.Get<Director>(id);
+                var result = await _repository.Get<Director>(id, including);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)

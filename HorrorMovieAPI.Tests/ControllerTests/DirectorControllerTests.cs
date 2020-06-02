@@ -41,7 +41,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
             _mockRepo.Setup(repo => repo.Get<Director>(1)).ReturnsAsync(director);
 
             // Act
-            var response = await _directorController.GetDirectorById(1, true);
+            var response = await _directorController.GetDirectorById(1);
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(response.Result);

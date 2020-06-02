@@ -60,15 +60,15 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the genre with a specific ID and possibility to include movies
+        /// Gets the genre with a specific ID and possibility to include other properties
         /// </summary>
         [HttpGet("{id}", Name = "GetGenreById")]
 
-        public async Task<ActionResult<GenreDTO>> GetGenreById(int id, bool includeMovies = false)
+        public async Task<ActionResult<GenreDTO>> GetGenreById(int id, [FromQuery] string[] including = null)
         {
             try
             {
-                var result = await _repository.Get<Genre>(id);
+                var result = await _repository.Get<Genre>(id, including);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
