@@ -54,6 +54,8 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             Assert.Equal(expectedId, director.Id);
         }
 
+
+        //Doesn't work at the moment, null exception thrown.
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -76,7 +78,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             _mockContext.Setup(x => x.Directors).ReturnsDbSet(directors);
 
             // Act
-            var directorsFromRepo = await _mockRepo.GetAll("",false);
+            var directorsFromRepo = await _mockRepo.GetAll<Director>();
 
             // Assert
             Assert.Equal(expectedNumberOfDirectors, directorsFromRepo.Count());

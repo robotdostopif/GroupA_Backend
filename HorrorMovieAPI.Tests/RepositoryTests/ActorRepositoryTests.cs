@@ -78,7 +78,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             _mockContext.Setup(x => x.Actors).ReturnsDbSet(actors);
 
             // Act
-            var actorsFromRepo = await _mockRepo.GetAll("Ryan",false);
+            var actorsFromRepo = await _mockRepo.GetAll<Actor>();
 
             // Assert
             Assert.Equal(expectedAmountOfActors, actorsFromRepo.Count());

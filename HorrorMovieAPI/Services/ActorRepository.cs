@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HorrorMovieAPI.Services
 {
 
-    public class ActorRepository : Repository<Actor>, IActorRepository
+    public class ActorRepository : Repository, IActorRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<ActorRepository> _logger;
@@ -28,7 +28,7 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Fetching all movies from the database.");
 
-            var actors = await GetAll(including);
+            var actors = await GetAll<Actor>(including);
 
             if (string.IsNullOrEmpty(firstName) == false)
             {

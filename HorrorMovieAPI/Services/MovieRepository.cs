@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HorrorMovieAPI.Services
 {
-    public class MovieRepository : Repository<Movie>, IMovieRepository
+    public class MovieRepository : Repository, IMovieRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<MovieRepository> _logger;
@@ -23,7 +23,7 @@ namespace HorrorMovieAPI.Services
         public async Task<List<Movie>> GetAll(string movieTitle, int exactYear, int afterYear, params string[] including)
         {
             _logger.LogInformation($"Fetching all movies from the database.");
-            var movies = await GetAll(including);
+            var movies = await GetAll<Movie>(including);
 
             if (exactYear != default)
             {

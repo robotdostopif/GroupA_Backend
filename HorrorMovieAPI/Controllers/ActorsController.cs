@@ -32,6 +32,8 @@ namespace HorrorMovieAPI.Controllers
         /// <summary>
         /// Get all actors, possible to filter on first name and include movies
         /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
         /// <param name="firstName"></param>
         /// <param name="including"></param>
         /// <returns></returns>
@@ -93,7 +95,7 @@ namespace HorrorMovieAPI.Controllers
                 {
                     return NotFound($"Could not delete actor. Actor with Id {id} was not found.");
                 }
-                await _repository.Delete(actor);
+                await _repository.Delete<Actor>(id);
 
                 return NoContent();
             }

@@ -11,8 +11,7 @@ using PoweredSoft.DynamicLinq;
 
 namespace HorrorMovieAPI.Services
 {
-    public class Repository<T> : IRepository<T>
-    where T : class, IEntity
+    public class Repository : IRepository
     
     {
         private readonly HorrorContext _context;
@@ -24,7 +23,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<T> Add(T entity)
+        public async Task<T> Add<T>(T entity) where T : class
         {
             _logger.LogInformation($"Adding object of type {entity.GetType()}");
             await _context.Set<T>().AddAsync(entity);
@@ -32,7 +31,7 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public async Task<T> Delete(int id)
+        public async Task<T> Delete<T>(int id)  where T : class
         {
             var entity = await _context.Set<T>().FindAsync(id);
             if (entity == null)
@@ -45,15 +44,7 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public async Task<T>Delete(T entity)
-        {
-            _logger.LogInformation($"Deleting object of type {entity.GetType()}");
-            _context.Set<T>().Remove(entity);
-            await Save();
-            return entity;
-        }
-
-        public async Task<T> Get(int id)
+        public async Task<T> Get<T>(int id) where T : class
         {
             _logger.LogInformation($"Getting object with id {id}");
             return await _context.Set<T>().FindAsync(id);
@@ -65,7 +56,7 @@ namespace HorrorMovieAPI.Services
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<T> Update(T entity)
+        public async Task<T> Update<T>(T entity)  where T : class
         {
             _logger.LogInformation($"Updating object of type {entity.GetType()}");
             _context.Entry(entity).State = EntityState.Modified;
@@ -73,7 +64,7 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public async Task<IList<T>> GetAll(params string[] including)
+        public async Task<IList<T>> GetAll<T> (params string[] including) where T : class
         {
             _logger.LogInformation($"Fetching entity list of type {typeof(T)} from the database.");
             var query = _context.Set<T>().AsQueryable();
@@ -85,15 +76,6 @@ namespace HorrorMovieAPI.Services
                 });
 
             return await query.ToListAsync();
-        }
-
-        public async Task<Director> GetDirectorById(int id) 
-        {
-            return await _context.Set<Director>().FindAsync(id);
-        }
-        public async Task<Genre> GetGenreById(int id)
-        {
-            return await _context.Set<Genre>().FindAsync(id);
         }
     }
 }

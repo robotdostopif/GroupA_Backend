@@ -32,6 +32,8 @@ namespace HorrorMovieAPI.Controllers
         /// <summary>
         /// Gets all the directors with possible filtering by birthcountry and include of directed movies
         /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pagesize"></param>
         /// <param name="birthCountry"></param>
         /// <param name="includeMovies"></param>
         /// <returns></returns>
@@ -93,7 +95,7 @@ namespace HorrorMovieAPI.Controllers
                 {
                     return BadRequest($"Could not delete director. Director with Id {id} was not found.");
                 }
-                await _repository.Delete(id);
+                await _repository.Delete<Director>(id);
 
                 return NoContent();
             }

@@ -84,13 +84,13 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var movie = await _repository.GetById(id,false,false);
+                var movie = await _repository.Get<Movie>(id);
 
                 if (movie == null)
                 {
                     return NotFound($"Could not delete movie. Movie with Id {id} was not found.");
                 }
-                await _repository.Delete(movie);
+                await _repository.Delete<Movie>(id);
 
                 return NoContent();
             }
@@ -142,9 +142,9 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                Director director = await _repository.GetDirectorById(movieToCreateDTO.DirectorID);
+                Director director = await _repository.Get<Director>(movieToCreateDTO.DirectorID);
 
-                Genre genre = await _repository.GetGenreById(movieToCreateDTO.GenreID);
+                Genre genre = await _repository.Get<Genre>(movieToCreateDTO.GenreID);
                 if (director == null)
                 {
                     return BadRequest($"The director with the id: {movieToCreateDTO.DirectorID} could not be found.");

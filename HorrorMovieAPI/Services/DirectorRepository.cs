@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Services
 {
-    public class DirectorRepository : Repository<Director>, IDirectorRepository
+    public class DirectorRepository : Repository, IDirectorRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<DirectorRepository> _logger;
@@ -19,7 +19,7 @@ namespace HorrorMovieAPI.Services
             _context = context;
             _logger = logger;
         }
-        public async Task<IPagedList<Director>> GetAll(string birthCountry,int? page, int pagesize, bool includeMovies)
+        public async Task<IPagedList<Director>> GetAll(string birthCountry, int? page, int pagesize, bool includeMovies)
         {
             IQueryable<Director> query = _context.Directors;
 
