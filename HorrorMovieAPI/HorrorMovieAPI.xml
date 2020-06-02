@@ -29,7 +29,7 @@
         </member>
         <member name="M:HorrorMovieAPI.Controllers.DirectorsController.UpdateDirectorDetails(System.Int32,HorrorMovieAPI.Dto.DirectorForUpdateDTO)">
             <summary>
-            Update directordetails by a unique id
+            Update directordetails by unique id
             </summary>
             <param name="id"></param>
             <param name="directorForUpdateDto"></param>

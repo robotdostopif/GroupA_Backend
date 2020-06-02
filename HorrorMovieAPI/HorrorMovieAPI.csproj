@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\C#\GroupA_Backend-master\GroupA_Backend-master\HorrorMovieAPI\HorrorMovieAPI.xml</DocumentationFile>
+    <DocumentationFile>D:\skola\backend\GroupA_Backend\HorrorMovieAPI\HorrorMovieAPI.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -21,6 +21,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PagedList" Version="1.17.0" />
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
     <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
     <PackageReference Include="PoweredSoft.DynamicLinq.EntityFrameworkCore" Version="1.1.10" />

@@ -7,7 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PagedList;
+using PagedList.Mvc;
 namespace HorrorMovieAPI.Services
 {
     public class GenreRepository : Repository<Genre>, IGenreRepository
@@ -21,7 +22,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Genre>> GetAll(string genre, params string[] including)
+        public async Task<IPagedList<Genre>> GetAll(string genre, int? page, params string[] including)
         {
             _logger.LogInformation($"Fetching all genres from the database.");
 
@@ -29,10 +30,11 @@ namespace HorrorMovieAPI.Services
            
             if(string.IsNullOrEmpty(genre) == false)
             {
-                return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList();
+                    
+                return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList().ToPagedList(page ?? 1, 3);
             }
 
-            return movies.ToList();
+            return movies.ToList().ToPagedList(page ?? 1, 50);
             
         }
 

@@ -9,6 +9,9 @@ using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
+using PagedList.Mvc;
+using PoweredSoft.Types;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -29,11 +32,12 @@ namespace HorrorMovieAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GenreDTO[]>> GetAll([FromQuery]string genre = "", [FromQuery] string [] including = null)
+        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "",[FromQuery] string [] including = null )
         {
             try
             {
-                var results = await _repository.GetAll(genre, including);
+                
+                var results = await _repository.GetAll(genre ,page , including);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(toReturn);
             }

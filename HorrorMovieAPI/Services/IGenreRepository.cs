@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HorrorMovieAPI.Models;
+using PagedList;
 
 namespace HorrorMovieAPI.Services
 {
     public interface IGenreRepository : IRepository<Genre>
     {
-        Task<List<Genre>> GetAll(string genre, params string[] including);
+        Task<IPagedList<Genre>> GetAll(string genre, int? page, params string[] including);
 
         Task<Genre> GetById(int id, bool includeMovies);
     }
