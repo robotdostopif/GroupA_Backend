@@ -2,6 +2,7 @@
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,10 @@ namespace HorrorMovieAPI.Services
             _context = context;
             _logger = logger;
         }
-        public async Task<List<Director>> GetAll(string birthCountry, bool includeMovies)
+        public async Task<IPagedList<Director>> GetAll(string birthCountry,int? page, int pagesize, bool includeMovies)
         {
             IQueryable<Director> query = _context.Directors;
+
             _logger.LogInformation("Fetching all directors.");
 
             if (string.IsNullOrEmpty(birthCountry) == false)
@@ -39,7 +41,8 @@ namespace HorrorMovieAPI.Services
             }
 
             query = query.OrderBy(d => d.LastName);
-            return await query.ToListAsync();
+            await query.ToListAsync();
+            return query.ToPagedList(page ?? 1, pagesize);
         }
 
         public async Task<Director> GetById(int id, bool includeMovies)
