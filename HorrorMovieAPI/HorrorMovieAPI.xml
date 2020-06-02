@@ -42,7 +42,7 @@
             <param name="actorDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.GetAll(System.String,System.Boolean)">
+        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.GetAllDirectors(System.Nullable{System.Int32},System.Int32,System.String,System.Boolean)">
             <summary>
             Gets all the directors with possible filtering by birthcountry and include of directed movies
             </summary>

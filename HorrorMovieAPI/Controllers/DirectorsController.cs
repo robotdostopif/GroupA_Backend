@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
+using PagedList;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -34,14 +35,19 @@ namespace HorrorMovieAPI.Controllers
         /// <param name="birthCountry"></param>
         /// <param name="includeMovies"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<DirectorDTO[]>> GetAll(string birthCountry = "", bool includeMovies = false)
+        [HttpGet(Name = "GetAllDirectors")]
+        public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page,int pagesize=3, string birthCountry = "", bool includeMovies = false)
         {
             try
             {
-                var results = await _repository.GetAll(birthCountry, includeMovies);
+                var results = await _repository.GetAll(birthCountry,page, pagesize, includeMovies);
+                var links = CreateLinksForCollection(results);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
-                return Ok(toReturn);
+                return Ok(new
+                {
+                    value = toReturn,
+                    links = links
+                });
             }
             catch (Exception e)
             {
@@ -190,6 +196,52 @@ namespace HorrorMovieAPI.Controllers
               "create",
               "POST"));
               
+            return links;
+        }
+
+        private List<LinkDto> CreateLinksForCollection(IPagedList pageList)
+        {
+            var links = new List<LinkDto>();
+
+
+            // self 
+            links.Add(
+             new LinkDto(_urlHelper.Link(nameof(GetAllDirectors), new
+             {
+                 pagesize = pageList.PageCount,
+                 page = pageList.PageNumber
+             }), "current page", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllDirectors), new
+            {
+                pagesize = pageList.PageCount,
+                page = 1,
+            }), "first", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllDirectors), new
+            {
+                pagesize = pageList.PageCount,
+                page = pageList.PageCount,
+            }), "last", "GET"));
+
+            if (!pageList.IsLastPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllDirectors), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber + 1,
+                }), "next", "GET"));
+            }
+
+            if (!pageList.IsFirstPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllDirectors), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber - 1,
+                }), "previous", "GET"));
+            }
+
             return links;
         }
     }
