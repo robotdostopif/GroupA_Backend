@@ -28,11 +28,14 @@ namespace HorrorMovieAPI.Controllers
             _urlHelper = urlHelper;
         }
 
-        // Example requests (Case sensitive includes):
-        // https://localhost:5001/api/v1.0/movies?movieTitle=hall
-        // https://localhost:5001/api/v1.0/movies?including=Director&movieTitle=hall
-        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre&movieTitle=hall
-        // https://localhost:5001/api/v1.0/movies?including=Director&including=Genre
+        /// <summary>
+        /// Gets all movies from the database.
+        /// </summary>
+        /// <param name="movieTitle">Filter by Movies by title.</param>
+        /// <param name="exactYear">Filter Movies by exact release year.</param>
+        /// <param name="afterYear">Filter Movies which were created after this year.</param>
+        /// <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
+        /// <returns>A list of Movies that may or may not have been filtered by the user.</returns>
         [HttpGet]
         public async Task<ActionResult<MovieDTO[]>> GetAll([FromQuery] string movieTitle = "", [FromQuery] int exactYear = default, [FromQuery] int afterYear = default, [FromQuery] string[] including = null)
         {
@@ -49,6 +52,13 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Get a movie by its Id.
+        /// </summary>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <param name="includeActors">Include list of Actors in the Movie.</param>
+        /// <param name="includeDirector">Include who directed the Movie.</param>
+        /// <returns>A Movie object which matched given Id.</returns>
         [HttpGet("{id}", Name = "GetMovieById")]
         public async Task<ActionResult<MovieDTO>> GetMovieById(int id, bool includeActors = false, bool includeDirector = false)
         {
@@ -64,6 +74,11 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete a movie by using its Id.
+        /// </summary>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully deleted.</returns>
         [HttpDelete("{id}", Name = "DeleteMovieById")]
         public async Task<ActionResult> DeleteMovieById(int id)
         {
@@ -87,6 +102,12 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Update a movie by using its Id and MovieForUpdateDTO containing its updated data.
+        /// </summary>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <param name="movieDTO">DTO of a Movie object which contains updated data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
         [HttpPut("{id}", Name = "UpdateMovieDetails")]
         public async Task<ActionResult> UpdateMovieDetails(int id, MovieForUpdateDTO movieDTO)
         {
@@ -111,6 +132,11 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Create a movie by using its Id and MovieForUpdateDTO containing its data.
+        /// </summary>
+        /// <param name="movieToCreateDTO">DTO of a Movie object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 201 (Created) if the Movie was successfully created.</returns>
         [HttpPost(Name = "CreateMovie")]
         public async Task<ActionResult<MovieDTO>> CreateMovie(MovieForUpdateDTO movieToCreateDTO)
         {
