@@ -5,7 +5,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>D:\skola\backend\GroupA_Backend\HorrorMovieAPI\HorrorMovieAPI.xml</DocumentationFile>
     <OutputPath>C:\</OutputPath>
-    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

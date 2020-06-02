@@ -9,6 +9,9 @@ namespace HorrorMovieAPI.Models
         /// Genre name
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// A list of movies with the specific genre
+        /// </summary>
         public ICollection<MovieDTO> Movies { get; set; }
     }
 }
