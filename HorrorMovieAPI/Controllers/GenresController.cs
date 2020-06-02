@@ -40,14 +40,19 @@ namespace HorrorMovieAPI.Controllers
         /// Gets all the genres with possibility to include movies
         /// </summary>
 
-        [HttpGet]
+        [HttpGet(Name="GetAll")]
         public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "", [FromQuery] string[] including = null)
         {
             try
             {
                 var results = await _repository.GetAll(genre, page, including);
+                var links = CreateLinksForCollection(results);                
                 var toReturn = results.Select(x => ExpandSingleItem(x));
-                return Ok(toReturn);
+                return Ok(new
+                {
+                    value = toReturn,
+                    links = links
+                });
             }
             catch (Exception e)
             {
@@ -183,6 +188,51 @@ namespace HorrorMovieAPI.Controllers
               new LinkDto(_urlHelper.Link(nameof(CreateGenre), null),
               "create",
               "POST"));
+
+            return links;
+        }
+        private List<LinkDto> CreateLinksForCollection(IPagedList pageList)
+        {
+            var links = new List<LinkDto>();
+
+
+            // self 
+            links.Add(
+             new LinkDto(_urlHelper.Link(nameof(GetAll), new
+             {
+                 pagecount = pageList.PageCount,
+                 page = pageList.PageNumber
+             }), "current page", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
+            {
+                pagecount = pageList.PageCount,
+                page = 1,
+            }), "first", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
+            {
+                pagecount = pageList.PageCount,
+                page = pageList.PageCount,
+            }), "last", "GET"));
+
+            if (!pageList.IsLastPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
+                {
+                    pagecount = pageList.PageCount,
+                    page = pageList.PageNumber + 1,
+                }), "next", "GET"));
+            }
+
+            if (!pageList.IsFirstPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
+                {
+                    pagecount = pageList.PageCount,
+                    page = pageList.PageNumber - 1,
+                }), "previous", "GET"));
+            }
 
             return links;
         }
