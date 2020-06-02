@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using PagedList;
 using PagedList.Mvc;
 using PoweredSoft.Types;
+using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.Swagger.Annotations;
+using System.Net;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -31,6 +34,10 @@ namespace HorrorMovieAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets all the genres with possibility to include movies
+        /// </summary>
+        
         [HttpGet]
         public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "",[FromQuery] string [] including = null )
         {
@@ -47,7 +54,11 @@ namespace HorrorMovieAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the genre with a specific ID and possibility to include movies
+        /// </summary>
         [HttpGet("{id}", Name = "GetGenreById")]
+
         public async Task<ActionResult<GenreDTO>> GetGenreById(int id, bool includeMovies = false)
         {
             try
@@ -61,7 +72,9 @@ namespace HorrorMovieAPI.Controllers
                 $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
             }
         }
-
+        /// <summary>
+        /// Detete the genre with a specific ID 
+        /// </summary>
         [HttpDelete("{id}", Name = "DeleteGenreById")]
         public async Task<ActionResult> DeleteGenreById(int id)
         {
@@ -82,6 +95,10 @@ namespace HorrorMovieAPI.Controllers
                 $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
         }
+
+        /// <summary>
+        /// Change the genre with a specific ID 
+        /// </summary>
         [HttpPut("{id}", Name = "UpdateGenreDetails")]
         public async Task<ActionResult> UpdateGenreDetails(int id, [FromBody] GenreForUpdateDTO genreForUpdateDto)
         {
@@ -106,6 +123,9 @@ namespace HorrorMovieAPI.Controllers
                 $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
+        /// <summary>
+        /// Create a new genre
+        /// </summary>
         [HttpPost(Name = "CreateGenre")]
         
         public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
