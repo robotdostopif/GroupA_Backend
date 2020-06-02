@@ -1,5 +1,71 @@
 ## Standups 
 
+# 2020-06-02
+
+**Generalsekreterare:** Nor
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-219
+* Satt med Swagger-dokumentation och XML-kommentarer (SKRAC-219), just nu är den ofärdig. 
+* 
+
+Sebastian:
+
+* SKRAC-221
+* SKRAC-225
+* SKRAC-230
+* Lade till kommentarer till Swagger-dokumentation och autentisering för Genre.
+
+
+Aron:
+
+* SKRAC-228
+* SKRAC-222
+* SKRAC-230
+* Lade till kommentarer till Swagger-dokumentation och autentisering för Director.
+
+Nor:
+
+* SKRAC-223
+* SKRAC-227
+* Lade till kommentarer till Swagger-dokumentation (endast för DTO) och autentisering för Movie.
+
+Gemensamt:
+
+* Vi satt tillsammans och implementerade Auth0-autentisering till vår API.
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* SKRAC-229
+* SKRAC-213
+* Kommentar: Implementera Auth0-autentisering (SKRAC-229) och kolla på pagination (SKRAC-213).
+
+Sebastian:
+
+* SKRAC-212
+* Kommentar:  Göra pagination för Genre-controller (SKRAC-212).
+
+
+Nor:
+
+* SKRAC-218
+
+* SKRAC-231
+
+* Kommentar: Lägga till xml-kommentarer (Swagger-dokumentation) för Movie-controller (SKRAC-218) och ändra implementationen för Generiska repository (SKRAC-231).
+
+  
+
+Aron:
+
+* SKRAC-214
+* Kommentar: Kolla på pagination (SKRAC-214) och läsa mer om Auth0.
+
 # 2020-06-01
 
 **Generalsekreterare:** Aron	
@@ -58,10 +124,6 @@ Aron:
 * SKRAC-222
 * SKRAC-228
 * Kommentar: Lägga till authentification till DirectorController och lägga till Comments for DirectorController och Descriptions for DirectorDTO Properties.
-
-
-
-### Göra till nästa gång*
 
 # 2020-05-29
 
