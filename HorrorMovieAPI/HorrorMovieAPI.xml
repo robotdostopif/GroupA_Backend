@@ -102,9 +102,74 @@
             Directed movies
             </summary>
         </member>
-        <member name="P:HorrorMovieAPI.Models.GenreDTO.Name">
+        <member name="T:HorrorMovieAPI.Models.MovieDTO">
             <summary>
-            Genre name
+            Represents the data transfer object of a Movie which will be used during GET-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Id">
+            <summary>
+            Primary key of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Genre">
+            <summary>
+            Genre of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Title">
+            <summary>
+            Title of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Length">
+            <summary>
+            The length of the movie in minutes.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Year">
+            <summary>
+            The year which the movie was released.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Director">
+            <summary>
+            The person who directed this movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Castings">
+            <summary>
+            The list of people who acted in the movie.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Dto.MovieForUpdateDTO">
+            <summary>
+            Represents the data transfer object of a Movie which will be used during POST/PUT-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Title">
+            <summary>
+            Title of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.DirectorID">
+            <summary>
+            Foreign key of the director which directed this movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.GenreID">
+            <summary>
+            Foreign key of the genre.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Length">
+            <summary>
+            The length of the movie in minutes.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Year">
+            <summary>
+            The year which the movie was released.
             </summary>
         </member>
     </members>
