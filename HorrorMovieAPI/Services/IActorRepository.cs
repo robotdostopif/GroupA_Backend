@@ -1,4 +1,5 @@
 ﻿using HorrorMovieAPI.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace HorrorMovieAPI.Services
 {
     public interface IActorRepository : IRepository<Actor>
     {
-        Task<List<Actor>> GetAll(string firstname, bool includeMovies);
+        Task<IPagedList<Actor>> GetAll(string firstname, int? page, int pagesize, params string[] including);
         Task<Actor> GetById(int id, bool includeMovies);
     }
 }
