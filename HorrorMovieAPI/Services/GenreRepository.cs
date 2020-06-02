@@ -22,7 +22,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<IPagedList<Genre>> GetAll(string genre, int? page, params string[] including)
+        public async Task<IPagedList<Genre>> GetAll(string genre, int? page, int pagesize, params string[] including)
         {
             _logger.LogInformation($"Fetching all genres from the database.");
 
@@ -32,11 +32,11 @@ namespace HorrorMovieAPI.Services
             {
 
 
-                return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList().ToPagedList(page ?? 1, 3);
+                return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList().ToPagedList(page ?? 1, pagesize);
             }
 
 
-            return movies.ToList().ToPagedList(page ?? 1, 3);
+            return movies.ToList().ToPagedList(page ?? 1, pagesize);
 
         }
 

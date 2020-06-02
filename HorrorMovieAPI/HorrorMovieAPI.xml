@@ -80,7 +80,7 @@
             <param name="directorDto"></param>
             <returns></returns>
         </member>
-        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetAll(System.Nullable{System.Int32},System.String,System.String[])">
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetAll(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
             <summary>
             Gets all the genres with possibility to include movies
             </summary>

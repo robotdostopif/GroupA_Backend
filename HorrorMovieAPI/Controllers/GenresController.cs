@@ -41,11 +41,11 @@ namespace HorrorMovieAPI.Controllers
         /// </summary>
 
         [HttpGet(Name="GetAll")]
-        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, [FromQuery]string genre = "", [FromQuery] string[] including = null)
+        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page,int pagesize=3, [FromQuery]string genre = "", [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(genre, page, including);
+                var results = await _repository.GetAll(genre, page, pagesize, including);
                 var links = CreateLinksForCollection(results);                
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(new

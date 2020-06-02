@@ -8,8 +8,9 @@ namespace HorrorMovieAPI.Models
 {
     public class GenreForUpdateDTO
     {
-       public  IPagedList<dynamic> genres { get; set; }
-        public int pages { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
 
     }
 }
