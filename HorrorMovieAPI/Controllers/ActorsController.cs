@@ -8,11 +8,13 @@ using HorrorMovieAPI.Dto;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HorrorMovieAPI.Controllers
 {
     [Route("api/v1.0/[controller]")]
     [ApiController]
+    [Authorize]
     public class ActorsController : ControllerBase
     {
         private readonly IActorRepository _repository;
