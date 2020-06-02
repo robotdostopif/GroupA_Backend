@@ -4,7 +4,7 @@ using HorrorMovieAPI.Models;
 
 namespace HorrorMovieAPI.Services
 {
-    public interface IMovieRepository : IRepository<Movie>
+    public interface IMovieRepository : IRepository
     {
         Task<List<Movie>> GetAll(string movieTitle, int exactYear ,int afterYear, params string[] including);
 

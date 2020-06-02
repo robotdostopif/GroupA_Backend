@@ -85,12 +85,12 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var genre = await _repository.Delete(id);
+                var genre = await _repository.Get<Genre>(id);
                 if (genre == null)
                 {
                     return BadRequest($"Could not delete genre. Genre with Id {id} was not found.");
                 }
-                await _repository.Delete(genre);
+                await _repository.Delete<Genre>(id);
 
                 return NoContent();
             }

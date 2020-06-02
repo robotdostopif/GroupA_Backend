@@ -78,7 +78,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                     Title="horrormovie 2"
                  },
             };
-            _mockRepo.Setup(repo => repo.GetAll("")).ReturnsAsync(movies);
+            _mockRepo.Setup(repo => repo.GetAll<Movie>("")).ReturnsAsync(movies);
 
             // Act
             var response = await _movieController.GetAll("");

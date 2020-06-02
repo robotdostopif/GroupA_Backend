@@ -11,7 +11,7 @@ using PagedList;
 using PagedList.Mvc;
 namespace HorrorMovieAPI.Services
 {
-    public class GenreRepository : Repository<Genre>, IGenreRepository
+    public class GenreRepository : Repository, IGenreRepository
     {
         private readonly HorrorContext _context;
         private readonly ILogger<GenreRepository> _logger;
@@ -26,18 +26,14 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Fetching all genres from the database.");
 
-            var movies = await GetAll(including);
+            var movies = await GetAll<Genre>(including);
            
             if(string.IsNullOrEmpty(genre) == false)
             {
-
-
                 return movies.Where(m => m.Name.ToLower() == genre.ToLower()).ToList().ToPagedList(page ?? 1, pagesize);
             }
 
-
             return movies.ToList().ToPagedList(page ?? 1, pagesize);
-
         }
 
         public async Task<Genre> GetById(int id, bool includeMovies)

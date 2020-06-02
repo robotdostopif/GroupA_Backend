@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Services
 {
-    public interface IActorRepository : IRepository<Actor>
+    public interface IActorRepository : IRepository
     {
         Task<IPagedList<Actor>> GetAll(string firstname, int? page, int pagesize, params string[] including);
         Task<Actor> GetById(int id, bool includeMovies);

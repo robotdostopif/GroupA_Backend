@@ -63,10 +63,10 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                     DOB = DateTime.Parse("1944-01-20")
                 }
             };
-            _mockRepo.Setup(repo => repo.GetAll("",true)).ReturnsAsync(directors);
+            _mockRepo.Setup(repo => repo.GetAll<Director>()).ReturnsAsync(directors);
 
             // Act
-            var response = await _directorController.GetAll("",true);
+            var response = await _directorController.GetAllDirectors(1);
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(response.Result);
