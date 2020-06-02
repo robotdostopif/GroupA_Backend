@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using PagedList;
 using PagedList.Mvc;
 using PoweredSoft.Types;
-using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
