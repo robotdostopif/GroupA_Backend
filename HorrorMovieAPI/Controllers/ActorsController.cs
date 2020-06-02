@@ -9,6 +9,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using PagedList;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -32,16 +33,21 @@ namespace HorrorMovieAPI.Controllers
         /// Get all actors, possible to filter on first name and include movies
         /// </summary>
         /// <param name="firstName"></param>
-        /// <param name="includeMovies"></param>
+        /// <param name="including"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<ActorDTO[]>> GetAll(string firstName = "", bool includeMovies = false)
+        [HttpGet(Name = "GetAllActors")]
+        public async Task<ActionResult<ActorDTO[]>> GetAllActors(int? page, int pagesize = 3, [FromQuery]string firstName = "", [FromQuery]string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(firstName, includeMovies);
+                var results = await _repository.GetAll(firstName, page, pagesize, including);
+                var links = CreateLinksForCollection(results);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
-                return Ok(toReturn);
+                return Ok(new
+                {
+                    value = toReturn,
+                    links = links
+                });
             }
             catch (Exception e)
             {
@@ -188,6 +194,52 @@ namespace HorrorMovieAPI.Controllers
               new LinkDto(_urlHelper.Link(nameof(CreateActor), null),
               "create",
               "POST"));
+
+            return links;
+        }
+
+        private List<LinkDto> CreateLinksForCollection(IPagedList pageList)
+        {
+            var links = new List<LinkDto>();
+
+
+            // self 
+            links.Add(
+             new LinkDto(_urlHelper.Link(nameof(GetAllActors), new
+             {
+                 pagesize = pageList.PageCount,
+                 page = pageList.PageNumber
+             }), "current page", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllActors), new
+            {
+                pagesize = pageList.PageCount,
+                page = 1,
+            }), "first", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllActors), new
+            {
+                pagesize = pageList.PageCount,
+                page = pageList.PageCount,
+            }), "last", "GET"));
+
+            if (!pageList.IsLastPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllActors), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber + 1,
+                }), "next", "GET"));
+            }
+
+            if (!pageList.IsFirstPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllActors), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber - 1,
+                }), "previous", "GET"));
+            }
 
             return links;
         }

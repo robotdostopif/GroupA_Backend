@@ -2,6 +2,7 @@
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +24,18 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Actor>> GetAll(string firstName, bool includeMovies)
+        public async Task<IPagedList<Actor>> GetAll(string firstName, int? page, int pagesize, params string[] including)
         {
-            _logger.LogInformation($"Fetching actors " + (includeMovies ? "including" : "excluding") + "movies.");
-            IQueryable<Actor> query = _context.Actors;
+            _logger.LogInformation($"Fetching all movies from the database.");
+
+            var actors = await GetAll(including);
+
             if (string.IsNullOrEmpty(firstName) == false)
             {
-                query = query.Where(w => w.FirstName == firstName);
+                return actors.Where(w => w.FirstName == firstName).ToList().ToPagedList(page ?? 1, pagesize);
             }
 
-            if (includeMovies)
-            {
-                query = query.Include(p => p.Castings).ThenInclude(m => m.Movie);
-            }
-
-            query = query.OrderBy(y => y.LastName);
-            return await query.ToListAsync();
+            return actors.ToList().ToPagedList(page ?? 1, pagesize);
         }
 
         public async Task<Actor> GetById(int id, bool includeMovies)

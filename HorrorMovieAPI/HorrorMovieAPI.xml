@@ -4,12 +4,12 @@
         <name>HorrorMovieAPI</name>
     </assembly>
     <members>
-        <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetAll(System.String,System.Boolean)">
+        <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetAllActors(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
             <summary>
             Get all actors, possible to filter on first name and include movies
             </summary>
             <param name="firstName"></param>
-            <param name="includeMovies"></param>
+            <param name="including"></param>
             <returns></returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetActorById(System.Int32,System.Boolean)">
