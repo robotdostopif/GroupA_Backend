@@ -113,6 +113,29 @@
         <member name="P:HorrorMovieAPI.Models.ActorDTO.Castings">
             <summary>
             Show which movie(s) the actor starrs in
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetAll(System.String,System.String[])">
+            <summary>
+            Gets all the genres with possibility to include movies
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.GetGenreById(System.Int32,System.Boolean)">
+            <summary>
+            Gets the genre with a specific ID and possibility to include movies
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.DeleteGenreById(System.Int32)">
+            <summary>
+            Detete the genre with a specific ID 
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.UpdateGenreDetails(System.Int32,HorrorMovieAPI.Models.GenreForUpdateDTO)">
+            <summary>
+            Change the genre with a specific ID 
+            </summary>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.CreateGenre(HorrorMovieAPI.Models.GenreDTO)">
+            <summary>
+            Create a new genre
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.Id">
@@ -148,6 +171,76 @@
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.Movies">
             <summary>
             Directed movies
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.MovieDTO">
+            <summary>
+            Represents the data transfer object of a Movie which will be used during GET-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Id">
+            <summary>
+            Primary key of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Genre">
+            <summary>
+            Genre of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Title">
+            <summary>
+            Title of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Length">
+            <summary>
+            The length of the movie in minutes.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Year">
+            <summary>
+            The year which the movie was released.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Director">
+            <summary>
+            The person who directed this movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Castings">
+            <summary>
+            The list of people who acted in the movie.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Dto.MovieForUpdateDTO">
+            <summary>
+            Represents the data transfer object of a Movie which will be used during POST/PUT-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Title">
+            <summary>
+            Title of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.DirectorID">
+            <summary>
+            Foreign key of the director which directed this movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.GenreID">
+            <summary>
+            Foreign key of the genre.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Length">
+            <summary>
+            The length of the movie in minutes.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Year">
+            <summary>
+            The year which the movie was released.
             </summary>
         </member>
     </members>
