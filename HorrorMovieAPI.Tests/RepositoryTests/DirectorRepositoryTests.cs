@@ -45,10 +45,10 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                     }
             };
 
-            _mockContext.Setup(x => x.Directors).ReturnsDbSet(directors);
+            _mockContext.Setup(x => x.Set<Director>()).ReturnsDbSet(directors);
 
             // Act
-            var director = await _mockRepo.GetById(expectedId, false);
+            var director = await _mockRepo.Get<Director>(expectedId);
 
             // Assert
             Assert.Equal(expectedId, director.Id);
@@ -75,7 +75,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                     });
             }
 
-            _mockContext.Setup(x => x.Directors).ReturnsDbSet(directors);
+            _mockContext.Setup(x =>x.Set<Director>()).ReturnsDbSet(directors);
 
             // Act
             var directorsFromRepo = await _mockRepo.GetAll<Director>();

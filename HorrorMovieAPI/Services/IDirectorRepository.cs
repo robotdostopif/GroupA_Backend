@@ -10,6 +10,5 @@ namespace HorrorMovieAPI.Services
     public interface IDirectorRepository : IRepository
     {
         Task<IPagedList<Director>> GetAll(string birthCountry,int? page, int pagesize, bool includeMovies);
-        Task<Director> GetById(int id, bool includeMovies);
     }
 }

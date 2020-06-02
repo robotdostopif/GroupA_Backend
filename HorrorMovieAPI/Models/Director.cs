@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
-    public class Director : IEntity
+    public class Director : BaseEntity
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DOB { get; set; }

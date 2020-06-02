@@ -38,7 +38,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                 FirstName = "Hasse",
                 DOB = DateTime.Parse("1944-01-20")
             };
-            _mockRepo.Setup(repo => repo.GetById(1, true)).ReturnsAsync(director);
+            _mockRepo.Setup(repo => repo.Get<Director>(1)).ReturnsAsync(director);
 
             // Act
             var response = await _directorController.GetDirectorById(1, true);

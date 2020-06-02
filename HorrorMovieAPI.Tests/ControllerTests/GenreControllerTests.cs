@@ -36,7 +36,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                 Id = 1,
                 Name = "Horror alt."
             };
-            _mockRepo.Setup(repo => repo.GetById(1, true)).ReturnsAsync(genre);
+            _mockRepo.Setup(repo => repo.Get<Genre>(1)).ReturnsAsync(genre);
 
             // Act
             var response = await _genresController.GetGenreById(1, true);

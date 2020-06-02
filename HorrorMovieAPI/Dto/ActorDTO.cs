@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HorrorMovieAPI.Models
 {
-    public class ActorDTO : IEntity
+    public class ActorDTO
     {
         /// <summary>
         /// Specific Id

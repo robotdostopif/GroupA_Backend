@@ -1,6 +1,6 @@
 namespace HorrorMovieAPI.Models
 {
-    public interface IEntity
+    public class BaseEntity
     {
         public int Id { get; set; }
     }

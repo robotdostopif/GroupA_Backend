@@ -50,10 +50,10 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                 }
             };
 
-            _mockContext.Setup(x => x.Movies).ReturnsDbSet(movies);
+            _mockContext.Setup(x =>x.Set<Movie>()).ReturnsDbSet(movies);
 
             // Act
-            var movie = await _mockRepo.GetById(expectedId, false,false);
+            var movie = await _mockRepo.Get<Movie>(expectedId);
 
             // Assert
             Assert.Equal(expectedId, movie.Id);

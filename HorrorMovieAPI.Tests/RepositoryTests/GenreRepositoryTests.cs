@@ -40,10 +40,10 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                     }
             };
 
-            _mockContext.Setup(x => x.Genres).ReturnsDbSet(genres);
+            _mockContext.Setup(x =>x.Set<Genre>()).ReturnsDbSet(genres);
 
             // Act
-            var genre = await _mockRepo.GetById(expectedId, false);
+            var genre = await _mockRepo.Get<Genre>(expectedId);
 
             // Assert
             Assert.Equal(expectedId, genre.Id);
@@ -66,10 +66,10 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
                     });
             }
 
-            _mockContext.Setup(x => x.Genres).ReturnsDbSet(genres);
+            _mockContext.Setup(x =>x.Set<Genre>()).ReturnsDbSet(genres);
 
             // Act
-            var genresFromRepo = await _mockRepo.GetAll<Genre>("", "");
+            var genresFromRepo = await _mockRepo.GetAll<Genre>();
 
             // Assert
             Assert.Equal(expectedAmountOfGenres, genresFromRepo.Count());

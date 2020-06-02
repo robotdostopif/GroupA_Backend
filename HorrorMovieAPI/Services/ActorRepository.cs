@@ -37,19 +37,5 @@ namespace HorrorMovieAPI.Services
 
             return actors.ToList().ToPagedList(page ?? 1, pagesize);
         }
-
-        public async Task<Actor> GetById(int id, bool includeMovies)
-        {
-            _logger.LogInformation($"Fetching actor with id {id}, " + (includeMovies ? "including" : "excluding") + "movies.");
-            IQueryable<Actor> query = _context.Actors;
-            query = query.Where(d => d.Id == id);
-
-            if (includeMovies)
-            {
-                query = query.Where(a => a.Id == id).Include(m => m.Castings).ThenInclude(m => m.Movie);
-            }
-
-            return await query.FirstOrDefaultAsync();
-        }
     }
 }

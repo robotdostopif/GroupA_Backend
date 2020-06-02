@@ -6,9 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HorrorMovieAPI.Models
 {
-    public class Movie : IEntity
+    public class Movie : BaseEntity
     {
-        public int Id { get; set; }
         public Genre Genre { get; set; }
         public string Title { get; set; }
         public int Length { get; set; }

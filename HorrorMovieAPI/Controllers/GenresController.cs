@@ -68,7 +68,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var result = await _repository.GetById(id, includeMovies);
+                var result = await _repository.Get<Genre>(id);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var genreFromRepo = await _repository.GetById(id, false);
+                var genreFromRepo = await _repository.Get<Genre>(id);
 
                 if (genreFromRepo == null)
                 {

@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HorrorMovieAPI.Models
 {
-    public class Casting : IEntity
+    public class Casting : BaseEntity
     {
-        public int Id { get; set; }
         public string Character { get; set; }
         public Movie Movie { get; set; }
         public Actor Actor { get; set; }
