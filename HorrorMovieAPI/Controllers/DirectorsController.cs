@@ -29,14 +29,15 @@ namespace HorrorMovieAPI.Controllers
             _mapper = mapper;
             _urlHelper = urlHelper;
         }
+
         /// <summary>
-        /// Gets all the directors with possible filtering by birthcountry and include of directed movies
+        /// Get all directors from the database.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pagesize"></param>
-        /// <param name="birthCountry"></param>
+        /// <param name="page">Page refers to which pagenumber will be displayed.</param>
+        /// <param name="pagesize">Pagesize refers to objects per page.</param>
+        /// <param name="birthCountry">Filter directors by birthcountry</param>
         /// <param name="includeMovies"></param>
-        /// <returns></returns>
+        /// <returns>A list of Directors that may or may not have been filtered by the user.</returns>
         [HttpGet(Name = "GetAllDirectors")]
         public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page,int pagesize=3, string birthCountry = "", bool includeMovies = false)
         {
@@ -58,12 +59,13 @@ namespace HorrorMovieAPI.Controllers
             }
             
         }
+
         /// <summary>
-        /// Get a director by a specific id and possible include of directed movies
+        /// Get a director by its Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="including"></param>
-        /// <returns></returns>
+        /// <param name="id">Director primary key Id which needs to be valid.</param>
+        /// <param name="including">Properties which will be included.</param>
+        /// <returns>A Director object which matched given Id.</returns>
         [HttpGet("{id}", Name ="GetDirectorById")]
         public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, [FromQuery]string[] including = null)
         {
@@ -79,39 +81,41 @@ namespace HorrorMovieAPI.Controllers
             }
             
         }
+
         /// <summary>
-        /// Delete a director by unique id
+        /// Create a director by using its Id and DirectorForUpdateDTO containing its data.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("{id}", Name ="DeleteDirectorById")]
-        public async Task<IActionResult> DeleteDirectorById(int id)
+        /// <param name="directorDto">DTO of a Director object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 201 (Created) if the Movie was successfully created.</returns>
+        [HttpPost(Name = "CreateDirector")]
+        public async Task<IActionResult> CreateDirector([FromBody] DirectorForUpdateDTO directorDto)
         {
             try
             {
-                var director = await _repository.Get<Director>(id);
+                var director = _mapper.Map<Director>(directorDto);
 
-                if (director == null)
+                var directorFromRepo = await _repository.Add(director);
+
+                if (directorFromRepo != null)
                 {
-                    return BadRequest($"Could not delete director. Director with Id {id} was not found.");
+                    return CreatedAtAction(nameof(GetDirectorById), new { id = director.Id }, director);
                 }
-                await _repository.Delete<Director>(id);
+                return BadRequest("Failed to create director.");
 
-                return NoContent();
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the director. Exception thrown when attempting to delete data from the database: {e.Message}");
+                    $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
             }
-
         }
+
         /// <summary>
-        /// Update directordetails by unique id
+        /// Update a director by using its Id and DirectorForUpdateDTO containing its updated data.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="directorForUpdateDto"></param>
-        /// <returns></returns>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <param name="directorForUpdateDto">DTO of a Director object which contains updated data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
         [HttpPut("{id}", Name = "UpdateDirectorDetails")]
         public async Task<IActionResult> UpdateDirectorDetails(int id, [FromBody] DirectorForUpdateDTO directorForUpdateDto)
         {
@@ -135,32 +139,33 @@ namespace HorrorMovieAPI.Controllers
                     $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
+
         /// <summary>
-        /// Post a new director
+        /// Delete a movie by using its Id.
         /// </summary>
-        /// <param name="directorDto"></param>
-        /// <returns></returns>
-        [HttpPost(Name = "CreateDirector")]
-        public async Task<IActionResult> CreateDirector([FromBody] DirectorForUpdateDTO directorDto)
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <returns>Returns status code 204 (NoContent) if the Director was successfully deleted.</returns>
+        [HttpDelete("{id}", Name = "DeleteDirectorById")]
+        public async Task<IActionResult> DeleteDirectorById(int id)
         {
             try
             {
-                var director = _mapper.Map<Director>(directorDto);
+                var director = await _repository.Get<Director>(id);
 
-                var directorFromRepo = await _repository.Add(director);
-
-                if (directorFromRepo != null)
+                if (director == null)
                 {
-                    return CreatedAtAction(nameof(GetDirectorById), new { id = director.Id }, director);
+                    return BadRequest($"Could not delete director. Director with Id {id} was not found.");
                 }
-                return BadRequest("Failed to create director.");
+                await _repository.Delete<Director>(id);
 
+                return NoContent();
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
+                    $"Failed to delete the director. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
+
         }
 
         private dynamic ExpandSingleItem(Director director)

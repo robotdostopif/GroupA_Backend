@@ -36,11 +36,15 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Gets all the genres with possibility to include movies
+        /// Gets all genres from the database.
         /// </summary>
-
+        /// <param name="page">Page refers to which pagenumber will be displayed.</param>
+        /// <param name="pagesize">Pagesize refers to objects per page.</param>
+        /// <param name="genre">Filter genres by genrename.</param>
+        /// <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
+        /// <returns>A list of Actors that may or may not have been filtered by the user.</returns>
         [HttpGet(Name="GetAll")]
-        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page,int pagesize=3, [FromQuery]string genre = "", [FromQuery] string[] including = null)
+        public async Task<ActionResult<GenreDTO[]>> GetAll(int? page, int pagesize=3, [FromQuery]string genre = "", [FromQuery] string[] including = null)
         {
             try
             {
@@ -60,10 +64,12 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the genre with a specific ID and possibility to include other properties
+        /// Get a genre by its Id.
         /// </summary>
+        /// <param name="id">Genre primary key Id which needs to be valid.</param>
+        /// <param name="including">Properties which will be included.</param>
+        /// <returns>A Genre object which matched given Id.</returns>
         [HttpGet("{id}", Name = "GetGenreById")]
-
         public async Task<ActionResult<GenreDTO>> GetGenreById(int id, [FromQuery] string[] including = null)
         {
             try
@@ -77,33 +83,40 @@ namespace HorrorMovieAPI.Controllers
                 $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
             }
         }
+
         /// <summary>
-        /// Detete the genre with a specific ID 
+        /// Create a genre by using its Id and GenreForUpdateDTO containing its data.
         /// </summary>
-        [HttpDelete("{id}", Name = "DeleteGenreById")]
-        public async Task<ActionResult> DeleteGenreById(int id)
+        /// <param name="genreDTO">DTO of a Genre object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 201 (Created) if the Genre was successfully created.</returns>
+        [HttpPost(Name = "CreateGenre")]
+        public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
         {
             try
             {
-                var genre = await _repository.Get<Genre>(id);
-                if (genre == null)
-                {
-                    return BadRequest($"Could not delete genre. Genre with Id {id} was not found.");
-                }
-                await _repository.Delete<Genre>(id);
+                var genre = _mapper.Map<Genre>(genreDTO);
+                var genreFromRepo = await _repository.Add(genre);
 
-                return NoContent();
+                if (genreFromRepo != null)
+                {
+                    return CreatedAtAction(nameof(GetGenreById), new { id = genre.Id }, genre);
+                }
+                return BadRequest("Failed to create genre.");
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
+                $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}");
             }
+
         }
 
         /// <summary>
-        /// Change the genre with a specific ID 
+        /// Update a genre by using its Id and GenreForUpdateDTO containing its updated data.
         /// </summary>
+        /// <param name="id">Genre primary key Id which needs to be valid.</param>
+        /// <param name="genreForUpdateDto">DTO of an Genre object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 204 (NoContent) if the Genre was successfully updated.</returns>
         [HttpPut("{id}", Name = "UpdateGenreDetails")]
         public async Task<ActionResult> UpdateGenreDetails(int id, [FromBody] GenreForUpdateDTO genreForUpdateDto)
         {
@@ -128,30 +141,31 @@ namespace HorrorMovieAPI.Controllers
                 $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}");
             }
         }
-        /// <summary>
-        /// Create a new genre
-        /// </summary>
-        [HttpPost(Name = "CreateGenre")]
 
-        public async Task<ActionResult> CreateGenre([FromBody] GenreDTO genreDTO)
+        /// <summary>
+        /// Delete a genre by using its Id.
+        /// </summary>
+        /// <param name="id">Genre primary key Id which needs to be valid.</param>
+        /// <returns>Returns status code 204 (NoContent) if the Genre was successfully deleted.</returns>
+        [HttpDelete("{id}", Name = "DeleteGenreById")]
+        public async Task<ActionResult> DeleteGenreById(int id)
         {
             try
             {
-                var genre = _mapper.Map<Genre>(genreDTO);
-                var genreFromRepo = await _repository.Add(genre);
-
-                if (genreFromRepo != null)
+                var genre = await _repository.Get<Genre>(id);
+                if (genre == null)
                 {
-                    return CreatedAtAction(nameof(GetGenreById), new { id = genre.Id }, genre);
+                    return BadRequest($"Could not delete genre. Genre with Id {id} was not found.");
                 }
-                return BadRequest("Failed to create genre.");
+                await _repository.Delete<Genre>(id);
+
+                return NoContent();
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}");
+                $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
-
         }
         private dynamic ExpandSingleItem(Genre genre)
         {

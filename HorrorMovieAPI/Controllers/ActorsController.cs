@@ -30,13 +30,13 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Get all actors, possible to filter on first name and include movies
+        /// Get all actors from the database.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="pagesize"></param>
-        /// <param name="firstName"></param>
-        /// <param name="including"></param>
-        /// <returns></returns>
+        /// <param name="page">Page refers to which pagenumber will be displayed.</param>
+        /// <param name="pagesize">Pagesize refers to objects per page.</param>
+        /// <param name="firstName">Filter actors by firstname.</param>
+        /// <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
+        /// <returns>A list of Actors that may or may not have been filtered by the user.</returns>
         [HttpGet(Name = "GetAllActors")]
         public async Task<ActionResult<ActorDTO[]>> GetAllActors(int? page, int pagesize = 3, [FromQuery]string firstName = "", [FromQuery]string[] including = null)
         {
@@ -59,11 +59,11 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Get actor by Id, possible to filter on movies
+        /// Get an actor by its Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="including"></param>
-        /// <returns></returns>
+        /// <param name="id">Actor primary key Id which needs to be valid.</param>
+        /// <param name="including">Properties which will be included.</param>
+        /// <returns>An Actor object which matched given Id.</returns>
         [HttpGet("{id}", Name = "GetActorById")]
         public async Task<ActionResult<ActorDTO>> GetActorById(int id, [FromQuery]string[] including = null)
         {
@@ -80,38 +80,37 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Delete actor by Id
+        /// Create an actor by using its Id and ActorForUpdateDTO containing its data.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("{id}", Name = "DeleteActorById")]
-        public async Task<IActionResult> DeleteActorById(int id)
+        /// <param name="actorDTO">DTO of an Actor object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 201 (Created) if the Actor was successfully created.</returns>
+        [HttpPost(Name = "CreateActor")]
+        public async Task<IActionResult> CreateActor([FromBody] ActorDTO actorDTO)
         {
             try
             {
-                var actor = await _repository.Get<Actor>(id);
+                var actor = _mapper.Map<Actor>(actorDTO);
 
-                if (actor == null)
+                var actorFromRepo = await _repository.Add(actor);
+                if (actorFromRepo != null)
                 {
-                    return NotFound($"Could not delete actor. Actor with Id {id} was not found.");
+                    return CreatedAtAction(nameof(GetActorById), new { id = actor.Id }, actor);
                 }
-                await _repository.Delete<Actor>(id);
-
-                return NoContent();
+                return BadRequest("Failed to create actor.");
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the actor. Exception thrown when attempting to delete data from the database: {e.Message}");
+                    $"Failed to create the actor. Exception thrown when attempting to add data to the database: {e.Message}");
             }
         }
 
         /// <summary>
-        /// Update actor by Id
+        /// Update an actor by using its Id and ActorForUpdateDTO containing its updated data.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="actorForUpdateDto"></param>
-        /// <returns></returns>
+        /// <param name="id">Actor primary key Id which needs to be valid.</param>
+        /// <param name="actorForUpdateDto">DTO of an Actor object which contains its data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 204 (NoContent) if the Actor was successfully updated.</returns>
         [HttpPut("{id}", Name = "UpdateActorDetails")]
         public async Task<IActionResult> UpdateActorDetails(int id, [FromBody] ActorForUpdateDTO actorForUpdateDto)
         {
@@ -137,28 +136,29 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Create actor
+        /// Delete an actor by using its Id.
         /// </summary>
-        /// <param name="actorDTO"></param>
-        /// <returns></returns>
-        [HttpPost(Name = "CreateActor")]
-        public async Task<IActionResult> CreateActor([FromBody] ActorDTO actorDTO)
+        /// <param name="id">Actor primary key Id which needs to be valid.</param>
+        /// <returns>Returns status code 204 (NoContent) if the Actor was successfully deleted.</returns>
+        [HttpDelete("{id}", Name = "DeleteActorById")]
+        public async Task<IActionResult> DeleteActorById(int id)
         {
             try
             {
-                var actor = _mapper.Map<Actor>(actorDTO);
+                var actor = await _repository.Get<Actor>(id);
 
-                var actorFromRepo = await _repository.Add(actor);
-                if (actorFromRepo != null)
+                if (actor == null)
                 {
-                    return CreatedAtAction(nameof(GetActorById), new { id = actor.Id }, actor);
+                    return NotFound($"Could not delete actor. Actor with Id {id} was not found.");
                 }
-                return BadRequest("Failed to create actor.");
+                await _repository.Delete<Actor>(id);
+
+                return NoContent();
             }
             catch (Exception e)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to create the actor. Exception thrown when attempting to add data to the database: {e.Message}");
+                    $"Failed to delete the actor. Exception thrown when attempting to delete data from the database: {e.Message}");
             }
         }
 

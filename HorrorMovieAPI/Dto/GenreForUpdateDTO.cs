@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
+    /// <summary>
+    /// Represents the data transfer object of a Genre which will be used during POST/PUT-requests.
+    /// </summary>
     public class GenreForUpdateDTO
     {
-        public int Id { get; set; }
+        /// <summary>
+        /// The name of the genre.
+        /// </summary>
         public string Name { get; set; }
 
 

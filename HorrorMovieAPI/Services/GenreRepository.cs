@@ -13,12 +13,10 @@ namespace HorrorMovieAPI.Services
 {
     public class GenreRepository : Repository, IGenreRepository
     {
-        private readonly HorrorContext _context;
         private readonly ILogger<GenreRepository> _logger;
 
         public GenreRepository(HorrorContext context, ILogger<GenreRepository> logger) : base(context, logger)
         {
-            _context = context;
             _logger = logger;
         }
 
