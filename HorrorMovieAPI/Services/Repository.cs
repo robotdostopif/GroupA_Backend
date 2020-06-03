@@ -44,12 +44,6 @@ namespace HorrorMovieAPI.Services
             return entity;
         }
 
-        public async Task<T> Get<T>(int id) where T : class
-        {
-            _logger.LogInformation($"Getting object with id {id}");
-            return await _context.Set<T>().FindAsync(id);
-        }
-
         public async Task<bool> Save()
         {
             _logger.LogInformation("Saving changes");
@@ -67,7 +61,7 @@ namespace HorrorMovieAPI.Services
         public async Task<IList<T>> GetAll<T> (params string[] including) where T : class
         {
             _logger.LogInformation($"Fetching entity list of type {typeof(T)} from the database.");
-            var query = _context.Set<T>().AsQueryable();
+            var query = _context.Set<T>().AsEnumerable().AsQueryable();
             if (including != null)
                 including.ToList().ForEach(include =>
                 {
@@ -76,6 +70,21 @@ namespace HorrorMovieAPI.Services
                 });
 
             return await query.ToListAsync();
+        }
+
+        public async Task<T> Get<T> (int id, params string[] including) where T : BaseEntity
+        {
+            _logger.LogInformation($"Fetching entity with id {id} of type {typeof(T)} from the database.");
+            var query = _context.Set<T>().Where(x => x.Id == id).AsQueryable();
+
+            if (including != null)
+                including.ToList().ForEach(include =>
+                {
+                    if (include != null)
+                        query = query.Include(include);
+                });
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
-    public class DirectorDTO : IEntity
+    public class DirectorDTO
     {
         /// <summary>
         /// Specific ID

@@ -37,8 +37,6 @@ namespace HorrorMovieAPI.Tests.ControllerTests
             var genre = new Genre { Id = 1, Name = "horror" };
             List<Movie> movies = new List<Movie>()
             {
-
-
                 new Movie() {
                     Id = 1,
                     Genre=genre,
@@ -50,7 +48,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                     Title="horrormovie 2"
                  },
             };
-            _mockRepo.Setup(repo => repo.GetById(2,false,false));
+            _mockRepo.Setup(repo => repo.GetAll<Movie>()).ReturnsAsync(movies);
             var result = await _movieController.GetAll();
 
             // Assert

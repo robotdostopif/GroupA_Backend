@@ -56,15 +56,14 @@ namespace HorrorMovieAPI.Controllers
         /// Get a movie by its Id.
         /// </summary>
         /// <param name="id">Movie primary key Id which needs to be valid.</param>
-        /// <param name="includeActors">Include list of Actors in the Movie.</param>
-        /// <param name="includeDirector">Include who directed the Movie.</param>
+        /// <param name="including">Properties which will be included.</param>
         /// <returns>A Movie object which matched given Id.</returns>
         [HttpGet("{id}", Name = "GetMovieById")]
-        public async Task<ActionResult<MovieDTO>> GetMovieById(int id, bool includeActors = false, bool includeDirector = false)
+        public async Task<ActionResult<MovieDTO>> GetMovieById(int id, [FromQuery] string[] including = null)
         {
             try
             {
-                var result = await _repository.GetById(id, includeActors, includeDirector);
+                var result = await _repository.Get<Movie>(id, including);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
@@ -113,7 +112,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var movieFromRepo = await _repository.GetById(id,false,false);
+                var movieFromRepo = await _repository.Get<Movie>(id);
                 if (movieFromRepo == null)
                 {
                     return NotFound($"Could not find the movie with the id {id}");

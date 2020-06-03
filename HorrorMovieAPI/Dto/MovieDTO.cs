@@ -9,7 +9,7 @@ namespace HorrorMovieAPI.Models
     /// <summary>
     /// Represents the data transfer object of a Movie which will be used during GET-requests.
     /// </summary>
-    public class MovieDTO : IEntity
+    public class MovieDTO
     {
         /// <summary>
         /// Primary key of the movie.

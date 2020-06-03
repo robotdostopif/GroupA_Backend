@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace HorrorMovieAPI.Models
 {
-    public class GenreDTO : IEntity
+    public class GenreDTO
     {
         public int Id { get; set; }
         /// <summary>

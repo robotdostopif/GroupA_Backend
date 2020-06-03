@@ -62,14 +62,14 @@ namespace HorrorMovieAPI.Controllers
         /// Get actor by Id, possible to filter on movies
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="includeMovies"></param>
+        /// <param name="including"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetActorById")]
-        public async Task<ActionResult<ActorDTO>> GetActorById(int id, bool includeMovies = false)
+        public async Task<ActionResult<ActorDTO>> GetActorById(int id, [FromQuery]string[] including = null)
         {
             try
             {
-                var result = await _repository.GetById(id, includeMovies);
+                var result = await _repository.Get<Actor>(id, including);
                 return Ok(ExpandSingleItem(result));
             }
             catch (Exception e)
@@ -89,7 +89,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var actor = await _repository.GetById(id, false);
+                var actor = await _repository.Get<Actor>(id);
 
                 if (actor == null)
                 {
@@ -117,7 +117,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var actorFromRepo = await _repository.GetById(id, false);
+                var actorFromRepo = await _repository.Get<Actor>(id);
 
                 if (actorFromRepo == null)
                 {

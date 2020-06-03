@@ -44,18 +44,5 @@ namespace HorrorMovieAPI.Services
             await query.ToListAsync();
             return query.ToPagedList(page ?? 1, pagesize);
         }
-
-        public async Task<Director> GetById(int id, bool includeMovies)
-        {
-            _logger.LogInformation($"Fetching director with the id: {id}.");
-            var query= await _context.Directors.Where(d => d.Id == id).FirstOrDefaultAsync();
-
-            if (includeMovies)
-            {
-                query = await _context.Directors.Where(d => d.Id == id).Include(m=>m.Movies).FirstOrDefaultAsync();
-            }
-          
-            return query;
-        }
     }
 }
