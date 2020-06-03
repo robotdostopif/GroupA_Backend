@@ -49,7 +49,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
                  },
             };
             _mockRepo.Setup(repo => repo.GetAll<Movie>()).ReturnsAsync(movies);
-            var result = await _movieController.GetAll();
+            var result = await _movieController.GetAllMovies(1);
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(result.Result);
@@ -79,7 +79,7 @@ namespace HorrorMovieAPI.Tests.ControllerTests
             _mockRepo.Setup(repo => repo.GetAll<Movie>("")).ReturnsAsync(movies);
 
             // Act
-            var response = await _movieController.GetAll("");
+            var response = await _movieController.GetAllMovies(1);
 
             // Assert
             Assert.IsAssignableFrom<ObjectResult>(response.Result);

@@ -209,19 +209,19 @@ namespace HorrorMovieAPI.Controllers
             links.Add(
              new LinkDto(_urlHelper.Link(nameof(GetAll), new
              {
-                 pagecount = pageList.PageCount,
+                 pagesize = pageList.PageCount,
                  page = pageList.PageNumber
              }), "current page", "GET"));
 
             links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
             {
-                pagecount = pageList.PageCount,
+                pagesize = pageList.PageCount,
                 page = 1,
             }), "first", "GET"));
 
             links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
             {
-                pagecount = pageList.PageCount,
+                pagesize = pageList.PageCount,
                 page = pageList.PageCount,
             }), "last", "GET"));
 
@@ -229,7 +229,7 @@ namespace HorrorMovieAPI.Controllers
             {
                 links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
                 {
-                    pagecount = pageList.PageCount,
+                    pagesize = pageList.PageCount,
                     page = pageList.PageNumber + 1,
                 }), "next", "GET"));
             }
@@ -238,7 +238,7 @@ namespace HorrorMovieAPI.Controllers
             {
                 links.Add(new LinkDto(_urlHelper.Link(nameof(GetAll), new
                 {
-                    pagecount = pageList.PageCount,
+                    pagesize = pageList.PageCount,
                     page = pageList.PageNumber - 1,
                 }), "previous", "GET"));
             }

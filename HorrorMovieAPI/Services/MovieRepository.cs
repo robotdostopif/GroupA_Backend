@@ -6,6 +6,7 @@ using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
+using PagedList;
 
 namespace HorrorMovieAPI.Services
 {
@@ -18,7 +19,7 @@ namespace HorrorMovieAPI.Services
             _logger = logger;
         }
 
-        public async Task<List<Movie>> GetAll(string movieTitle, int exactYear, int afterYear, params string[] including)
+        public async Task<IPagedList<Movie>> GetAll(int? page, int pagesize, string movieTitle, int exactYear, int afterYear, params string[] including)
         {
             _logger.LogInformation($"Fetching all movies from the database.");
             var movies = await GetAll<Movie>(including);
@@ -31,8 +32,10 @@ namespace HorrorMovieAPI.Services
             {
                 movies = movies.Where(m => m.Year >= afterYear).ToList();
             }
-                              
-            return await Task.FromResult(movies.Where(m => m.Title.Contains(movieTitle)).ToList());
+            
+            movies = movies.Where(m => m.Title.Contains(movieTitle)).ToList();
+
+            return movies.ToPagedList(page ?? 1, pagesize);      
         }
     }
 }
