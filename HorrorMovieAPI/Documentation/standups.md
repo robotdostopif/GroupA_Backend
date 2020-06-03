@@ -2,6 +2,89 @@
 
 # 2020-06-02
 
+**Generalsekreterare:** Fredrika
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-219
+
+* SKRAC-229
+
+* SKRAC-213
+
+* SKRAC-205
+
+* Kommentar: Färdigställt swagger-dokumentation och XML-kommentarer (SKRAC-219). 
+
+  Pagination för ActorController (SKRAC-213) är klar, även autentiseringen för ActorController  (SKRAC-229). Även lagt till Dynamic includes för actor getAllActor().
+
+  
+
+Sebastian:
+
+* SKRAC-212.
+* Satt med pagination för GenreController som nu är klar.
+
+
+Aron:
+
+* SKRAC-214
+* Pagination för DirectorController, jag och Nor satt med arvshierarkin för det generiska repositoriet. 
+
+Nor:
+
+* SKRAC-231
+* SKRAC-215
+* SKRAC-216
+* SKRAC-232
+* SKRAC-233
+* Ändrade implementationen av det generiska repositoriet (Tillsammans med Aron), löste även testerna (repository-testerna). Tog även bort alla varningar för XML-kommentarerna. Satt också med att fixa generisk GetByID() med dynamic includes. 
+
+Gemensamt:
+
+* Vi satt tillsammans och implementerade paginering, det höll vi på med ända fram till lunch. 
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* Kommentar: Kolla lite på relaterade filmer.
+
+Sebastian:
+
+* SKRAC-208
+* Kommentar:  Göra Dynamic include på Director GetAll()
+
+
+Nor:
+
+* SKRAC-211
+
+* Kommentar: Pagination för MovieController, dubbelkolla alla XML-kommentarer.
+
+  
+
+Aron:
+
+* Kommentar: Kolla på logger i dataseed? kolla generellt på dataseeding, se om man kan få in fler data från den. 
+
+
+
+**Göra gemensamt**: 
+Städa koden.
+Kolla så att alla kommentarer följer samma struktur. Kolla så att alla DTO:er visar relevant information.
+Få bort package-referens-warnings. 
+Kolla på att fixa relaterade filmer till en film.
+Kanske fixa fler filtreringar på requests??
+
+
+
+
+
+# 2020-06-02
+
 **Generalsekreterare:** Nor
 
 ### Gjort färdigt tills idag*
