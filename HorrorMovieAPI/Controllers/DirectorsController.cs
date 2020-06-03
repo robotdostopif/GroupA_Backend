@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Swashbuckle.Swagger.Annotations;
 using PagedList;
 
 namespace HorrorMovieAPI.Controllers

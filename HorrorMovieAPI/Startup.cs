@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.Swagger;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
