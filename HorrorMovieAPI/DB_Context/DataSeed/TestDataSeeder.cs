@@ -9,9 +9,11 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
     public class TestDataSeeder
     {
         private readonly HorrorContext _context;
-        public TestDataSeeder(HorrorContext context)
+        private readonly ILogger<TestDataSeeder> _logger;
+        public TestDataSeeder(HorrorContext context, ILogger<TestDataSeeder> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public void SeedData()
@@ -42,7 +44,7 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
                     }
                     catch (Exception e)
                     {
-                        Debug.WriteLine($"Something went wrong when loading data from csv. {e.Message}");
+                        _logger.LogInformation($"Something went wrong when loading data from csv. {e.Message}");
                     }
                 }
                 _context.SaveChanges();
