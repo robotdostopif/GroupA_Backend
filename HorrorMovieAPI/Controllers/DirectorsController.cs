@@ -35,14 +35,14 @@ namespace HorrorMovieAPI.Controllers
         /// <param name="page"></param>
         /// <param name="pagesize"></param>
         /// <param name="birthCountry"></param>
-        /// <param name="includeMovies"></param>
+        /// <param name="including"></param>
         /// <returns></returns>
         [HttpGet(Name = "GetAllDirectors")]
-        public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page,int pagesize=3, string birthCountry = "", bool includeMovies = false)
+        public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page,int pagesize=3, string birthCountry = "", [FromQuery]string[] including = null )
         {
             try
             {
-                var results = await _repository.GetAll(birthCountry,page, pagesize, includeMovies);
+                var results = await _repository.GetAll(birthCountry,page, pagesize, including);
                 var links = CreateLinksForCollection(results);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(new

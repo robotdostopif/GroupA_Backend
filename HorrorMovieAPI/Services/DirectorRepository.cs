@@ -19,29 +19,24 @@ namespace HorrorMovieAPI.Services
             _context = context;
             _logger = logger;
         }
-        public async Task<IPagedList<Director>> GetAll(string birthCountry, int? page, int pagesize, bool includeMovies)
+        public async Task<IPagedList<Director>> GetAll(string birthCountry, int? page, int pagesize, params string[] including)
         {
-            IQueryable<Director> query = _context.Directors;
-
+            var query = await GetAll<Director>(including);
             _logger.LogInformation("Fetching all directors.");
 
             if (string.IsNullOrEmpty(birthCountry) == false)
             {
                 _logger.LogInformation("Fetching with BirthCountry specified");
-                query = query.Where(d => d.BirthCountry == birthCountry);
+                query = query.Where(d => d.BirthCountry == birthCountry).ToList();
             }
             else
             {
                 _logger.LogInformation("Fetching with BirthCountry NOT specified");
             }
 
-            if (includeMovies)
-            {
-                query = query.Include(m => m.Movies);
-            }
+          
 
-            query = query.OrderBy(d => d.LastName);
-            await query.ToListAsync();
+            query = query.OrderBy(d => d.LastName).ToList();
             return query.ToPagedList(page ?? 1, pagesize);
         }
     }
