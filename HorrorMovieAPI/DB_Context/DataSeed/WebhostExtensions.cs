@@ -18,9 +18,9 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
                 var services = scope.ServiceProvider;
                 var context = services.GetService<HorrorContext>();
                 var logger = services.GetService<ILogger<TestDataSeeder>>();
-                    new TestDataSeeder(context,logger).SeedData();
                 if (!context.Movies.Any())
                 {
+                    new TestDataSeeder(context,logger).SeedData();
                 }
             }
 
