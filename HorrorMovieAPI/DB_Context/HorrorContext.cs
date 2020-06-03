@@ -29,7 +29,11 @@ namespace HorrorMovieAPI.DB_Context
             {
                 Id = 1,
                 GenreId = 1,
-                Title = "Halloween",
+                Title = "Halloween",  
+                BudgetInUsd=2000000,
+                Language="English",
+                Country="Usa",
+                Rating=7.6,
                 Length = 91,
                 Year = 1978,
                 DirectorId = 1
@@ -38,6 +42,10 @@ namespace HorrorMovieAPI.DB_Context
                 Id = 2,
                 GenreId = 2,
                 Title = "The Conjuring",
+                BudgetInUsd=30000000,
+                Language = "English",
+                Country = "Usa",
+                Rating = 8.2,
                 Length = 112,
                 Year = 2013,
                 DirectorId = 2

@@ -329,6 +329,26 @@
             The year which the movie was released.
             </summary>
         </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Rating">
+            <summary>
+            The curent rating of the movie .
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Country">
+            <summary>
+            The country the movie origine from.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.Language">
+            <summary>
+            The original Language of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.MovieDTO.BudgetInUsd">
+            <summary>
+            The budget for the movie in Us dollars.
+            </summary>
+        </member>
         <member name="P:HorrorMovieAPI.Models.MovieDTO.Director">
             <summary>
             The person who directed this movie.
@@ -447,6 +467,26 @@
         <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Year">
             <summary>
             The year which the movie was released.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Rating">
+            <summary>
+            The curent rating of the movie .
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Country">
+            <summary>
+            The country the movie origine from.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.Language">
+            <summary>
+            The original Language of the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.MovieForUpdateDTO.BudgetInUsd">
+            <summary>
+            The budget for the movie in Us dollars.
             </summary>
         </member>
     </members>

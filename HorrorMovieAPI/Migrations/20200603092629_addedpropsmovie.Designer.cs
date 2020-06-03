@@ -4,14 +4,16 @@ using HorrorMovieAPI.DB_Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HorrorMovieAPI.Migrations
 {
     [DbContext(typeof(HorrorContext))]
-    partial class HorrorContextModelSnapshot : ModelSnapshot
+    [Migration("20200603092629_addedpropsmovie")]
+    partial class addedpropsmovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

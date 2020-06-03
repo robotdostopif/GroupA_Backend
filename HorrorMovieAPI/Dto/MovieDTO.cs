@@ -32,6 +32,22 @@ namespace HorrorMovieAPI.Models
         /// </summary>
         public int Year { get; set; }
         /// <summary>
+        /// The curent rating of the movie .
+        /// </summary>
+        public double Rating { get; set; }
+        /// <summary>
+        /// The country the movie origine from.
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        /// The original Language of the movie.
+        /// </summary>
+        public string Language { get; set; }
+        /// <summary>
+        /// The budget for the movie in Us dollars.
+        /// </summary>
+        public int BudgetInUsd { get; set; }
+        /// <summary>
         /// The person who directed this movie.
         /// </summary>
         public DirectorDTO Director { get; set; }
