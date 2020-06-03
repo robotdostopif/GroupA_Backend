@@ -5,34 +5,37 @@ using System.Threading.Tasks;
 
 namespace HorrorMovieAPI.Models
 {
+    /// <summary>
+    /// Represents the data transfer object of a Director which will be used during GET-requests.
+    /// </summary>
     public class DirectorDTO
     {
         /// <summary>
-        /// Specific ID
+        /// Primary key of the Director.
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// First name of the Director
+        /// First name of the Director.
         /// </summary>
         public string FirstName { get; set; }
         /// <summary>
-        /// Last name of the Director
+        /// Last name of the Director.
         /// </summary>
         public string LastName { get; set; }
         /// <summary>
-        /// Date of birth of the Director
+        /// Date of birth of the Director.
         /// </summary>
         public DateTime DOB { get; set; }
         /// <summary>
-        /// Hometown of the Director
+        /// The town where the actor was born.
         /// </summary>
         public string BirthTown { get; set; }
         /// <summary>
-        /// Homecountry of the Director
+        /// The country where the actor was born.
         /// </summary>
         public string BirthCountry { get; set; }
         /// <summary>
-        /// Directed movies
+        /// Directed movies.
         /// </summary>
         public ICollection<MovieDTO> Movies { get; set; }
     }

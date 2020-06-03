@@ -74,64 +74,6 @@ namespace HorrorMovieAPI.Controllers
         }
 
         /// <summary>
-        /// Delete a movie by using its Id.
-        /// </summary>
-        /// <param name="id">Movie primary key Id which needs to be valid.</param>
-        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully deleted.</returns>
-        [HttpDelete("{id}", Name = "DeleteMovieById")]
-        public async Task<ActionResult> DeleteMovieById(int id)
-        {
-            try
-            {
-                var movie = await _repository.Get<Movie>(id);
-
-                if (movie == null)
-                {
-                    return NotFound($"Could not delete movie. Movie with Id {id} was not found.");
-                }
-                await _repository.Delete<Movie>(id);
-
-                return NoContent();
-            }
-
-            catch (Exception e)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the movie with the id: {id}. Exception thrown: {e.Message}");
-            }
-        }
-
-        /// <summary>
-        /// Update a movie by using its Id and MovieForUpdateDTO containing its updated data.
-        /// </summary>
-        /// <param name="id">Movie primary key Id which needs to be valid.</param>
-        /// <param name="movieDTO">DTO of a Movie object which contains updated data (refer to schema-documentation for more information).</param>
-        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
-        [HttpPut("{id}", Name = "UpdateMovieDetails")]
-        public async Task<ActionResult> UpdateMovieDetails(int id, MovieForUpdateDTO movieDTO)
-        {
-            try
-            {
-                var movieFromRepo = await _repository.Get<Movie>(id);
-                if (movieFromRepo == null)
-                {
-                    return NotFound($"Could not find the movie with the id {id}");
-                }
-
-                var movieForUpdate = _mapper.Map(movieDTO, movieFromRepo);
-
-                await _repository.Update(movieForUpdate);
-        
-                return NoContent();
-            }
-
-            catch (Exception e)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
-            }
-        }
-
-        /// <summary>
         /// Create a movie by using its Id and MovieForUpdateDTO containing its data.
         /// </summary>
         /// <param name="movieToCreateDTO">DTO of a Movie object which contains its data (refer to schema-documentation for more information).</param>
@@ -173,6 +115,64 @@ namespace HorrorMovieAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Update a movie by using its Id and MovieForUpdateDTO containing its updated data.
+        /// </summary>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <param name="movieDTO">DTO of a Movie object which contains updated data (refer to schema-documentation for more information).</param>
+        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
+        [HttpPut("{id}", Name = "UpdateMovieDetails")]
+        public async Task<ActionResult> UpdateMovieDetails(int id, MovieForUpdateDTO movieDTO)
+        {
+            try
+            {
+                var movieFromRepo = await _repository.Get<Movie>(id);
+                if (movieFromRepo == null)
+                {
+                    return NotFound($"Could not find the movie with the id {id}");
+                }
+
+                var movieForUpdate = _mapper.Map(movieDTO, movieFromRepo);
+
+                await _repository.Update(movieForUpdate);
+        
+                return NoContent();
+            }
+
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+            }
+        }     
+
+        /// <summary>
+        /// Delete a movie by using its Id.
+        /// </summary>
+        /// <param name="id">Movie primary key Id which needs to be valid.</param>
+        /// <returns>Returns status code 204 (NoContent) if the Movie was successfully deleted.</returns>
+        [HttpDelete("{id}", Name = "DeleteMovieById")]
+        public async Task<ActionResult> DeleteMovieById(int id)
+        {
+            try
+            {
+                var movie = await _repository.Get<Movie>(id);
+
+                if (movie == null)
+                {
+                    return NotFound($"Could not delete movie. Movie with Id {id} was not found.");
+                }
+                await _repository.Delete<Movie>(id);
+
+                return NoContent();
+            }
+
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Failed to delete the movie with the id: {id}. Exception thrown: {e.Message}");
             }
         }
 

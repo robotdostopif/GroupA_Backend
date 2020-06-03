@@ -6,108 +6,123 @@
     <members>
         <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetAllActors(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
             <summary>
-            Get all actors, possible to filter on first name and include movies
+            Get all actors from the database.
             </summary>
-            <param name="page"></param>
-            <param name="pagesize"></param>
-            <param name="firstName"></param>
-            <param name="including"></param>
-            <returns></returns>
+            <param name="page">Page refers to which pagenumber will be displayed.</param>
+            <param name="pagesize">Pagesize refers to objects per page.</param>
+            <param name="firstName">Filter actors by firstname.</param>
+            <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
+            <returns>A list of Actors that may or may not have been filtered by the user.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetActorById(System.Int32,System.String[])">
             <summary>
-            Get actor by Id, possible to filter on movies
+            Get an actor by its Id.
             </summary>
-            <param name="id"></param>
-            <param name="including"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.ActorsController.DeleteActorById(System.Int32)">
-            <summary>
-            Delete actor by Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.ActorsController.UpdateActorDetails(System.Int32,HorrorMovieAPI.Dto.ActorForUpdateDTO)">
-            <summary>
-            Update actor by Id
-            </summary>
-            <param name="id"></param>
-            <param name="actorForUpdateDto"></param>
-            <returns></returns>
+            <param name="id">Actor primary key Id which needs to be valid.</param>
+            <param name="including">Properties which will be included.</param>
+            <returns>An Actor object which matched given Id.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.ActorsController.CreateActor(HorrorMovieAPI.Models.ActorDTO)">
             <summary>
-            Create actor
+            Create an actor by using its Id and ActorForUpdateDTO containing its data.
             </summary>
-            <param name="actorDTO"></param>
-            <returns></returns>
+            <param name="actorDTO">DTO of an Actor object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 201 (Created) if the Actor was successfully created.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.ActorsController.UpdateActorDetails(System.Int32,HorrorMovieAPI.Dto.ActorForUpdateDTO)">
+            <summary>
+            Update an actor by using its Id and ActorForUpdateDTO containing its updated data.
+            </summary>
+            <param name="id">Actor primary key Id which needs to be valid.</param>
+            <param name="actorForUpdateDto">DTO of an Actor object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 204 (NoContent) if the Actor was successfully updated.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.ActorsController.DeleteActorById(System.Int32)">
+            <summary>
+            Delete an actor by using its Id.
+            </summary>
+            <param name="id">Actor primary key Id which needs to be valid.</param>
+            <returns>Returns status code 204 (NoContent) if the Actor was successfully deleted.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.DirectorsController.GetAllDirectors(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
             <summary>
-            Gets all the directors with possible filtering by birthcountry and include of directed movies
+            Get all directors from the database.
             </summary>
-            <param name="page"></param>
-            <param name="pagesize"></param>
-            <param name="birthCountry"></param>
+            <param name="page">Page refers to which pagenumber will be displayed.</param>
+            <param name="pagesize">Pagesize refers to objects per page.</param>
+            <param name="birthCountry">Filter directors by birthcountry</param>
             <param name="including"></param>
-            <returns></returns>
+            <returns>A list of Directors that may or may not have been filtered by the user.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.DirectorsController.GetDirectorById(System.Int32,System.String[])">
             <summary>
-            Get a director by a specific id and possible include of directed movies
+            Get a director by its Id.
             </summary>
-            <param name="id"></param>
-            <param name="including"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.DeleteDirectorById(System.Int32)">
-            <summary>
-            Delete a director by unique id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.UpdateDirectorDetails(System.Int32,HorrorMovieAPI.Dto.DirectorForUpdateDTO)">
-            <summary>
-            Update directordetails by unique id
-            </summary>
-            <param name="id"></param>
-            <param name="directorForUpdateDto"></param>
-            <returns></returns>
+            <param name="id">Director primary key Id which needs to be valid.</param>
+            <param name="including">Properties which will be included.</param>
+            <returns>A Director object which matched given Id.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.DirectorsController.CreateDirector(HorrorMovieAPI.Dto.DirectorForUpdateDTO)">
             <summary>
-            Post a new director
+            Create a director by using its Id and DirectorForUpdateDTO containing its data.
             </summary>
-            <param name="directorDto"></param>
-            <returns></returns>
+            <param name="directorDto">DTO of a Director object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 201 (Created) if the Movie was successfully created.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.UpdateDirectorDetails(System.Int32,HorrorMovieAPI.Dto.DirectorForUpdateDTO)">
+            <summary>
+            Update a director by using its Id and DirectorForUpdateDTO containing its updated data.
+            </summary>
+            <param name="id">Movie primary key Id which needs to be valid.</param>
+            <param name="directorForUpdateDto">DTO of a Director object which contains updated data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.DirectorsController.DeleteDirectorById(System.Int32)">
+            <summary>
+            Delete a movie by using its Id.
+            </summary>
+            <param name="id">Movie primary key Id which needs to be valid.</param>
+            <returns>Returns status code 204 (NoContent) if the Director was successfully deleted.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.GenresController.GetAll(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
             <summary>
-            Gets all the genres with possibility to include movies
+            Gets all genres from the database.
             </summary>
+            <param name="page">Page refers to which pagenumber will be displayed.</param>
+            <param name="pagesize">Pagesize refers to objects per page.</param>
+            <param name="genre">Filter genres by genrename.</param>
+            <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
+            <returns>A list of Actors that may or may not have been filtered by the user.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.GenresController.GetGenreById(System.Int32,System.String[])">
             <summary>
-            Gets the genre with a specific ID and possibility to include other properties
+            Get a genre by its Id.
             </summary>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.GenresController.DeleteGenreById(System.Int32)">
-            <summary>
-            Detete the genre with a specific ID 
-            </summary>
-        </member>
-        <member name="M:HorrorMovieAPI.Controllers.GenresController.UpdateGenreDetails(System.Int32,HorrorMovieAPI.Models.GenreForUpdateDTO)">
-            <summary>
-            Change the genre with a specific ID 
-            </summary>
+            <param name="id">Genre primary key Id which needs to be valid.</param>
+            <param name="including">Properties which will be included.</param>
+            <returns>A Genre object which matched given Id.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.GenresController.CreateGenre(HorrorMovieAPI.Models.GenreDTO)">
             <summary>
-            Create a new genre
+            Create a genre by using its Id and GenreForUpdateDTO containing its data.
             </summary>
+            <param name="genreDTO">DTO of a Genre object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 201 (Created) if the Genre was successfully created.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.UpdateGenreDetails(System.Int32,HorrorMovieAPI.Models.GenreForUpdateDTO)">
+            <summary>
+            Update a genre by using its Id and GenreForUpdateDTO containing its updated data.
+            </summary>
+            <param name="id">Genre primary key Id which needs to be valid.</param>
+            <param name="genreForUpdateDto">DTO of an Genre object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 204 (NoContent) if the Genre was successfully updated.</returns>
+        </member>
+        <member name="M:HorrorMovieAPI.Controllers.GenresController.DeleteGenreById(System.Int32)">
+            <summary>
+            Delete a genre by using its Id.
+            </summary>
+            <param name="id">Genre primary key Id which needs to be valid.</param>
+            <returns>Returns status code 204 (NoContent) if the Genre was successfully deleted.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.MoviesController.GetAll(System.String,System.Int32,System.Int32,System.String[])">
             <summary>
@@ -127,12 +142,12 @@
             <param name="including">Properties which will be included.</param>
             <returns>A Movie object which matched given Id.</returns>
         </member>
-        <member name="M:HorrorMovieAPI.Controllers.MoviesController.DeleteMovieById(System.Int32)">
+        <member name="M:HorrorMovieAPI.Controllers.MoviesController.CreateMovie(HorrorMovieAPI.Dto.MovieForUpdateDTO)">
             <summary>
-            Delete a movie by using its Id.
+            Create a movie by using its Id and MovieForUpdateDTO containing its data.
             </summary>
-            <param name="id">Movie primary key Id which needs to be valid.</param>
-            <returns>Returns status code 204 (NoContent) if the Movie was successfully deleted.</returns>
+            <param name="movieToCreateDTO">DTO of a Movie object which contains its data (refer to schema-documentation for more information).</param>
+            <returns>Returns status code 201 (Created) if the Movie was successfully created.</returns>
         </member>
         <member name="M:HorrorMovieAPI.Controllers.MoviesController.UpdateMovieDetails(System.Int32,HorrorMovieAPI.Dto.MovieForUpdateDTO)">
             <summary>
@@ -142,91 +157,146 @@
             <param name="movieDTO">DTO of a Movie object which contains updated data (refer to schema-documentation for more information).</param>
             <returns>Returns status code 204 (NoContent) if the Movie was successfully updated.</returns>
         </member>
-        <member name="M:HorrorMovieAPI.Controllers.MoviesController.CreateMovie(HorrorMovieAPI.Dto.MovieForUpdateDTO)">
+        <member name="M:HorrorMovieAPI.Controllers.MoviesController.DeleteMovieById(System.Int32)">
             <summary>
-            Create a movie by using its Id and MovieForUpdateDTO containing its data.
+            Delete a movie by using its Id.
             </summary>
-            <param name="movieToCreateDTO">DTO of a Movie object which contains its data (refer to schema-documentation for more information).</param>
-            <returns>Returns status code 201 (Created) if the Movie was successfully created.</returns>
+            <param name="id">Movie primary key Id which needs to be valid.</param>
+            <returns>Returns status code 204 (NoContent) if the Movie was successfully deleted.</returns>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.ActorDTO">
+            <summary>
+            Represents the data transfer object of an Actor which will be used during GET-requests.
+            </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.Id">
             <summary>
-            Specific Id
+            Primary key of the actor.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.FirstName">
             <summary>
-            Actor Firstname
+            First name of the actor.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.LastName">
             <summary>
-            Actor Lastname
+            Last name of the actor.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.DOB">
             <summary>
-            Actor date of birth
+            Date of birth of the actor.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.BirthTown">
             <summary>
-            The town where the actor was born
+            The town where the actor was born.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.BirthCountry">
             <summary>
-            The country where the actor was born
+            The country where the actor was born.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.ActorDTO.Castings">
             <summary>
-            Show which movie(s) the actor starrs in
+            The list of movie(s) the actor starrs in.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.CastingDTO">
+            <summary>
+            Represents the data transfer object of the Casted actor which will be used during GET-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.CastingDTO.Id">
+            <summary>
+            Primary key of the casting.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.CastingDTO.Character">
+            <summary>
+            Represents the specific character the actor plays in the movie.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.CastingDTO.Movie">
+            <summary>
+            The movie which the character starrs in.  
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.CastingDTO.Actor">
+            <summary>
+            The actor who plays the character.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.DirectorDTO">
+            <summary>
+            Represents the data transfer object of a Director which will be used during GET-requests.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.Id">
             <summary>
-            Specific ID
+            Primary key of the Director.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.FirstName">
             <summary>
-            First name of the Director
+            First name of the Director.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.LastName">
             <summary>
-            Last name of the Director
+            Last name of the Director.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.DOB">
             <summary>
-            Date of birth of the Director
+            Date of birth of the Director.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.BirthTown">
             <summary>
-            Hometown of the Director
+            The town where the actor was born.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.BirthCountry">
             <summary>
-            Homecountry of the Director
+            The country where the actor was born.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.DirectorDTO.Movies">
             <summary>
-            Directed movies
+            Directed movies.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.GenreDTO">
+            <summary>
+            Represents the data transfer object of a Genre which will be used during GET-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.GenreDTO.Id">
+            <summary>
+            Primary key of the genre.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.GenreDTO.Name">
             <summary>
-            Genre name
+            The name of the genre.
             </summary>
         </member>
         <member name="P:HorrorMovieAPI.Models.GenreDTO.Movies">
             <summary>
-            A list of movies with the specific genre
+            A list of movies with the specific genre.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Models.GenreForUpdateDTO">
+            <summary>
+            Represents the data transfer object of a Genre which will be used during POST/PUT-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Models.GenreForUpdateDTO.Name">
+            <summary>
+            The name of the genre.
             </summary>
         </member>
         <member name="T:HorrorMovieAPI.Models.MovieDTO">
@@ -267,6 +337,86 @@
         <member name="P:HorrorMovieAPI.Models.MovieDTO.Castings">
             <summary>
             The list of people who acted in the movie.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Dto.ActorForUpdateDTO">
+            <summary>
+            Represents the data transfer object of an Actor which will be used during POST/PUT-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.ActorForUpdateDTO.FirstName">
+            <summary>
+            Firstname of the actor.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.ActorForUpdateDTO.LastName">
+            <summary>
+            Lastname of the actor.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.ActorForUpdateDTO.DOB">
+            <summary>
+            Date of birth of the actor.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.ActorForUpdateDTO.BirthTown">
+            <summary>
+            The town where the actor was born.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.ActorForUpdateDTO.BirthCountry">
+            <summary>
+            The country where the actor was born.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Dto.DirectorForUpdateDTO">
+            <summary>
+            Represents the data transfer object of a Movie which will be used during POST/PUT-requests.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.DirectorForUpdateDTO.FirstName">
+            <summary>
+            First name of the Director.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.DirectorForUpdateDTO.LastName">
+            <summary>
+            Last name of the Director.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.DirectorForUpdateDTO.DOB">
+            <summary>
+            Date of birth of the Director.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.DirectorForUpdateDTO.BirthTown">
+            <summary>
+            The town where the actor was born.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.DirectorForUpdateDTO.BirthCountry">
+            <summary>
+            The country where the actor was born.
+            </summary>
+        </member>
+        <member name="T:HorrorMovieAPI.Dto.LinkDto">
+            <summary>
+            Refers to the HATEOAS.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.LinkDto.Href">
+            <summary>
+            The link.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.LinkDto.Rel">
+            <summary>
+            Explains the relationship between the link and the object.
+            </summary>
+        </member>
+        <member name="P:HorrorMovieAPI.Dto.LinkDto.Method">
+            <summary>
+            Refers to the specific CRUD-method.
             </summary>
         </member>
         <member name="T:HorrorMovieAPI.Dto.MovieForUpdateDTO">
