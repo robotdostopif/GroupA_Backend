@@ -2,13 +2,13 @@
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PagedList;
 using PoweredSoft.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PagedList;
-using PagedList.Mvc;
+
 namespace HorrorMovieAPI.Services
 {
     public class GenreRepository : Repository, IGenreRepository

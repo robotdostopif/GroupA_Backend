@@ -9,13 +9,9 @@ using HorrorMovieAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PagedList;
-using PagedList.Mvc;
-using PoweredSoft.Types;
-using Swashbuckle.Swagger.Annotations;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Newtonsoft.Json;
+using PagedList;
 
 namespace HorrorMovieAPI.Controllers
 {
