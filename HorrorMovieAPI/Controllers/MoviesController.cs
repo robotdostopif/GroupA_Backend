@@ -98,6 +98,10 @@ namespace HorrorMovieAPI.Controllers
                 Movie movie = new Movie
                 {
                     Title = movieToCreateDTO.Title,
+                    BudgetInUsd=movieToCreateDTO.BudgetInUsd,
+                    Country=movieToCreateDTO.Country,
+                    Language=movieToCreateDTO.Language,
+                    Rating=movieToCreateDTO.Rating,
                     Length = movieToCreateDTO.Length,
                     Year = movieToCreateDTO.Year,
                     Director = director,

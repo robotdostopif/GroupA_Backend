@@ -10,6 +10,10 @@ namespace HorrorMovieAPI.Models
     {
         public Genre Genre { get; set; }
         public string Title { get; set; }
+        public double Rating { get; set; }
+        public string Country { get; set; }
+        public string Language { get; set; }
+        public int BudgetInUsd { get; set; }
         public int Length { get; set; }
         public int Year { get; set; }
         public Director Director { get; set; }
