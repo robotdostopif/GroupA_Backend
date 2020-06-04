@@ -38,11 +38,11 @@ namespace HorrorMovieAPI.Controllers
         /// <param name="including"></param>
         /// <returns>A list of Directors that may or may not have been filtered by the user.</returns>
         [HttpGet(Name = "GetAllDirectors")]
-        public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page,int pagesize=3, string birthCountry = "", [FromQuery]string[] including = null )
+        public async Task<ActionResult<DirectorDTO[]>> GetAllDirectors(int? page, int pagesize = 3, string birthCountry = "", [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(birthCountry,page, pagesize, including);
+                var results = await _repository.GetAll(birthCountry, page, pagesize, including);
                 var links = CreateLinksForCollection(results);
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(new
@@ -53,10 +53,11 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve directors. Exception thrown: {e.Message} ");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve directors. Exception thrown: {e.Message} " };
+                return this.StatusCode(StatusCodes.Status500InternalServerError, result);
+
             }
-            
+
         }
 
         /// <summary>
@@ -65,8 +66,8 @@ namespace HorrorMovieAPI.Controllers
         /// <param name="id">Director primary key Id which needs to be valid.</param>
         /// <param name="including">Properties which will be included.</param>
         /// <returns>A Director object which matched given Id.</returns>
-        [HttpGet("{id}", Name ="GetDirectorById")]
-        public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, [FromQuery]string[] including = null)
+        [HttpGet("{id}", Name = "GetDirectorById")]
+        public async Task<ActionResult<DirectorDTO>> GetDirectorById(int id, [FromQuery] string[] including = null)
         {
             try
             {
@@ -75,10 +76,11 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve director with id {id}. Exception thrown: {e.Message} ");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve director with id {id}. Exception thrown: {e.Message} "};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
-            
+
         }
 
         /// <summary>
@@ -104,8 +106,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 
@@ -134,8 +137,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to update the director. Exception thrown when attempting to update data in the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 
@@ -161,8 +165,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the director. Exception thrown when attempting to delete data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to delete the director. Exception thrown when attempting to delete data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
 
         }
@@ -201,7 +206,7 @@ namespace HorrorMovieAPI.Controllers
               new LinkDto(_urlHelper.Link(nameof(CreateDirector), null),
               "create",
               "POST"));
-              
+
             return links;
         }
 
