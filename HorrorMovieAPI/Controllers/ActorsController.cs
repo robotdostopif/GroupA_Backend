@@ -53,8 +53,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve actors. Exception thrown when attempting to retrieve data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve actors. Exception thrown when attempting to retrieve data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 
@@ -74,9 +75,10 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve the actor with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve the actor with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);             
             }
+            
         }
 
         /// <summary>
@@ -100,8 +102,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to create the actor. Exception thrown when attempting to add data to the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to create the actor. Exception thrown when attempting to add data to the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 
@@ -130,8 +133,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to update the actor. Exception thrown when attempting to update data in the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to update the actor. Exception thrown when attempting to update data in the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 
@@ -157,8 +161,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the actor. Exception thrown when attempting to delete data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to delete the actor. Exception thrown when attempting to delete data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 

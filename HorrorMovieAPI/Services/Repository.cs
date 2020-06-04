@@ -76,7 +76,10 @@ namespace HorrorMovieAPI.Services
         {
             _logger.LogInformation($"Fetching entity with id {id} of type {typeof(T)} from the database.");
             var query = _context.Set<T>().Where(x => x.Id == id).AsQueryable();
-
+            if(!query.Any())
+            {
+                throw new NullReferenceException($"The {typeof(T)} with id {id} was not found in the database");
+            }
             if (including != null)
                 including.ToList().ForEach(include =>
                 {
