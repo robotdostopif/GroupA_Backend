@@ -44,7 +44,7 @@ namespace HorrorMovieAPI.Controllers
         {
             try
             {
-                var results = await _repository.GetAll(page, pagesize, movieTitle, exactYear, afterYear, including);
+                var results = await _repository.GetAll(page, pagesize < 50? pagesize : 50, movieTitle, exactYear, afterYear, including);
                 var links = CreateLinksForCollection(results); 
                 var toReturn = results.Select(x => ExpandSingleItem(x));
                 return Ok(new 
