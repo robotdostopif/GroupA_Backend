@@ -1,5 +1,79 @@
 ## Standups 
 
+# 2020-06-03
+
+**Generalsekreterare:** Fredrika
+
+### Gjort färdigt tills idag*
+
+Fredrika:
+
+* SKRAC-234
+
+* SKRAC-240
+
+* SKRAC-252, 254, 255 (ta bort horrorcontext fält som var överflödiga och inte användes)
+
+* Kommentar: Färdigställt cleanup av XML-kommentarer (SKRAC-219). 
+
+  Pagination för ActorController (SKRAC-213) är klar, även autentiseringen för ActorController  (SKRAC-229). Även lagt till Dynamic includes för actor getAllActor().
+
+  
+
+Sebastian:
+
+* SKRAC-208.
+* SKRAC-237 (Med fyra subtasks)
+* Kommentar: La till props i movies, gjorde även dynamic includes på director.
+
+
+Aron:
+
+* SKRAC-239
+* SKRAC-235
+* Kommentar: Lägga till logger och cleanade up dataseed. Nor och jag ändrade i datafilen så att den skulle följa Sebastians nya tillägg av nya props i Movie-model. Detta för att kunna få med ytterligare data till de nya propsen i Movie-modellen. Fick bort en package-varning för swashbuckle som inte användes.
+
+Nor:
+
+* SKRAC-211
+* Kommentar: Pagination för MovieController. Satt även med Aron och fixade dataseeding för att få med ytterligare data till de nya propsen i movie-modellen. Redigerade parametrar i MovieController och GenreController, bytte från pagecount till pagesize så att de matchade för i de utskrivna länkarna i HATEOAS så hette de pagecount så det blev fel när man tryckte på länken. 
+
+**Gemensamt:**
+
+* Vi diskuterade ett tag på morgonen för att komma fram till vad vi ville göra med projektet och få med ytterligare då vi var klara med alla issues i sprinten. Vi la då in några fler issues i sprinten.
+
+### Göra till nästa gång*
+
+Fredrika:
+
+* Kommentar: Fortsätta på related movies.
+* SKRAC-240
+
+Sebastian:
+
+* SKRAC-208
+* Kommentar:  
+
+
+Nor:
+
+* SKRAC-211
+
+* Kommentar: Pagination för MovieController, dubbelkolla alla XML-kommentarer.
+
+  
+
+Aron:
+
+* Kommentar: Kika på och läsa om att hantera Authorization Policies.
+
+
+
+**Göra gemensamt**: 
+Städa koden.
+Skulle kunna kika på att hantera Authorization Policies.
+Man skulle kunna kika på att lägga till mer filtrering, eller kolla på DTOerna om de visar relevant information.
+
 # 2020-06-02
 
 **Generalsekreterare:** Fredrika
