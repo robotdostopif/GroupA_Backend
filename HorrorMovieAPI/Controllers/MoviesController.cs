@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using HorrorMovieAPI.Dto;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using PagedList;
 
 namespace HorrorMovieAPI.Controllers
 {
@@ -31,19 +32,26 @@ namespace HorrorMovieAPI.Controllers
         /// <summary>
         /// Gets all movies from the database.
         /// </summary>
+        /// <param name="page">Page refers to which pagenumber will be displayed.</param>
+        /// <param name="pagesize">Pagesize refers to objects per page.</param>
         /// <param name="movieTitle">Filter by Movies by title.</param>
         /// <param name="exactYear">Filter Movies by exact release year.</param>
         /// <param name="afterYear">Filter Movies which were created after this year.</param>
         /// <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
         /// <returns>A list of Movies that may or may not have been filtered by the user.</returns>
-        [HttpGet]
-        public async Task<ActionResult<MovieDTO[]>> GetAll([FromQuery] string movieTitle = "", [FromQuery] int exactYear = default, [FromQuery] int afterYear = default, [FromQuery] string[] including = null)
+        [HttpGet(Name = "GetAllMovies")]
+        public async Task<ActionResult<MovieDTO[]>> GetAllMovies(int? page, int pagesize=3, [FromQuery] string movieTitle = "", [FromQuery] int exactYear = default, [FromQuery] int afterYear = default, [FromQuery] string[] including = null)
         {
             try
             {
-                var results = await _repository.GetAll(movieTitle, exactYear, afterYear, including);
+                var results = await _repository.GetAll(page, pagesize, movieTitle, exactYear, afterYear, including);
+                var links = CreateLinksForCollection(results); 
                 var toReturn = results.Select(x => ExpandSingleItem(x));
-                return Ok(toReturn);
+                return Ok(new 
+                {
+                    value = toReturn,
+                    links = links
+                });
             }
             catch (Exception e)
             {
@@ -218,5 +226,49 @@ namespace HorrorMovieAPI.Controllers
             return links;
         }
 
+        private List<LinkDto> CreateLinksForCollection(IPagedList pageList)
+        {
+            var links = new List<LinkDto>();
+
+            // self 
+            links.Add(
+             new LinkDto(_urlHelper.Link(nameof(GetAllMovies), new
+             {
+                 pagesize = pageList.PageCount,
+                 page = pageList.PageNumber
+             }), "current page", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllMovies), new
+            {
+                pagesize = pageList.PageCount,
+                page = 1,
+            }), "first", "GET"));
+
+            links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllMovies), new
+            {
+                pagesize = pageList.PageCount,
+                page = pageList.PageCount,
+            }), "last", "GET"));
+
+            if (!pageList.IsLastPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllMovies), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber + 1,
+                }), "next", "GET"));
+            }
+
+            if (!pageList.IsFirstPage)
+            {
+                links.Add(new LinkDto(_urlHelper.Link(nameof(GetAllMovies), new
+                {
+                    pagesize = pageList.PageCount,
+                    page = pageList.PageNumber - 1,
+                }), "previous", "GET"));
+            }
+
+            return links;
+        }
     }
 }

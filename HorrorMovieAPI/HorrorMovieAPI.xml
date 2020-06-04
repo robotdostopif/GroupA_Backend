@@ -124,10 +124,12 @@
             <param name="id">Genre primary key Id which needs to be valid.</param>
             <returns>Returns status code 204 (NoContent) if the Genre was successfully deleted.</returns>
         </member>
-        <member name="M:HorrorMovieAPI.Controllers.MoviesController.GetAll(System.String,System.Int32,System.Int32,System.String[])">
+        <member name="M:HorrorMovieAPI.Controllers.MoviesController.GetAllMovies(System.Nullable{System.Int32},System.Int32,System.String,System.Int32,System.Int32,System.String[])">
             <summary>
             Gets all movies from the database.
             </summary>
+            <param name="page">Page refers to which pagenumber will be displayed.</param>
+            <param name="pagesize">Pagesize refers to objects per page.</param>
             <param name="movieTitle">Filter by Movies by title.</param>
             <param name="exactYear">Filter Movies by exact release year.</param>
             <param name="afterYear">Filter Movies which were created after this year.</param>
