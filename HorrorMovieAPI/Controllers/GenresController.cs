@@ -55,7 +55,8 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve genres. Exception thrown: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError, result);
             }
         }
 
@@ -75,8 +76,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve the genre with id {id}. Exception thrown when attempting to retrieve data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                
             }
         }
 
@@ -101,8 +103,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to create the genre. Exception thrown when attempting to add data to the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                
             }
 
         }
@@ -133,8 +136,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to update the genre. Exception thrown when attempting to update data in the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                
             }
         }
 
@@ -159,8 +163,8 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to delete the genre. Exception thrown when attempting to delete data from the database: {e.Message}"};
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
             }
         }
         private dynamic ExpandSingleItem(Genre genre)

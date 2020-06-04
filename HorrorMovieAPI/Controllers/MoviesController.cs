@@ -55,8 +55,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve movies. Exception thrown: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve movies. Exception thrown: {e.Message}" };
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result
+                    );
             }
         }
 
@@ -76,8 +77,9 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve the movie with id: {id}. Exception thrown: {e.Message}" };
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result
+                    );
             }
         }
 
@@ -125,8 +127,8 @@ namespace HorrorMovieAPI.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to create the movie. Exception thrown when attempting to add data to the database: {e.Message}" };
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
             }
         }
 
@@ -156,7 +158,8 @@ namespace HorrorMovieAPI.Controllers
 
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update the movie. Exception thrown: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to update the movie. Exception thrown: {e.Message}" };
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
             }
         }     
 
@@ -183,8 +186,9 @@ namespace HorrorMovieAPI.Controllers
 
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Failed to delete the movie with the id: {id}. Exception thrown: {e.Message}");
+                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to delete the movie with the id: {id}. Exception thrown: {e.Message}" };
+                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
+                    
             }
         }
 

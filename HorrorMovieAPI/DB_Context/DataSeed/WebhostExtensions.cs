@@ -23,7 +23,7 @@ namespace HorrorMovieAPI.DB_Context.DataSeed
                     new TestDataSeeder(context,logger).SeedData();
                 }
             }
-
+    
             return host;
         }
     }
