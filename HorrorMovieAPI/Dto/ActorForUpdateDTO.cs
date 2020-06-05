@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HorrorMovieAPI.Dto
 {
@@ -10,22 +11,27 @@ namespace HorrorMovieAPI.Dto
         /// <summary>
         /// Firstname of the actor.
         /// </summary>
+        [Required]
         public string FirstName { get; set; }
         /// <summary>
         /// Lastname of the actor.
         /// </summary>
+        [Required]
         public string LastName { get; set; }
         /// <summary>
         /// Date of birth of the actor.
         /// </summary>
+        [Required]
         public DateTime DOB { get; set; }
         /// <summary>
         /// The town where the actor was born.
         /// </summary>
+        [Required]
         public string BirthTown { get; set; }
         /// <summary>
         /// The country where the actor was born.
         /// </summary>
+        [Required]
         public string BirthCountry { get; set; }
     }
 }
