@@ -1,5 +1,51 @@
 # Sprint Reviews
 
+## 2020-06-05
+
+### SKRAC-an Sprint 10
+
+* Sekreterare: **Sebastian**
+
+* **Vad var målet för sprinten?** 
+  Att få ett fungerande api  och snygga till befintlig kod 
+
+* **Uppfylldes målet för sprinten?** 
+
+  :white_check_mark: Ja
+
+- **Blev alla issues klara?**
+
+  Nej, vi trode att vi skulle få mer tid över så vi han inte med alla utbygnader vi tänkt. 
+
+- **Om inte, varför**
+  Tidsbrist.
+
+- *Icke klara issues återförs till backlog, efter att de har uppdaterats. Har vissa
+  delar klarats av? Skall vi ha en ny tidsuppskattning? Vad behövs för att vi
+  skall klara detta issue nästa gång?*
+
+- **Höll tidsplaneringen för alla issues?**
+
+  Nej, ibland stötte vi på problem som vi inte hade räknat med. Ibland kunde man spinna iväg på annat också. Ibland när man satt och sökte på problem/lösningar så kunde de ta längre tid än vi förutspått.
+
+  
+
+- Bedöm vad ni kan göra bättre i nästa sprint**
+
+  Att inte ta på oss mer än vad vi behöver göra utan att snygga upp det vi redan gjort istället
+
+
+  **Vad vi gjorde bra i denna sprinten:** Vi hade ett bra teamwork och lyckades implementera både paging och bygga ut swagger.
+
+  
+
+- **Har det kommit upp nya saker som skall läggas till på er backlog?**
+  Ja vi har lagt till många issus då vi trode att vi skulle få mycket tid över.
+
+  
+
+  
+
 ## 2020-05-29
 
 ### SKRAC-an Sprint 9
