@@ -6,7 +6,7 @@ using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
-using PagedList;
+using PagedList.Core;
 
 namespace HorrorMovieAPI.Services
 {

@@ -2,7 +2,7 @@
 using HorrorMovieAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PagedList;
+using PagedList.Core;
 using PoweredSoft.Types;
 using System;
 using System.Collections.Generic;

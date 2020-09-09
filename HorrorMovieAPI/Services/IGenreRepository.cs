@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HorrorMovieAPI.Models;
-using PagedList;
+using PagedList.Core;
 
 namespace HorrorMovieAPI.Services
 {

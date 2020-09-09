@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using PagedList;
+using PagedList.Core;
 
 namespace HorrorMovieAPI.Controllers
 {

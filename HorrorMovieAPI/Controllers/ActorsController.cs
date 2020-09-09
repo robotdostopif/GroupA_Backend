@@ -9,7 +9,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System;
 using Microsoft.AspNetCore.Authorization;
-using PagedList;
+using PagedList.Core;
 
 namespace HorrorMovieAPI.Controllers
 {
