@@ -8,7 +8,7 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Debug'
+  buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -28,6 +28,6 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
-    configuration: '$(buildConfiguration)'
+    configuration: '--logger trx --configuration $(buildConfiguration)'
     testRunTitle: 'Running Unit Tests'
 
