@@ -32,6 +32,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '**/HorrorMovieAPI.Tests.csproj'
+    projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
     testRunTitle: 'Running Unit Tests'
