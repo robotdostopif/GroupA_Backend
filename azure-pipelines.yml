@@ -35,3 +35,4 @@ steps:
     projects: '**/*Test/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
     testRunTitle: 'Running Unit Tests'
+    publishTestResults: true
