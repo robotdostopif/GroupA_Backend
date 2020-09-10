@@ -36,4 +36,4 @@ steps:
     containerRegistry: 'HorrorRegistry'
     repository: 'HorrorApi'
     command: 'buildAndPush'
-    Dockerfile: '**/dockerfile'
+    Dockerfile: 'dockerfile'
