@@ -31,3 +31,9 @@ steps:
     configuration: '--configuration $(buildConfiguration)'
     testRunTitle: 'Running Unit Tests'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'HorrorRegistry'
+    repository: 'HorrorApi'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
