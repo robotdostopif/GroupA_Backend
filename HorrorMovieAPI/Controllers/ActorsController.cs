@@ -37,25 +37,9 @@ namespace HorrorMovieAPI.Controllers
         /// <param name="including">Dynamic inclusions which determine what foreign entities should be included in results.</param>
         /// <returns>A list of Actors that may or may not have been filtered by the user.</returns>
         [HttpGet(Name = "GetAllActors")]
-        public async Task<ActionResult<ActorDTO[]>> GetAllActors(int? page, int pagesize = 3, [FromQuery]string firstName = "", [FromQuery]string[] including = null)
+        public string GetAllActors()
         {
-            try
-            {
-                var results = await _repository.GetAll(firstName, page, pagesize < 50? pagesize : 50, including);
-                var links = CreateLinksForCollection(results);
-                var toReturn = results.Select(x => ExpandSingleItem(x));
-                return Ok(new
-                {
-                    value = toReturn,
-                    links = links
-                });
-            }
-            catch (Exception e)
-            {
-                var result = new { Status = StatusCodes.Status500InternalServerError, Data = $"Failed to retrieve actors. Exception thrown when attempting to retrieve data from the database: {e.Message}"};
-                return this.StatusCode(StatusCodes.Status500InternalServerError,result);
-                    
-            }
+                return "Hello World";
         }
 
         /// <summary>

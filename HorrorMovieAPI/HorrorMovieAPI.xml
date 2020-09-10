@@ -4,7 +4,7 @@
         <name>HorrorMovieAPI</name>
     </assembly>
     <members>
-        <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetAllActors(System.Nullable{System.Int32},System.Int32,System.String,System.String[])">
+        <member name="M:HorrorMovieAPI.Controllers.ActorsController.GetAllActors">
             <summary>
             Get all actors from the database.
             </summary>
