@@ -16,7 +16,6 @@ namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
-    [Authorize]
     public class DirectorsController : ControllerBase
     {
         private readonly IDirectorRepository _repository;

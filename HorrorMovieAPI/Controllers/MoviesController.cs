@@ -15,7 +15,6 @@ namespace HorrorMovieAPI.Controllers
 {
     [ApiController]
     [Route("api/v1.0/[controller]")]
-    [Authorize]
     public class MoviesController : ControllerBase
     {
         private readonly IMovieRepository _repository;
