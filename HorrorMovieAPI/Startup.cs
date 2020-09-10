@@ -59,17 +59,6 @@ namespace HorrorMovieAPI
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" });
                 c.IncludeXmlComments("HorrorMovieAPI.XML");
                 });
-                                    
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = Configuration.GetSection("Auth0").GetSection("Domain").Value;
-                options.Audience = Configuration.GetSection("Auth0").GetSection("Audience").Value;
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
