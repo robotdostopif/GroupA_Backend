@@ -6,7 +6,7 @@ COPY ./HorrorMovieAPI/*.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
-COPY ./HorrorMovieAPI/*.csproj ./
+COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
