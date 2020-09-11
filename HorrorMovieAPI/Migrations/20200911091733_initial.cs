@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HorrorMovieAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace HorrorMovieAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: false),
@@ -29,11 +29,11 @@ namespace HorrorMovieAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: false),
-                    BirthThown = table.Column<string>(nullable: true),
+                    BirthTown = table.Column<string>(nullable: true),
                     BirthCountry = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -46,7 +46,7 @@ namespace HorrorMovieAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -59,9 +59,13 @@ namespace HorrorMovieAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     GenreId = table.Column<int>(nullable: true),
                     Title = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false),
+                    Country = table.Column<string>(nullable: true),
+                    Language = table.Column<string>(nullable: true),
+                    BudgetInUsd = table.Column<int>(nullable: false),
                     Length = table.Column<int>(nullable: false),
                     Year = table.Column<int>(nullable: false),
                     DirectorId = table.Column<int>(nullable: true)
@@ -88,7 +92,7 @@ namespace HorrorMovieAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Character = table.Column<string>(nullable: true),
                     MovieId = table.Column<int>(nullable: true),
                     ActorId = table.Column<int>(nullable: true)
@@ -109,6 +113,56 @@ namespace HorrorMovieAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "BirthCountry", "BirthTown", "DOB", "FirstName", "LastName" },
+                values: new object[] { 1, "USA", "Burbank, California", new DateTime(1957, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tony", "Moran" });
+
+            migrationBuilder.InsertData(
+                table: "Actor",
+                columns: new[] { "Id", "BirthCountry", "BirthTown", "DOB", "FirstName", "LastName" },
+                values: new object[] { 2, "USA", "Clifton, New Yersey", new DateTime(1973, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vera", "Farmiga" });
+
+            migrationBuilder.InsertData(
+                table: "Director",
+                columns: new[] { "Id", "BirthCountry", "BirthTown", "DOB", "FirstName", "LastName" },
+                values: new object[] { 1, "USA", "Carthage, New York", new DateTime(1948, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "Carpenter" });
+
+            migrationBuilder.InsertData(
+                table: "Director",
+                columns: new[] { "Id", "BirthCountry", "BirthTown", "DOB", "FirstName", "LastName" },
+                values: new object[] { 2, "Malaysia", "Kuching, Sarawak", new DateTime(1977, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "James", "Wan" });
+
+            migrationBuilder.InsertData(
+                table: "Genre",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Slasher" });
+
+            migrationBuilder.InsertData(
+                table: "Genre",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Paranormal" });
+
+            migrationBuilder.InsertData(
+                table: "Movie",
+                columns: new[] { "Id", "BudgetInUsd", "Country", "DirectorId", "GenreId", "Language", "Length", "Rating", "Title", "Year" },
+                values: new object[] { 1, 2000000, "Usa", 1, 1, "English", 91, 7.5999999999999996, "Halloween", 1978 });
+
+            migrationBuilder.InsertData(
+                table: "Movie",
+                columns: new[] { "Id", "BudgetInUsd", "Country", "DirectorId", "GenreId", "Language", "Length", "Rating", "Title", "Year" },
+                values: new object[] { 2, 30000000, "Usa", 2, 2, "English", 112, 8.1999999999999993, "The Conjuring", 2013 });
+
+            migrationBuilder.InsertData(
+                table: "Casting",
+                columns: new[] { "Id", "ActorId", "Character", "MovieId" },
+                values: new object[] { 1, 1, "Michael Myers (age 23)", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Casting",
+                columns: new[] { "Id", "ActorId", "Character", "MovieId" },
+                values: new object[] { 2, 2, "Loraine Warren", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Casting_ActorId",

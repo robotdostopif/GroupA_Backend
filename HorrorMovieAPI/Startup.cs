@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IO;
 
 namespace HorrorMovieAPI
 {
@@ -31,7 +32,7 @@ namespace HorrorMovieAPI
 
             services.AddDbContext<HorrorContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlite("DataSource=sqlite.db");
             });
             services.AddMvc(options => options.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
@@ -56,9 +57,11 @@ namespace HorrorMovieAPI
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IDirectorRepository, DirectorRepository>();
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "HorrorMovieAPI", Version = "v1.0" });
                 c.IncludeXmlComments("HorrorMovieAPI.XML");
-                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -74,7 +77,7 @@ namespace HorrorMovieAPI
             {
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0");
                 c.RoutePrefix = string.Empty;
-                
+
             });
 
             //app.UseHttpsRedirection();
