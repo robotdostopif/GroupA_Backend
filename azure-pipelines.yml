@@ -44,7 +44,7 @@ stages:
   dependsOn: Test
   condition: succeeded()
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
   jobs:
   - job: Deploy
     steps:
