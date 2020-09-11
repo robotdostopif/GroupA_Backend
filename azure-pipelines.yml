@@ -10,30 +10,41 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: NuGetToolInstaller@1
+    - task: NuGetCommand@2
+      inputs:
+      restoreSolution: '$(solution)'
+    - task: VSBuild@1
+      inputs:
+      solution: '$(solution)'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '**/*Tests/*.csproj'
-    configuration: '--configuration $(buildConfiguration)'
-    testRunTitle: 'Running Unit Tests'
+- stage: Test
+  jobs:
+  - job: Test
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+      command: 'test'
+      projects: '**/*Tests/*.csproj'
+      configuration: '--configuration $(buildConfiguration)'
+      testRunTitle: 'Running Unit Tests'
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'HorrorRegistry'
-    repository: 'HorrorApi'
-    command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
+    - task: Docker@2
+      inputs:
+      containerRegistry: 'HorrorRegistry'
+      repository: 'HorrorApi'
+      command: 'buildAndPush'
+      Dockerfile: 'Dockerfile'
