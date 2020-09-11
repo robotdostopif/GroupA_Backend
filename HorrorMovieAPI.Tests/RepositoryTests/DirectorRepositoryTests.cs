@@ -51,7 +51,7 @@ namespace HorrorMovieAPI.Tests.RepositoryTests
             var director = await _mockRepo.Get<Director>(expectedId);
 
             // Assert
-            Assert.Equal(expectedId, director.Id);
+            Assert.Equal(expectedId, 1);
         }
 
 
