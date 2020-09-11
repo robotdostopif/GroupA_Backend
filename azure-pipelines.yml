@@ -37,7 +37,7 @@ stages:
       inputs:
         command: 'test'
         projects: '**/*Tests/*.csproj'
-        configuration: '--configuration $(buildConfiguration)'
+        configuration: '--self-contained true -r win-x86 --configuration $(buildConfiguration)'
         testRunTitle: 'Running Unit Tests'
 
 - stage: Deploy
