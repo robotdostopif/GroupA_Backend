@@ -28,6 +28,8 @@ stages:
 
 
 - stage: Test
+  dependsOn: Build
+  condition: succeded() 
   jobs:
   - job: Test
     steps:
@@ -39,6 +41,8 @@ stages:
         testRunTitle: 'Running Unit Tests'
 
 - stage: Deploy
+  dependsOn: Test
+  condition: succeded()
   jobs:
   - job: Deploy
     steps:
