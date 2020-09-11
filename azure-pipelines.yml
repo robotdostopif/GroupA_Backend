@@ -29,7 +29,7 @@ stages:
 
 - stage: Test
   dependsOn: Build
-  condition: failed() 
+  condition: succeeded() 
   jobs:
   - job: Test
     steps:
